@@ -2,7 +2,11 @@
 
 ## Build/Lint/Test Commands
 
+<<<<<<< HEAD
 ### Backend Services (kronos-agent, kronos-agent-cc, kronosd)
+=======
+### Backend Services (bytebot-agent, bytebot-agent-cc, bytebotd)
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 - **Build**: `npm run build` (builds shared package first)
 - **Lint**: `npm run lint` (ESLint with TypeScript + Prettier)
 - **Format**: `npm run format` (Prettier)
@@ -11,7 +15,11 @@
 - **Test watch**: `npm run test:watch`
 - **Test coverage**: `npm run test:cov`
 
+<<<<<<< HEAD
 ### UI (kronos-ui)
+=======
+### UI (bytebot-ui)
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 - **Build**: `npm run build` (builds shared package first)
 - **Lint**: `npm run lint` (Next.js ESLint)
 - **Dev server**: `npm run dev`
@@ -21,7 +29,11 @@
 - **Lint**: `npm run lint`
 - **Format**: `npm run format`
 
+<<<<<<< HEAD
 ### LLM Proxy (kronos-llm-proxy)
+=======
+### LLM Proxy (bytebot-llm-proxy)
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 - **Build**: `docker build .` (Docker container)
 - **Run**: `docker run -p 4000:4000 [image]`
 
@@ -49,7 +61,11 @@
 
 ### Naming Conventions
 - **Classes**: PascalCase (e.g., `AnthropicService`, `AppModule`)
+<<<<<<< HEAD
 - **Interfaces/Types**: PascalCase (e.g., `KronosAgentResponse`)
+=======
+- **Interfaces/Types**: PascalCase (e.g., `BytebotAgentResponse`)
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 - **Variables/Functions**: camelCase (e.g., `generateMessage`, `apiKey`)
 - **Constants**: UPPER_SNAKE_CASE (e.g., `DEFAULT_MODEL`)
 - **Files**: kebab-case for modules, camelCase for services (e.g., `anthropic.service.ts`)
@@ -71,7 +87,11 @@
 
 ## Project Rules
 
+<<<<<<< HEAD
 ### Kronos Platform
+=======
+### Bytebot Monorepo
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 - **Backend Services**: NestJS with TypeScript, Prisma ORM, PostgreSQL
 - **Frontend**: Next.js 15+ with React 19, Tailwind CSS, shadcn/ui
 - **Shared Types**: TypeScript-only package for type definitions and utilities

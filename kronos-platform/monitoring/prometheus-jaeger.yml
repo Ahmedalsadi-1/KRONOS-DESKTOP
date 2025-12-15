@@ -1,0 +1,82 @@
+# Prometheus configuration for KRONOS services metrics collection
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # OpenTelemetry Collector metrics
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:8888']
+    metrics_path: /metrics
+    scrape_interval: 5s
+
+  # KRONOS Service Registry
+  - job_name: 'kronos-service-registry'
+    static_configs:
+      - targets: ['kronos-service-registry:8080']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS API Gateway
+  - job_name: 'kronos-api-gateway'
+    static_configs:
+      - targets: ['kronos-api-gateway:3003']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS Configuration Service
+  - job_name: 'kronos-config-service'
+    static_configs:
+      - targets: ['kronos-config-service:4000']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS Orchestration Engine
+  - job_name: 'kronos-orchestration-engine'
+    static_configs:
+      - targets: ['kronos-orchestration-engine:5000']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS Security Service
+  - job_name: 'kronos-security-service'
+    static_configs:
+      - targets: ['kronos-security-service:6000']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS Browser Automation Frontend
+  - job_name: 'kronos-browser-automation'
+    static_configs:
+      - targets: ['kronos-browser-automation:3002']
+    metrics_path: /api/metrics
+    scrape_interval: 15s
+
+  # KRONOS Browser Automation Backend
+  - job_name: 'kronos-browser-automation-backend'
+    static_configs:
+      - targets: ['kronos-browser-automation-backend:8002']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # KRONOS UI Automation
+  - job_name: 'kronos-ui-automation'
+    static_configs:
+      - targets: ['kronos-ui-automation:8003']
+    metrics_path: /metrics
+    scrape_interval: 15s
+
+  # KRONOS Desktop Agent
+  - job_name: 'kronos-desktop-agent'
+    static_configs:
+      - targets: ['kronos-desktop-agent:9990']
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  # Redis metrics (if enabled)
+  - job_name: 'kronos-redis'
+    static_configs:
+      - targets: ['kronos-redis:6381']
+    metrics_path: /metrics
+    scrape_interval: 30s

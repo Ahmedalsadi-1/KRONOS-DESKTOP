@@ -1,0 +1,58 @@
+{
+  "name": "kronos-desktop-distribution",
+  "productName": "KRONOS Desktop Agent",
+  "description": "AI-powered desktop automation platform with comprehensive distribution system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kronos-ai/kronos-desktop-agent"
+  },
+  "scripts": {
+    "install": "npm install",
+    "start": "npm start",
+    "build": "npm run build",
+    "build:all": "npm run build:all",
+    "build:dmg": "npm run build:dmg",
+    "build:exe": "npm run build:exe",
+    "package": "npm run build:dir",
+    "configure": "npm run configure",
+    "setup": "npm run setup",
+    "sign": "npm run sign",
+    "dist": "npm run build:all && npm run package",
+    "clean": "npm run clean && rimraf release dist",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "lint": "npm run lint",
+    "lint:fix": "npm run lint:fix",
+    "test": "npm run test"
+  },
+  "workspaces": [
+    "kronos-desktop-distribution",
+    "kronos-unified-automation-platform", 
+    "kronos-unified-ai-ecosystem"
+  ],
+  "scripts": {
+    "install": "npm install",
+    "start": "npm start",
+    "build": "npm run build",
+    "build:all": "npm run build:all",
+    "build:dmg": "npm run build:dmg",
+    "build:exe": "npm run build:exe",
+    "package": "npm run build:dir",
+    "configure": "npm run configure",
+    "setup": "npm run setup",
+    "sign": "npm run sign",
+    "dist": "npm run build:all && npm run package",
+    "clean": "npm run clean && rimraf release dist",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "lint": "npm run lint",
+    "lint:fix": "npm run lint:fix",
+    "test": "npm run test"
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^27.1.0",
+    "electron-builder": "^24.6.4",
+    "electron-notarize": "^1.2.2",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.3.3"
+  }
+}

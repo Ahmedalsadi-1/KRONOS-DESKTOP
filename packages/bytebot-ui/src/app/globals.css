@@ -1,0 +1,39 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Kronos Theme - Dark Console Layout */
+:root {
+  --bg-app: #0a0a0a; /* Deep black */
+  --bg-surface: #1a1a1a; /* Charcoal */
+  --bg-panel: #2a2a2a; /* Dark grey */
+  --bg-accent: #3a3a3a; /* Medium grey */
+  --border-glow: #00ff88; /* Neon green */
+  --text-primary: #ffffff; /* White */
+  --text-muted: #888888; /* Grey */
+  --text-accent: #00ff88; /* Neon green */
+  --shadow-glow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+/* Dark theme overrides */
+.dark {
+  --bg-app: #0a0a0a;
+  --bg-surface: #1a1a1a;
+  --bg-panel: #2a2a2a;
+  --bg-accent: #3a3a3a;
+  --border-glow: #00ff88;
+  --text-primary: #ffffff;
+  --text-muted: #888888;
+  --text-accent: #00ff88;
+}
+
+/* Utility classes */
+.bg-app { background-color: var(--bg-app); }
+.bg-surface { background-color: var(--bg-surface); }
+.bg-panel { background-color: var(--bg-panel); }
+.bg-accent { background-color: var(--bg-accent); }
+.border-glow { border-color: var(--border-glow); }
+.text-primary { color: var(--text-primary); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--text-accent); }
+.shadow-glow { box-shadow: var(--shadow-glow); }

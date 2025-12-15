@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
 
 # KRONOS 🤖⚡
@@ -219,6 +220,102 @@ KRONOS democratizes AI-powered automation through a unified platform where intel
 - **`accessible-view-terminal/`** - Terminal interface
 - **`reports/`** - Analysis and documentation
 - **`data/`** - Shared configurations
+=======
+# AI Emulators Ecosystem 🧠🤖
+
+A comprehensive suite of AI-powered computer automation tools and frameworks designed for intelligent desktop and mobile automation across multiple platforms.
+
+## 🌟 Overview
+
+The AI Emulators Ecosystem is a unified platform that brings together cutting-edge AI automation technologies to create intelligent agents capable of automating complex workflows across desktop and mobile environments. This monorepo contains multiple specialized automation frameworks, each designed for specific use cases while maintaining seamless interoperability.
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     AI EMULATORS ECOSYSTEM                           │
+│  ┌─────────────────────────────────────────────────────────────────┐  │
+│  │              UI-TARS Desktop Automation                         │  │
+│  │         Vision-language models for desktop control              │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────────┐  │
+│  │              Open Computer Use Framework                        │  │
+│  │       Cross-platform computer automation via APIs               │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────────┐  │
+│  │                Bytebot Agent System                             │  │
+│  │     Multi-modal AI agents with MCP protocol integration         │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────────┐  │
+│  │                 GBox Environment Provisioning                   │  │
+│  │    Unified sandboxing for Android/desktop automation            │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────────────────┐  │
+│  │               Unified Automation Platform                       │  │
+│  │         Orchestration layer for multi-agent workflows           │  │
+│  └─────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+                               ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                   MCP Integration Layer                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
+│  │  Cursor     │  │  Claude     │  │ Any MCP     │  │ Custom      │ │
+│  │ Integration │  │ Code Agent  │  │ Client      │  │ Agent       │ │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## 📁 Project Structure
+
+### Core Automation Frameworks
+
+- **`UI-TARS-desktop/`** - Vision-language model based desktop automation
+  - Advanced computer vision for GUI interaction
+  - Multi-modal input processing (text, images, coordinates)
+  - Real-time action prediction and execution
+
+- **`open-computer-use/`** - Cross-platform computer automation framework
+  - API-driven automation across desktop and mobile
+  - Plugin architecture for extensibility
+  - Security-focused execution environment
+
+- **`bytebot/`** - Multi-modal AI agent system
+  - MCP (Model Context Protocol) integration
+  - Real-time agent communication
+  - WebSocket-based orchestration
+
+- **`gbox/`** - Unified environment provisioning
+  - Cloud Virtual Devices (Android emulators)
+  - Cloud Physical Devices (real Android hardware)
+  - Local Physical Devices (USB-connected devices)
+  - Desktop/Browser environments
+
+### Specialized Automation Tools
+
+- **`ai-browser/`** - Intelligent web automation
+- **`local-manus/`** - Local AI agent orchestration
+- **`postiz-app/`** - Social media automation platform
+- **`unified-automation-platform/`** - Cross-framework orchestration
+
+### Integration Components
+
+- **`unified-ai-ecosystem/`** - Shared AI services and utilities
+- **`packages/`** - Shared npm packages and dependencies
+- **`ollama/`** - Local LLM inference and model management
+
+### Social Media & Content Automation
+
+- **`instapy/`** - Instagram automation toolkit
+- **`onlysnarf/`** - Content management and distribution
+- **`tiktokpy/`** - TikTok automation framework
+- **`youtube_upload/`** - YouTube content publishing
+
+### Development & Analysis Tools
+
+- **`accessible-view-terminal/`** - Accessibility-focused terminal interface
+- **`reports/`** - Analysis reports and documentation
+- **`data/`** - Shared data stores and configurations
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 
 ## 🚀 Quick Start
 
@@ -268,6 +365,7 @@ npm run test
 npm run build
 ```
 
+<<<<<<< HEAD
 ## Development
 
 ### Code Style
@@ -318,6 +416,37 @@ All changes maintain zero breaking functionality while enhancing the visual iden
 - **MCP Protocol**: Standardized agent communication
 - **Plugin System**: Extensible automation capabilities
 - **Security First**: Sandboxed execution and validation
+=======
+## 🛠️ Development Guidelines
+
+### Code Style & Conventions
+
+- **TypeScript**: Strict mode, TSDoc comments, camelCase
+- **Python**: Type hints, Google docstrings, snake_case
+- **Linting**: ESLint + Prettier for consistency
+- **Testing**: Jest for unit tests, comprehensive coverage
+
+### Build Commands
+
+```bash
+# Lint and format code
+npm run lint
+npm run format
+
+# Build all components
+npm run build
+
+# Run test suite
+npm run test
+```
+
+### Architecture Patterns
+
+- **Modular Design**: Each framework is independently deployable
+- **MCP Integration**: Standardized agent communication protocol
+- **Plugin Architecture**: Extensible automation capabilities
+- **Security First**: Sandboxed execution, input validation
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 
 ## 🔧 Configuration
 
@@ -356,6 +485,7 @@ docker-compose up -d
 docker-compose logs -f
 ```
 
+<<<<<<< HEAD
 ### Agent Orchestrator API
 
 The orchestrator service runs on port 8080 and is part of the same Docker Compose network. Once the stack is healthy you can query:
@@ -372,6 +502,15 @@ These endpoints are also used by the GitHub `ai_emulators` workflow to validate 
 
 - **[Architecture Overview](./kronos-docs/architecture.md)** - Detailed system design
 - **[API Reference](./kronos-docs/api.md)** - Complete API documentation
+=======
+## 📚 Documentation
+
+- **[Architecture Overview](./docs/architecture.md)** - Detailed system design
+- **[API Reference](./docs/api.md)** - Complete API documentation
+- **[Integration Guide](./docs/integration.md)** - Framework integration patterns
+- **[Security Guide](./docs/security.md)** - Security best practices
+- **[Deployment Guide](./docs/deployment.md)** - Production deployment
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
 
 ## 🤝 Contributing
 
@@ -391,6 +530,7 @@ We welcome contributions from the community! Please see our [Contributing Guide]
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
+<<<<<<< HEAD
 ## Acknowledgments
 
 - **MCP Protocol**: Standardized agent communication
@@ -405,3 +545,22 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ---
 
 *KRONOS: Where AI agents collaborate.*
+=======
+## 🙏 Acknowledgments
+
+- **UI-TARS**: Vision-language desktop automation framework
+- **Open Computer Use**: Cross-platform automation community
+- **Bytebot**: Multi-modal agent architecture
+- **GBox**: Environment provisioning technology
+- **MCP Protocol**: Standardized agent communication
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/ai-emulators/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/ai-emulators/discussions)
+- **Documentation**: [docs.ai-emulators.dev](https://docs.ai-emulators.dev)
+
+---
+
+**Built with ❤️ for the AI automation community**
+>>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)

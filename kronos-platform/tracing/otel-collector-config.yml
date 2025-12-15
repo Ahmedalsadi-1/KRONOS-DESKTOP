@@ -1,0 +1,170 @@
+receivers:
+  # OTLP gRPC receiver for high-throughput trace collection
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+    attributes:
+      - key: environment
+        value: production
+        action: upsert
+      - key: service_cluster
+        value: kronos-platform
+        action: upsert
+
+  # OTLP HTTP receiver for fallback and compatibility
+  otlp/http:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+    attributes:
+      - key: environment
+        value: production
+        action: upsert
+
+  # Jaeger receiver for direct Jaeger protocol support
+  jaeger:
+    protocols:
+      grpc:
+        endpoint: jaeger:14250
+    tls:
+      insecure: true
+
+  # Prometheus receiver for metrics collection
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'kronos-otel-collector'
+          scrape_interval: 15s
+          static_configs:
+            - targets: ['0.0.0.0:8888']
+          metric_relabel_configs:
+            - source_labels: [__name__]
+              target_label: metric_name
+              regex: 'otel_(.*)'
+              replacement: '$1'
+
+  # Zipkin receiver for legacy system compatibility
+  zipkin:
+    endpoint: "http://jaeger:9411/api/v2/spans"
+    format: json
+
+processors:
+  # Batch processor for performance optimization
+  batch:
+    timeout: 1s
+    send_batch_size: 8192
+    send_batch_max_size: 8192
+
+  # Memory limiter for resource management
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+
+  # Resource processor for adding service metadata
+  resource:
+    attributes:
+      - key: service.name
+        from_attributes: ["service.name"]
+      - key: service.version
+        from_attributes: ["service.version"]
+      - key: service.instance.id
+        from_attributes: ["host.name"]
+      - key: cloud.provider
+        from_attributes: ["cloud.provider"]
+      - key: cloud.region
+        from_attributes: ["cloud.region"]
+      - key: deployment.environment
+        from_attributes: ["deployment.environment"]
+
+  # Resource detection for KRONOS services
+  resourcedetection:
+    detectors:
+      - env
+      - system
+      - docker
+    timeout: 2s
+
+  # Attributes processor for custom KRONOS trace enrichment
+  attributes:
+    actions:
+      - key: service.namespace
+        value: kronos
+        action: upsert
+      - key: platform.version
+        value: 1.0.0
+        action: upsert
+      - key: tracing.sampling.rate
+        value: 0.1
+        action: upsert
+
+exporters:
+  # Jaeger exporter for distributed trace storage
+  jaeger:
+    endpoint: jaeger:14250
+    tls:
+      insecure: true
+    sending_queue:
+      enabled: true
+      num_consumers: 10
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+
+  # OTLP HTTP exporter for redundancy
+  otlphttp:
+    endpoint: http://jaeger:14250/api/traces
+    tls:
+      insecure: true
+    headers:
+      - "Content-Type: application/json"
+
+  # Prometheus exporter for metrics
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: kronos
+    const_labels:
+      environment: production
+      platform: kronos
+
+  # Logging exporter for debugging and development
+  logging:
+    loglevel: info
+
+extensions:
+  # Health check extension for monitoring collector status
+  health_check:
+    endpoint: 0.0.0.0:13133
+    port: 13133
+
+  # ZPages for web-based debugging and monitoring
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+  # Performance monitoring extension
+  memory_ballast:
+    enabled: true
+    limit_mib: 256
+
+service:
+  # Pipelines for different data types
+  pipelines:
+    # High-performance traces pipeline
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource, resourcedetection, attributes]
+      exporters: [jaeger, otlphttp]
+    
+    # Comprehensive metrics pipeline  
+    metrics:
+      receivers: [otlp, prometheus]
+      processors: [memory_limiter, batch, resource, resourcedetection, attributes]
+      exporters: [prometheus]
+    
+    # Logs pipeline with structured logging
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource, resourcedetection, attributes]
+      exporters: [logging]

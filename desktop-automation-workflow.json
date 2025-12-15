@@ -1,0 +1,94 @@
+{
+  "name": "Desktop Automation Pipeline Demo",
+  "description": "Complete end-to-end desktop automation workflow demonstrating orchestration engine capabilities",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "id": "capture_screenshot",
+      "name": "Capture Desktop Screenshot",
+      "type": "desktop_action",
+      "description": "Take a screenshot of the current desktop state",
+      "config": {
+        "action": "screenshot",
+        "savePath": "/tmp/desktop_screenshot.png"
+      },
+      "timeout": 10000,
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMultiplier": 2
+      }
+    },
+    {
+      "id": "analyze_screenshot",
+      "name": "AI Analysis of Screenshot",
+      "type": "ai_analysis",
+      "description": "Analyze the screenshot using AI to identify UI elements and actions",
+      "config": {
+        "model": "gpt-4-vision-preview",
+        "prompt": "Analyze this desktop screenshot and identify key UI elements, open applications, and suggest potential automation actions. Return a structured analysis with coordinates of clickable elements.",
+        "inputImage": "{{steps.capture_screenshot.output.imagePath}}"
+      },
+      "dependsOn": ["capture_screenshot"],
+      "timeout": 30000
+    },
+    {
+      "id": "execute_desktop_action",
+      "name": "Execute Desktop Action",
+      "type": "desktop_action",
+      "description": "Execute a desktop action based on AI analysis",
+      "config": {
+        "action": "click_mouse",
+        "coordinates": "{{steps.analyze_screenshot.output.clickableElement.x}},{{steps.analyze_screenshot.output.clickableElement.y}}",
+        "button": "left",
+        "clickCount": 1
+      },
+      "dependsOn": ["analyze_screenshot"],
+      "timeout": 5000
+    },
+    {
+      "id": "verify_completion",
+      "name": "Verify Workflow Completion",
+      "type": "validation",
+      "description": "Verify that the desktop action was executed successfully",
+      "config": {
+        "validationType": "screenshot_comparison",
+        "originalScreenshot": "{{steps.capture_screenshot.output.imagePath}}",
+        "expectedChange": "UI element interaction"
+      },
+      "dependsOn": ["execute_desktop_action"],
+      "timeout": 10000
+    }
+  ],
+  "triggers": [
+    {
+      "type": "manual",
+      "name": "Manual Trigger",
+      "description": "Manually trigger the desktop automation workflow"
+    }
+  ],
+  "errorHandling": {
+    "maxRetries": 3,
+    "retryStrategy": "exponential_backoff",
+    "failureActions": [
+      {
+        "condition": "desktop_unavailable",
+        "action": "retry_with_delay",
+        "delay": 5000
+      },
+      {
+        "condition": "ai_analysis_failed",
+        "action": "fallback_to_basic_action"
+      }
+    ]
+  },
+  "monitoring": {
+    "enableMetrics": true,
+    "logLevel": "info",
+    "performanceTracking": true
+  },
+  "metadata": {
+    "author": "KRONOS Orchestration Engine",
+    "tags": ["desktop-automation", "ai-analysis", "workflow-demo"],
+    "platform": "unified-automation"
+  }
+}

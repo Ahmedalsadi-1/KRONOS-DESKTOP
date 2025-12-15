@@ -1,0 +1,24 @@
+{
+  "name": "kronos-api-gateway-with-tracing",
+  "version": "1.0.0",
+  "description": "KRONOS API Gateway with comprehensive OpenTelemetry distributed tracing",
+  "main": "index-with-tracing.js",
+  "scripts": {
+    "start": "node index-with-tracing.js",
+    "dev": "nodemon index-with-tracing.js",
+    "test": "jest --detectOpenHandles --forceExit"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@opentelemetry/sdk-node": "^1.15.0",
+    "@opentelemetry/exporter-otlp-http": "^0.44.0",
+    "@opentelemetry/exporters-jaeger": "^1.18.0",
+    "@opentelemetry/sdk-trace-base": "^1.15.0",
+    "@opentelemetry/resources": "^1.15.0",
+    "axios": "^1.6.0",
+    "uuid": "^9.0.0"
+  },
+  "keywords": ["kronos", "api-gateway", "opentelemetry", "distributed-tracing", "jaeger"],
+  "author": "KRONOS Platform",
+  "license": "MIT"
+}

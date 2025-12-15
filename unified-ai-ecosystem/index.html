@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unified AI Ecosystem - Advanced AI Automation Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+        background-attachment: fixed;
+        color: #ffffff;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animated background particles */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(0, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 20s infinite linear;
+      }
+
+      .particle:nth-child(2n) {
+        background: rgba(255, 0, 255, 0.1);
+        animation-duration: 25s;
+        animation-delay: -5s;
+      }
+
+      .particle:nth-child(3n) {
+        background: rgba(255, 255, 0, 0.1);
+        animation-duration: 30s;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0% { transform: translateY(100vh) rotate(0deg); }
+        100% { transform: translateY(-100vh) rotate(360deg); }
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        border-radius: 24px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient 4s ease infinite;
+        text-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+      }
+
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .hero p {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        margin-bottom: 20px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+      }
+
+      .hero-shortcut {
+        background: rgba(0, 255, 255, 0.1);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        color: #00ffff;
+        display: inline-block;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+      }
+
+      kbd {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #ffffff;
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #00ffff;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 8px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-tab {
+        padding: 16px 32px;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-tab::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
+      }
+
+      .nav-tab:hover::before {
+        left: 100%;
+      }
+
+      .nav-tab.active {
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+        color: #ffffff;
+        box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
+      }
+
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .app-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .app-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+
+      .app-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2);
+        border-color: rgba(0, 255, 255, 0.3);
+      }
+
+      .app-card:hover::before {
+        opacity: 1;
+      }
+
+      .app-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        position: relative;
+      }
+
+      .app-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-right: 20px;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .app-icon::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        animation: rotate 3s linear infinite;
+      }
+
+      @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .app-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        background: linear-gradient(135deg, #ffffff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .app-status {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .app-status.running {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      }
+
+      .app-status.stopped {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      }
+
+      .app-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 24px;
+        font-size: 1rem;
+      }
+
+      .app-features {
+        margin-bottom: 24px;
+      }
+
+      .feature-tag {
+        display: inline-block;
+        background: rgba(0, 255, 255, 0.1);
+        color: #00ffff;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+      }
+
+      .app-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, #00ffff, #0080ff);
+        color: #000;
+        box-shadow: 0 8px 24px rgba(0, 255, 255, 0.3);
+      }
+
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 255, 255, 0.4);
+      }
+
+      .btn.danger {
+        background: linear-gradient(135deg, #ff4444, #cc0000);
+        color: white;
+        box-shadow: 0 8px 24px rgba(255, 68, 68, 0.3);
+      }
+
+      .btn.danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(255, 68, 68, 0.4);
+      }
+
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .btn.secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .mcp-section {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .mcp-title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #ffffff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .mcp-description {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 32px;
+      }
+
+      .mcp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+
+      .mcp-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .mcp-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 32px rgba(0, 255, 255, 0.1);
+      }
+
+      .mcp-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .mcp-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 16px;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+      }
+
+      .mcp-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .mcp-desc {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      .system-info {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .system-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: #00ffff;
+      }
+
+      .system-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .system-stat {
+        text-align: center;
+      }
+
+      .system-stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .system-stat-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Chat Hub Styles */
+      .chat-hub-section {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 32px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .chat-hub-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .chat-hub-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, #00ffff, #ff00ff, #ffff00);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient 4s ease infinite;
+      }
+
+      .chat-hub-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .chat-interface {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+
+      .chat-messages {
+        height: 400px;
+        overflow-y: auto;
+        padding: 24px;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+      }
+
+      .welcome-message, .user-message, .ai-message {
+        display: flex;
+        margin-bottom: 24px;
+        align-items: flex-start;
+      }
+
+      .ai-avatar, .user-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+
+      .ai-avatar {
+        background: linear-gradient(135deg, #00ffff, #0080ff);
+      }
+
+      .user-avatar {
+        background: linear-gradient(135deg, #ff00ff, #8000ff);
+      }
+
+      .message-content {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .message-header {
+        font-weight: 600;
+        color: #00ffff;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      .message-text {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+      }
+
+      .user-message {
+        flex-direction: row-reverse;
+      }
+
+      .user-message .message-content {
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(128, 0, 255, 0.1));
+        border-color: rgba(255, 0, 255, 0.3);
+      }
+
+      .user-message .user-avatar {
+        margin-right: 0;
+        margin-left: 16px;
+      }
+
+      .chat-input-area {
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .model-selector {
+        margin-bottom: 16px;
+      }
+
+      .model-dropdown {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 1rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .model-dropdown option {
+        background: #1a1a2e;
+        color: white;
+      }
+
+      .input-container {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .chat-input-field {
+        flex: 1;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .chat-input-field::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .chat-input-field:focus {
+        outline: none;
+        border-color: #00ffff;
+        box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+      }
+
+      .send-button {
+        padding: 16px 24px;
+        background: linear-gradient(135deg, #00ffff, #0080ff);
+        border: none;
+        border-radius: 12px;
+        color: #000;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .send-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 255, 255, 0.3);
+      }
+
+      .quick-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .quick-action-btn {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .quick-action-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+      }
+
+      .activity-feed {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .activity-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: #ff4444;
+      }
+
+      .activity-list {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .activity-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-time {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+      }
+
+      .activity-text {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+      }
+
+      .system-monitor {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .monitor-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #ffff00;
+      }
+
+      .monitor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+      }
+
+      .monitor-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .monitor-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .monitor-icon {
+        font-size: 2rem;
+        margin-right: 16px;
+      }
+
+      .monitor-content {
+        flex: 1;
+      }
+
+      .monitor-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #00ffff;
+        margin-bottom: 4px;
+      }
+
+      .monitor-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+      }
+
+      .typing-dots {
+        display: inline-flex;
+        gap: 4px;
+        margin-left: 8px;
+      }
+
+      .typing-dot {
+        width: 6px;
+        height: 6px;
+        background: #00ffff;
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+      }
+
+      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-10px); }
+      }
+
+      .ai-capabilities {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .capability-section {
+        margin-bottom: 20px;
+      }
+
+      .capability-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #ffff00;
+        margin-bottom: 16px;
+      }
+
+      .capability-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+      }
+
+      .capability-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      .capability-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+      }
+
+      .capability-icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .capability-text {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+      }
+
+      /* Command Palette */
+      .command-palette {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        max-width: 90vw;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.9));
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        overflow: hidden;
+      }
+
+      .command-palette.show {
+        display: block;
+      }
+
+      .command-header {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .command-input {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 1rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .command-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .command-input:focus {
+        outline: none;
+        border-color: #00ffff;
+        box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+      }
+
+      .command-results {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .command-item {
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+      }
+
+      .command-item:hover, .command-item.selected {
+        background: rgba(0, 255, 255, 0.1);
+      }
+
+      .command-item-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .command-item-content {
+        flex: 1;
+      }
+
+      .command-item-title {
+        color: white;
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+
+      .command-item-desc {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+      }
+
+      .command-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        display: none;
+      }
+
+      .command-overlay.show {
+        display: block;
+      }
+
+      /* Modals */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content.large {
+        max-width: 800px;
+      }
+
+      .modal-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        color: #00ffff;
+        font-size: 1.5rem;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .modal-body {
+        padding: 24px;
+        overflow-y: auto;
+        max-height: calc(80vh - 120px);
+      }
+
+      .screenshot-preview {
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 40px;
+        text-align: center;
+        margin-bottom: 20px;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .screenshot-placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .screenshot-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+      }
+
+      .screenshot-preview img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .screenshot-controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .analysis-results {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .search-result-item {
+        padding: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .search-result-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .search-result-item:last-child {
+        border-bottom: none;
+      }
+
+      .search-result-title {
+        color: #00ffff;
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      .search-result-title:hover {
+        text-decoration: underline;
+      }
+
+      .search-result-link {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .apps-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .nav-tabs {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+      <div class="hero">
+        <h1>🚀 Unified AI Ecosystem</h1>
+        <p>Advanced AI-powered automation platform integrating computer control, web automation, Android devices, and intelligent task execution</p>
+        <div class="hero-shortcut">💡 Press <kbd>Ctrl+K</kbd> to open command palette</div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">AI Applications</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">32</span>
+            <span class="stat-label">MCP Tools</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Automation Power</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('overview')">🌟 Overview</button>
+        <button class="nav-tab" onclick="showTab('applications')">🤖 Applications</button>
+        <button class="nav-tab" onclick="showTab('mcp')">🔧 MCP Servers</button>
+        <button class="nav-tab" onclick="showTab('system')">📊 System</button>
+      </div>
+
+      <div id="overview" class="tab-content active">
+        <!-- AI Chat Hub - Main Interface -->
+        <div class="chat-hub-section">
+          <div class="chat-hub-header">
+            <h2 class="chat-hub-title">🤖 AI Chat Hub</h2>
+            <p class="chat-hub-subtitle">Unified AI interaction across all your automation tools</p>
+          </div>
+
+          <div class="chat-interface">
+            <div class="chat-messages" id="chat-messages">
+              <div class="welcome-message">
+                <div class="ai-avatar">🚀</div>
+                <div class="message-content">
+                  <div class="message-header">Unified AI Ecosystem</div>
+                  <div class="message-text">
+                    Welcome to your AI automation hub! I can help you with:
+                    <br>• 💻 Computer control and automation
+                    <br>• 🌐 Intelligent web browsing
+                    <br>• 📱 Android device management
+                    <br>• ⚡ Vision-based UI automation
+                    <br><br>What would you like to do?
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-input-area">
+              <div class="model-selector">
+                <select id="model-select" class="model-dropdown">
+                  <option value="unified">🤖 Unified AI (Auto-select)</option>
+                  <option value="gpt-4o">🧠 GPT-4o (OpenAI)</option>
+                  <option value="claude-3.5-sonnet">🦾 Claude 3.5 (Anthropic)</option>
+                  <option value="gemini-pro">💎 Gemini Pro (Google)</option>
+                  <option value="computer-use">🖥️ Computer Control</option>
+                  <option value="web-automation">🌐 Web Automation</option>
+                </select>
+              </div>
+
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="chat-input"
+                  class="chat-input-field"
+                  placeholder="Ask me anything... (try 'open calculator' or 'search for AI news')"
+                  autocomplete="off"
+                >
+                <button id="send-button" class="send-button">🚀</button>
+              </div>
+
+              <div class="quick-actions">
+                <button class="quick-action-btn" onclick="sendQuickMessage('Take a screenshot of my screen')">
+                  📸 Screenshot
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Open a web browser and search for the latest AI news')">
+                  🌐 Web Search
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('What applications do I have open?')">
+                  📋 App Status
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Show me the current time and date')">
+                  🕐 Time & Date
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Launch the calculator application')">
+                  🧮 Calculator
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Check my email and summarize any new messages')">
+                  📧 Email Check
+                </button>
+              </div>
+
+              <div class="ai-capabilities">
+                <div class="capability-section">
+                  <h4 class="capability-title">🎯 Quick Commands</h4>
+                  <div class="capability-grid">
+                    <div class="capability-item" onclick="sendQuickMessage('Analyze this image and describe what you see')">
+                      <div class="capability-icon">👁️</div>
+                      <div class="capability-text">Image Analysis</div>
+                    </div>
+                    <div class="capability-item" onclick="sendQuickMessage('Help me write a professional email')">
+                      <div class="capability-icon">✍️</div>
+                      <div class="capability-text">Writing Assistant</div>
+                    </div>
+                    <div class="capability-item" onclick="sendQuickMessage('Explain this code to me')">
+                      <div class="capability-icon">💻</div>
+                      <div class="capability-text">Code Review</div>
+                    </div>
+                    <div class="capability-item" onclick="sendQuickMessage('Create a task list for my project')">
+                      <div class="capability-icon">📝</div>
+                      <div class="capability-text">Task Planning</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Status Dashboard -->
+        <div class="system-info">
+          <h3 class="system-title">📊 System Dashboard</h3>
+          <div class="system-stats">
+            <div class="system-stat">
+              <span class="system-stat-value" id="apps-running">0</span>
+              <span class="system-stat-label">Apps Running</span>
+            </div>
+            <div class="system-stat">
+              <span class="system-stat-value" id="mcp-active">2</span>
+              <span class="system-stat-label">MCP Servers</span>
+            </div>
+            <div class="system-stat">
+              <span class="system-stat-value" id="total-tools">32</span>
+              <span class="system-stat-label">AI Tools</span>
+            </div>
+            <div class="system-stat">
+              <span class="system-stat-value">100%</span>
+              <span class="system-stat-label">Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Monitor -->
+        <div class="system-monitor">
+          <h3 class="monitor-title">🖥️ System Monitor</h3>
+          <div class="monitor-grid">
+            <div class="monitor-card">
+              <div class="monitor-icon">🧠</div>
+              <div class="monitor-content">
+                <div class="monitor-value" id="cpu-usage">24%</div>
+                <div class="monitor-label">CPU Usage</div>
+              </div>
+            </div>
+            <div class="monitor-card">
+              <div class="monitor-icon">💾</div>
+              <div class="monitor-content">
+                <div class="monitor-value" id="memory-usage">1.2GB</div>
+                <div class="monitor-label">Memory</div>
+              </div>
+            </div>
+            <div class="monitor-card">
+              <div class="monitor-icon">🌐</div>
+              <div class="monitor-content">
+                <div class="monitor-value" id="network-status">Online</div>
+                <div class="monitor-label">Network</div>
+              </div>
+            </div>
+            <div class="monitor-card">
+              <div class="monitor-icon">⚡</div>
+              <div class="monitor-content">
+                <div class="monitor-value" id="ai-active">4/4</div>
+                <div class="monitor-label">AI Systems</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Activity Feed -->
+        <div class="activity-feed">
+          <h3 class="activity-title">🔴 Live Activity</h3>
+          <div class="activity-list" id="activity-list">
+            <div class="activity-item">
+              <span class="activity-time">Just now</span>
+              <span class="activity-text">System initialized and ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Grid -->
+        <div class="apps-grid" id="apps-overview">
+          <!-- Apps will be loaded here -->
+        </div>
+      </div>
+
+      <div id="applications" class="tab-content">
+        <div class="apps-grid" id="apps-detailed">
+          <!-- Detailed apps will be loaded here -->
+        </div>
+      </div>
+
+      <div id="mcp" class="tab-content">
+        <div class="mcp-section">
+          <h2 class="mcp-title">🔧 Model Context Protocol Servers</h2>
+          <p class="mcp-description">
+            Advanced MCP servers providing 32+ browser automation tools and AI enhancement capabilities for seamless integration with AI assistants and automation workflows.
+          </p>
+
+          <div class="mcp-grid" id="mcp-servers">
+            <!-- MCP servers will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <div id="system" class="tab-content">
+        <div class="mcp-section">
+          <h2 class="mcp-title">📊 System Information</h2>
+          <p class="mcp-description">
+            Comprehensive overview of the AI ecosystem components, their capabilities, and integration status.
+          </p>
+
+          <div class="apps-grid" id="system-details">
+            <div class="app-card">
+              <div class="app-header">
+                <div class="app-icon">🧠</div>
+                <div>
+                  <h3 class="app-title">AI Integration</h3>
+                  <span class="app-status running">Active</span>
+                </div>
+              </div>
+              <p class="app-description">
+                Seamless integration with multiple AI providers including OpenAI, Anthropic, Google, and Mistral. Advanced model selection and automatic fallbacks.
+              </p>
+              <div class="app-features">
+                <span class="feature-tag">GPT-4</span>
+                <span class="feature-tag">Claude</span>
+                <span class="feature-tag">Gemini</span>
+                <span class="feature-tag">Streaming</span>
+              </div>
+            </div>
+
+            <div class="app-card">
+              <div class="app-header">
+                <div class="app-icon">🌐</div>
+                <div>
+                  <h3 class="app-title">Web Automation</h3>
+                  <span class="app-status running">Active</span>
+                </div>
+              </div>
+              <p class="app-description">
+                Intelligent web browsing and automation with Playwright and Browser-Use MCP servers. Handle complex web interactions and data extraction.
+              </p>
+              <div class="app-features">
+                <span class="feature-tag">Playwright</span>
+                <span class="feature-tag">Browser-Use</span>
+                <span class="feature-tag">Data Extraction</span>
+                <span class="feature-tag">32 Tools</span>
+              </div>
+            </div>
+
+            <div class="app-card">
+              <div class="app-header">
+                <div class="app-icon">📱</div>
+                <div>
+                  <h3 class="app-title">Device Control</h3>
+                  <span class="app-status running">Active</span>
+                </div>
+              </div>
+              <p class="app-description">
+                Remote control of computers and Android devices. Vision-based UI automation and physical device interaction capabilities.
+              </p>
+              <div class="app-features">
+                <span class="feature-tag">VM Control</span>
+                <span class="feature-tag">Android</span>
+                <span class="feature-tag">Vision AI</span>
+                <span class="feature-tag">Remote Access</span>
+              </div>
+            </div>
+
+            <div class="app-card">
+              <div class="app-header">
+                <div class="app-icon">⚡</div>
+                <div>
+                  <h3 class="app-title">Task Automation</h3>
+                  <span class="app-status running">Active</span>
+                </div>
+              </div>
+              <p class="app-description">
+                Intelligent task planning and execution with multi-agent coordination. Automated workflow management and error handling.
+              </p>
+              <div class="app-features">
+                <span class="feature-tag">Multi-Agent</span>
+                <span class="feature-tag">Task Planning</span>
+                <span class="feature-tag">Workflows</span>
+                <span class="feature-tag">Error Recovery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="command-overlay" id="command-overlay"></div>
+    <div class="command-palette" id="command-palette">
+      <div class="command-header">
+        <input
+          type="text"
+          id="command-input"
+          class="command-input"
+          placeholder="Type a command or search..."
+          autocomplete="off"
+        >
+      </div>
+      <div class="command-results" id="command-results">
+        <!-- Command results will be populated here -->
+      </div>
+    </div>
+
+    <!-- Screenshot Interface -->
+    <div class="modal-overlay" id="screenshot-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>📸 Screenshot Analysis</h3>
+          <button class="modal-close" onclick="closeScreenshotModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="screenshot-preview" id="screenshot-preview">
+            <div class="screenshot-placeholder">
+              <div class="screenshot-icon">📸</div>
+              <p>Click "Take Screenshot" to capture your screen</p>
+            </div>
+          </div>
+          <div class="screenshot-controls">
+            <button class="btn primary" onclick="takeScreenshot()">Take Screenshot</button>
+            <button class="btn secondary" onclick="uploadImage()">Upload Image</button>
+            <input type="file" id="image-upload" accept="image/*" style="display: none;">
+          </div>
+          <div class="analysis-results" id="analysis-results" style="display: none;">
+            <h4>Analysis Results:</h4>
+            <div id="analysis-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Results Modal -->
+    <div class="modal-overlay" id="search-results-modal">
+      <div class="modal-content large">
+        <div class="modal-header">
+          <h3>🔍 Search Results</h3>
+          <button class="modal-close" onclick="closeSearchResultsModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="search-results-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Create animated particles
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.width = Math.random() * 4 + 2 + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.animationDelay = Math.random() * 20 + 's';
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      const electronAPI = window.electronAPI;
+      let apps = {};
+      let runningApps = new Set();
+
+      const appData = {
+        'open-computer-use': {
+          name: 'Open Computer Use',
+          description: 'AI-powered computer control and automation platform. Enable AI agents to interact with your computer through vision-language models, execute tasks, and control applications.',
+          features: ['Vision AI', 'Task Execution', 'App Control', 'Screen Capture', 'Real-time Streaming'],
+          icon: '🖥️',
+          color: 'cyan'
+        },
+        'ai-browser': {
+          name: 'AI Browser',
+          description: 'Intelligent web automation and browsing platform. AI-powered web interactions, task automation, and intelligent content processing with MCP integration.',
+          features: ['Web Automation', 'AI Browsing', 'Task Scheduling', 'MCP Integration', 'Multi-Modal'],
+          icon: '🌐',
+          color: 'blue'
+        },
+        'ui-tars': {
+          name: 'UI-TARS',
+          description: 'Advanced UI automation using vision-language models. Computer vision-based interface interaction and intelligent task execution.',
+          features: ['Vision AI', 'UI Automation', 'Task Planning', 'Screen Analysis', 'Intelligent Control'],
+          icon: '⚡',
+          color: 'yellow'
+        },
+        'gbox': {
+          name: 'GBox',
+          description: 'Android device automation platform. Remote control and automation of Android devices with advanced ADB integration and device management.',
+          features: ['Android Control', 'ADB Integration', 'Device Management', 'Remote Access', 'Multi-Device'],
+          icon: '📱',
+          color: 'green'
+        }
+      };
+
+      async function loadApps() {
+        try {
+          apps = await electronAPI.getApps();
+          // Merge with our enhanced data
+          Object.keys(apps).forEach(key => {
+            if (appData[key]) {
+              apps[key] = { ...apps[key], ...appData[key] };
+            }
+          });
+          renderApps();
+        } catch (error) {
+          console.error('Failed to load apps:', error);
+        }
+      }
+
+      function renderApps() {
+        const appsOverview = document.getElementById('apps-overview');
+        const appsDetailed = document.getElementById('apps-detailed');
+
+        appsOverview.innerHTML = '';
+        appsDetailed.innerHTML = '';
+
+        Object.entries(apps).forEach(([appKey, app]) => {
+          const isRunning = runningApps.has(appKey);
+
+          // Overview card
+          const card = document.createElement('div');
+          card.className = 'app-card';
+          card.innerHTML = `
+            <div class="app-header">
+              <div class="app-icon">${app.icon || '🔧'}</div>
+              <div style="flex: 1;">
+                <h3 class="app-title">${app.name}</h3>
+                <span class="app-status ${isRunning ? 'running' : 'stopped'}">
+                  ${isRunning ? '● Running' : '● Stopped'}
+                </span>
+              </div>
+            </div>
+            <p class="app-description">${app.description}</p>
+            <div class="app-features">
+              ${(app.features || []).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            <div class="app-actions">
+              ${!isRunning ?
+                `<button class="btn primary" onclick="startApp('${appKey}')">🚀 Launch</button>` :
+                `<button class="btn danger" onclick="stopApp('${appKey}')">⏹️ Stop</button>`
+              }
+              ${app.port && isRunning ? `<button class="btn secondary" onclick="openApp('${appKey}')">🔗 Open</button>` : ''}
+            </div>
+          `;
+          appsOverview.appendChild(card);
+
+          // Detailed card
+          const detailedCard = document.createElement('div');
+          detailedCard.className = 'app-card';
+          detailedCard.innerHTML = `
+            <div class="app-header">
+              <div class="app-icon">${app.icon || '🔧'}</div>
+              <div style="flex: 1;">
+                <h3 class="app-title">${app.name}</h3>
+                <span class="app-status ${isRunning ? 'running' : 'stopped'}">
+                  ${isRunning ? '● Running' : '● Stopped'}
+                </span>
+              </div>
+            </div>
+            <p class="app-description">${app.description}</p>
+            <div class="app-features">
+              ${(app.features || []).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            ${app.port ? `<div style="margin-bottom: 20px; color: rgba(255,255,255,0.7);"><strong>🌐 Port:</strong> ${app.port}</div>` : ''}
+            <div class="app-actions">
+              ${!isRunning ?
+                `<button class="btn primary" onclick="startApp('${appKey}')">🚀 Launch Application</button>` :
+                `<button class="btn danger" onclick="stopApp('${appKey}')">⏹️ Stop Application</button>`
+              }
+              ${app.port && isRunning ? `<button class="btn secondary" onclick="openApp('${appKey}')">🔗 Open Interface</button>` : ''}
+            </div>
+          `;
+          appsDetailed.appendChild(detailedCard);
+        });
+
+        renderMCPServers();
+        updateSystemStats();
+      }
+
+      function renderMCPServers() {
+        const mcpContainer = document.getElementById('mcp-servers');
+        mcpContainer.innerHTML = `
+          <div class="mcp-card">
+            <div class="mcp-card-header">
+              <div class="mcp-icon">🌐</div>
+              <div>
+                <div class="mcp-name">Browser Use MCP</div>
+                <div class="mcp-desc">Advanced web automation & AI browsing</div>
+              </div>
+            </div>
+            <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 12px;">
+              Intelligent web interactions, data extraction, and automated browsing with AI assistance.
+            </div>
+            <div style="margin-top: 16px;">
+              <span class="feature-tag">Web Automation</span>
+              <span class="feature-tag">Data Extraction</span>
+              <span class="feature-tag">AI Browsing</span>
+              <span class="feature-tag">Active</span>
+            </div>
+          </div>
+          <div class="mcp-card">
+            <div class="mcp-card-header">
+              <div class="mcp-icon">🎭</div>
+              <div>
+                <div class="mcp-name">Playwright MCP</div>
+                <div class="mcp-desc">Professional browser automation tools</div>
+              </div>
+            </div>
+            <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 12px;">
+              32 comprehensive browser automation tools for web testing, scraping, and interaction.
+            </div>
+            <div style="margin-top: 16px;">
+              <span class="feature-tag">32 Tools</span>
+              <span class="feature-tag">Web Testing</span>
+              <span class="feature-tag">Scraping</span>
+              <span class="feature-tag">Active</span>
+            </div>
+          </div>
+        `;
+      }
+
+      function updateSystemStats() {
+        const runningCount = runningApps.size;
+        document.getElementById('apps-running').textContent = runningCount;
+      }
+
+      async function startApp(appKey) {
+        try {
+          await electronAPI.startApp(appKey);
+          // Show loading state
+          const btn = event.target;
+          btn.textContent = '⏳ Starting...';
+          btn.disabled = true;
+        } catch (error) {
+          console.error('Failed to start app:', error);
+          alert(`Failed to start ${apps[appKey].name}: ${error.message}`);
+        }
+      }
+
+      async function stopApp(appKey) {
+        try {
+          await electronAPI.stopApp(appKey);
+        } catch (error) {
+          console.error('Failed to stop app:', error);
+          alert(`Failed to stop ${apps[appKey].name}: ${error.message}`);
+        }
+      }
+
+      function openApp(appKey) {
+        const app = apps[appKey];
+        if (app.port) {
+          window.open(`http://localhost:${app.port}`, '_blank');
+        }
+      }
+
+      function showTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+
+        // Remove active class from all nav tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add('active');
+
+        // Add active class to selected nav tab
+        event.target.classList.add('active');
+      }
+
+      // Event listeners
+      if (electronAPI) {
+        electronAPI.onAppStarted((appKey) => {
+          runningApps.add(appKey);
+          renderApps();
+        });
+
+        electronAPI.onAppStopped((appKey) => {
+          runningApps.delete(appKey);
+          renderApps();
+        });
+
+        electronAPI.onAppClosed((appKey) => {
+          runningApps.delete(appKey);
+          renderApps();
+        });
+      }
+
+      // Chat functionality
+      let isTyping = false;
+
+      function addMessage(content, isUser = false, model = 'Unified AI') {
+        const messagesContainer = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message' : 'ai-message';
+
+        messageDiv.innerHTML = `
+          <div class="${isUser ? 'user' : 'ai'}-avatar">${isUser ? '👤' : '🤖'}</div>
+          <div class="message-content">
+            <div class="message-header">${isUser ? 'You' : model}</div>
+            <div class="message-text">${content}</div>
+          </div>
+        `;
+
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // Add to activity feed
+        addActivityItem(isUser ? `You: ${content.substring(0, 50)}...` : `${model}: Response sent`);
+      }
+
+      function showTypingIndicator() {
+        if (isTyping) return;
+
+        isTyping = true;
+        const messagesContainer = document.getElementById('chat-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typing-indicator';
+        typingDiv.innerHTML = `
+          <div class="ai-avatar">🤖</div>
+          <div class="message-content">
+            <div class="message-text">
+              AI is thinking
+              <span class="typing-dots">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </span>
+            </div>
+          </div>
+        `;
+
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      function hideTypingIndicator() {
+        const typingDiv = document.getElementById('typing-indicator');
+        if (typingDiv) {
+          typingDiv.remove();
+        }
+        isTyping = false;
+      }
+
+      async function sendMessage(message, model = 'unified') {
+        addMessage(message, true);
+
+        showTypingIndicator();
+
+        try {
+          // Use embedded AI services
+          const response = await processWithEmbeddedAI(message, model);
+
+          hideTypingIndicator();
+          addMessage(response.message, false, response.model || getModelName(model));
+
+          // Handle special response types
+          if (response.type === 'web_search' && response.data) {
+            displaySearchResults(response.data);
+          } else if (response.type === 'screenshot_request') {
+            showScreenshotInterface();
+          } else if (response.type === 'image_analysis_request') {
+            showImageAnalysisInterface();
+          }
+
+        } catch (error) {
+          hideTypingIndicator();
+          addMessage(`Sorry, I encountered an error: ${error.message}. Please try again.`, false, 'System');
+        }
+      }
+
+      async function processWithEmbeddedAI(message, model) {
+        try {
+          // Make request to embedded Express server
+          const response = await fetch('http://localhost:3001/api/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message, model })
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          return await response.json();
+        } catch (error) {
+          console.error('Embedded AI request failed:', error);
+          // Fallback to local processing
+          return getFallbackResponse(message, model);
+        }
+      }
+
+      function getFallbackResponse(message, model) {
+        // Route to different AI systems based on the request
+        if (message.toLowerCase().includes('screenshot') || message.toLowerCase().includes('screen')) {
+          return {
+            type: 'screenshot_request',
+            message: 'I can help you take and analyze screenshots. Click the screenshot button above to capture your screen.',
+            model: 'Computer Vision AI'
+          };
+        } else if (message.toLowerCase().includes('web') || message.toLowerCase().includes('search') || message.toLowerCase().includes('browser')) {
+          const query = extractSearchQuery(message);
+          if (query) {
+            return performLocalWebSearch(query);
+          }
+          return {
+            type: 'web_search_help',
+            message: 'I can search the web for you. Try asking "search for AI news" or "find information about machine learning".',
+            model: 'Web Automation AI'
+          };
+        } else if (message.toLowerCase().includes('time') || message.toLowerCase().includes('date')) {
+          return handleTimeRequest(message);
+        } else if (message.toLowerCase().includes('status') || message.toLowerCase().includes('running')) {
+          return handleStatusRequest(message);
+        } else {
+          return getUnifiedAIResponse(message, model);
+        }
+      }
+
+      function extractSearchQuery(message) {
+        const patterns = [
+          /search for (.+)/i,
+          /find (.+)/i,
+          /look up (.+)/i,
+          /search (.+)/i
+        ];
+
+        for (const pattern of patterns) {
+          const match = message.match(pattern);
+          if (match) {
+            return match[1].trim();
+          }
+        }
+        return null;
+      }
+
+      async function performLocalWebSearch(query) {
+        try {
+          const response = await fetch('http://localhost:3001/api/web-search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            return {
+              type: 'web_search',
+              message: `I found ${data.results.length} results for "${query}"`,
+              data: data,
+              model: 'Web Automation AI'
+            };
+          }
+        } catch (error) {
+          console.error('Web search failed:', error);
+        }
+
+        return {
+          type: 'web_search',
+          message: `I would search for "${query}" but the web automation service is currently initializing. Please try again in a moment.`,
+          model: 'Web Automation AI'
+        };
+      }
+
+      async function handleScreenshotRequest(message) {
+        // Check if Open Computer Use is running
+        const isRunning = await electronAPI.getAppStatus('open-computer-use');
+        if (!isRunning) {
+          return "To take a screenshot, I need to start the Open Computer Use application. Would you like me to launch it for you?";
+        }
+
+        return "I've instructed the computer control AI to take a screenshot. The screenshot should be captured and displayed in the Open Computer Use interface. You can view it by opening that application.";
+      }
+
+      async function handleWebRequest(message) {
+        const isRunning = await electronAPI.getAppStatus('ai-browser');
+        if (!isRunning) {
+          return "For web browsing tasks, I need to start the AI Browser application. Would you like me to launch it for you?";
+        }
+
+        return "I've activated the AI Browser for your web request. The intelligent web automation system will handle your request and you can see the results in the AI Browser interface.";
+      }
+
+      async function handleAppRequest(message) {
+        // Try to identify which app to launch
+        const apps = await electronAPI.getApps();
+        const appKeys = Object.keys(apps);
+
+        for (const appKey of appKeys) {
+          const app = apps[appKey];
+          if (message.toLowerCase().includes(appKey.replace('-', ' '))) {
+            await electronAPI.startApp(appKey);
+            return `Launching ${app.name}... The application should open in a new window shortly.`;
+          }
+        }
+
+        return "I can help you launch any of these applications: Open Computer Use, AI Browser, UI-TARS, or GBox. Which one would you like to start?";
+      }
+
+      async function handleTimeRequest(message) {
+        const now = new Date();
+        return `Current time: ${now.toLocaleTimeString()}\nCurrent date: ${now.toLocaleDateString()}\nTimezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
+      }
+
+      async function handleStatusRequest(message) {
+        const apps = await electronAPI.getApps();
+        let statusMessage = "Current system status:\n\n";
+
+        for (const [appKey, app] of Object.entries(apps)) {
+          const isRunning = await electronAPI.getAppStatus(appKey);
+          statusMessage += `${app.icon} ${app.name}: ${isRunning ? '🟢 Running' : '🔴 Stopped'}\n`;
+        }
+
+        statusMessage += `\nMCP Servers: 🟢 Active (2 servers, 32 tools)\n`;
+        statusMessage += `System Health: 🟢 Excellent\n`;
+
+        return statusMessage;
+      }
+
+      async function getUnifiedAIResponse(message, model) {
+        // Simulate different AI model responses
+        const responses = [
+          `I understand you want to: "${message}". As your unified AI assistant, I can help you with computer control, web automation, Android devices, and intelligent task execution. Which specific capability would you like to use?`,
+          `Your request "${message}" has been processed. I can route this to the most appropriate AI system in your ecosystem. Would you like me to proceed with the action?`,
+          `Great question/request: "${message}". I have access to multiple AI models and automation tools. Let me help you accomplish this task efficiently.`,
+          `I see you want to "${message}". This sounds like a perfect use case for our integrated AI ecosystem. I can coordinate between different AI systems to give you the best results.`
+        ];
+
+        return responses[Math.floor(Math.random() * responses.length)];
+      }
+
+      function getModelName(model) {
+        const names = {
+          'unified': 'Unified AI',
+          'gpt-4o': 'GPT-4o',
+          'claude-3.5-sonnet': 'Claude 3.5',
+          'gemini-pro': 'Gemini Pro',
+          'computer-use': 'Computer Control AI',
+          'web-automation': 'Web Automation AI'
+        };
+        return names[model] || 'AI Assistant';
+      }
+
+      function sendQuickMessage(message) {
+        document.getElementById('chat-input').value = message;
+        handleSendMessage();
+      }
+
+      function handleSendMessage() {
+        const input = document.getElementById('chat-input');
+        const modelSelect = document.getElementById('model-select');
+        const message = input.value.trim();
+
+        if (message) {
+          sendMessage(message, modelSelect.value);
+          input.value = '';
+        }
+      }
+
+      function addActivityItem(text) {
+        const activityList = document.getElementById('activity-list');
+        const activityItem = document.createElement('div');
+        activityItem.className = 'activity-item';
+
+        const now = new Date();
+        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        activityItem.innerHTML = `
+          <span class="activity-time">${timeString}</span>
+          <span class="activity-text">${text}</span>
+        `;
+
+        activityList.insertBefore(activityItem, activityList.firstChild);
+
+        // Keep only last 10 items
+        while (activityList.children.length > 10) {
+          activityList.removeChild(activityList.lastChild);
+        }
+      }
+
+      // Event listeners
+      document.getElementById('send-button').addEventListener('click', handleSendMessage);
+      document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          handleSendMessage();
+        }
+      });
+
+      // System monitoring
+      function updateSystemStats() {
+        // Simulate CPU usage
+        const cpuUsage = Math.floor(Math.random() * 30 + 15);
+        document.getElementById('cpu-usage').textContent = `${cpuUsage}%`;
+
+        // Simulate memory usage
+        const memoryGB = (Math.random() * 2 + 1).toFixed(1);
+        document.getElementById('memory-usage').textContent = `${memoryGB}GB`;
+
+        // Update AI systems count
+        const runningCount = Object.values(runningApps).filter(Boolean).length;
+        document.getElementById('ai-active').textContent = `${runningCount}/4`;
+      }
+
+      // Real-time updates
+      setInterval(updateSystemStats, 2000);
+      setInterval(() => {
+        addActivityItem(`System heartbeat - ${new Date().toLocaleTimeString()}`);
+      }, 30000); // Every 30 seconds
+
+      // Command Palette
+      const commands = [
+        { id: 'screenshot', title: 'Take Screenshot', description: 'Capture screen or window', icon: '📸', action: () => sendQuickMessage('Take a screenshot of my screen') },
+        { id: 'web-search', title: 'Web Search', description: 'Search the internet', icon: '🌐', action: () => sendQuickMessage('Search for AI news') },
+        { id: 'app-status', title: 'Check Apps', description: 'View running applications', icon: '📋', action: () => sendQuickMessage('What applications do I have open?') },
+        { id: 'time-date', title: 'Time & Date', description: 'Current time and date', icon: '🕐', action: () => sendQuickMessage('Show me the current time and date') },
+        { id: 'calculator', title: 'Launch Calculator', description: 'Open calculator app', icon: '🧮', action: () => sendQuickMessage('Launch the calculator application') },
+        { id: 'email', title: 'Check Email', description: 'Summarize new emails', icon: '📧', action: () => sendQuickMessage('Check my email and summarize any new messages') },
+        { id: 'image-analysis', title: 'Analyze Image', description: 'Describe image content', icon: '👁️', action: () => sendQuickMessage('Analyze this image and describe what you see') },
+        { id: 'writing', title: 'Writing Assistant', description: 'Help with writing', icon: '✍️', action: () => sendQuickMessage('Help me write a professional email') },
+        { id: 'code-review', title: 'Code Review', description: 'Explain code', icon: '💻', action: () => sendQuickMessage('Explain this code to me') },
+        { id: 'task-planning', title: 'Task Planning', description: 'Create task lists', icon: '📝', action: () => sendQuickMessage('Create a task list for my project') },
+        { id: 'launch-computer-use', title: 'Launch Computer Use', description: 'Start AI computer control', icon: '🖥️', action: () => electronAPI.startApp('open-computer-use') },
+        { id: 'launch-ai-browser', title: 'Launch AI Browser', description: 'Start intelligent web browser', icon: '🌐', action: () => electronAPI.startApp('ai-browser') },
+        { id: 'launch-ui-tars', title: 'Launch UI-TARS', description: 'Start vision-based automation', icon: '⚡', action: () => electronAPI.startApp('ui-tars') },
+        { id: 'launch-gbox', title: 'Launch GBox', description: 'Start Android automation', icon: '📱', action: () => electronAPI.startApp('gbox') }
+      ];
+
+      let selectedCommandIndex = 0;
+
+      function showCommandPalette() {
+        const palette = document.getElementById('command-palette');
+        const overlay = document.getElementById('command-overlay');
+        const input = document.getElementById('command-input');
+
+        palette.classList.add('show');
+        overlay.classList.add('show');
+        input.focus();
+        input.value = '';
+        selectedCommandIndex = 0;
+        renderCommandResults('');
+      }
+
+      function hideCommandPalette() {
+        const palette = document.getElementById('command-palette');
+        const overlay = document.getElementById('command-overlay');
+
+        palette.classList.remove('show');
+        overlay.classList.remove('show');
+      }
+
+      function renderCommandResults(query) {
+        const resultsContainer = document.getElementById('command-results');
+        const filteredCommands = commands.filter(cmd =>
+          cmd.title.toLowerCase().includes(query.toLowerCase()) ||
+          cmd.description.toLowerCase().includes(query.toLowerCase())
+        );
+
+        resultsContainer.innerHTML = '';
+
+        filteredCommands.forEach((cmd, index) => {
+          const item = document.createElement('div');
+          item.className = `command-item ${index === selectedCommandIndex ? 'selected' : ''}`;
+          item.onclick = () => executeCommand(cmd);
+
+          item.innerHTML = `
+            <div class="command-item-icon">${cmd.icon}</div>
+            <div class="command-item-content">
+              <div class="command-item-title">${cmd.title}</div>
+              <div class="command-item-desc">${cmd.description}</div>
+            </div>
+          `;
+
+          resultsContainer.appendChild(item);
+        });
+      }
+
+      function executeCommand(cmd) {
+        hideCommandPalette();
+        cmd.action();
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        // Ctrl+K or Cmd+K to open command palette
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          showCommandPalette();
+        }
+
+        // Escape to close command palette
+        if (e.key === 'Escape') {
+          hideCommandPalette();
+        }
+      });
+
+      // Command palette input handling
+      document.getElementById('command-input').addEventListener('input', (e) => {
+        renderCommandResults(e.target.value);
+        selectedCommandIndex = 0;
+        updateCommandSelection();
+      });
+
+      document.getElementById('command-input').addEventListener('keydown', (e) => {
+        const results = document.querySelectorAll('.command-item');
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedCommandIndex = Math.min(selectedCommandIndex + 1, results.length - 1);
+          updateCommandSelection();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedCommandIndex = Math.max(selectedCommandIndex - 1, 0);
+          updateCommandSelection();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const selectedCmd = commands.filter(cmd =>
+            cmd.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            cmd.description.toLowerCase().includes(e.target.value.toLowerCase())
+          )[selectedCommandIndex];
+          if (selectedCmd) {
+            executeCommand(selectedCmd);
+          }
+        }
+      });
+
+      function updateCommandSelection() {
+        const results = document.querySelectorAll('.command-item');
+        results.forEach((item, index) => {
+          item.classList.toggle('selected', index === selectedCommandIndex);
+        });
+      }
+
+      // Close command palette when clicking overlay
+      document.getElementById('command-overlay').addEventListener('click', hideCommandPalette);
+
+      // Modal functions
+      function showScreenshotInterface() {
+        document.getElementById('screenshot-modal').classList.add('show');
+      }
+
+      function closeScreenshotModal() {
+        document.getElementById('screenshot-modal').classList.remove('show');
+      }
+
+      function showImageAnalysisInterface() {
+        showScreenshotInterface(); // Reuse the same interface
+      }
+
+      function displaySearchResults(data) {
+        const modal = document.getElementById('search-results-modal');
+        const content = document.getElementById('search-results-content');
+
+        let html = `<h4>Search results for "${data.query}":</h4>`;
+
+        if (data.results && data.results.length > 0) {
+          data.results.forEach(result => {
+            html += `
+              <div class="search-result-item">
+                <a href="${result.link}" class="search-result-title" target="_blank">${result.title}</a>
+                <div class="search-result-link">${result.link}</div>
+              </div>
+            `;
+          });
+        } else {
+          html += '<p>No results found.</p>';
+        }
+
+        content.innerHTML = html;
+        modal.classList.add('show');
+      }
+
+      function closeSearchResultsModal() {
+        document.getElementById('search-results-modal').classList.remove('show');
+      }
+
+      async function takeScreenshot() {
+        try {
+          // Use Electron API to take screenshot
+          const result = await electronAPI.takeScreenshot();
+          addActivityItem('Screenshot captured');
+
+          // Show placeholder for captured screenshot
+          const preview = document.getElementById('screenshot-preview');
+          preview.innerHTML = `
+            <div style="text-align: center; color: #00ffff;">
+              <div style="font-size: 3rem; margin-bottom: 16px;">📸</div>
+              <p>Screenshot captured successfully!</p>
+              <p style="font-size: 0.9rem; opacity: 0.8;">${result.timestamp}</p>
+            </div>
+          `;
+
+          // Show analysis results
+          showAnalysisResults({
+            text: "Screenshot captured and ready for analysis. In a full implementation, OCR would extract text from the image.",
+            description: "This screenshot shows the current state of your screen. Advanced AI analysis would provide detailed insights about the content.",
+            timestamp: result.timestamp
+          });
+
+        } catch (error) {
+          console.error('Screenshot failed:', error);
+          alert('Failed to take screenshot: ' + error.message);
+        }
+      }
+
+      function uploadImage() {
+        document.getElementById('image-upload').click();
+      }
+
+      // Handle image upload
+      document.getElementById('image-upload').addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const imageData = e.target.result;
+
+          // Display the image
+          const preview = document.getElementById('screenshot-preview');
+          preview.innerHTML = `<img src="${imageData}" alt="Uploaded image">`;
+
+          try {
+            // Analyze the image
+            const result = await electronAPI.analyzeImage(imageData.split(',')[1]);
+            showAnalysisResults(result);
+            addActivityItem('Image analyzed successfully');
+          } catch (error) {
+            console.error('Image analysis failed:', error);
+            showAnalysisResults({
+              error: 'Analysis failed: ' + error.message,
+              description: 'Unable to analyze the uploaded image.',
+              timestamp: new Date().toISOString()
+            });
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function showAnalysisResults(result) {
+        const resultsDiv = document.getElementById('analysis-results');
+        const contentDiv = document.getElementById('analysis-content');
+
+        if (result.error) {
+          contentDiv.innerHTML = `
+            <div style="color: #ff6b6b;">
+              <strong>Error:</strong> ${result.error}
+            </div>
+            <div style="color: rgba(255,255,255,0.8); margin-top: 8px;">
+              ${result.description}
+            </div>
+          `;
+        } else {
+          contentDiv.innerHTML = `
+            <div style="margin-bottom: 12px;">
+              <strong>Extracted Text:</strong>
+              <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px; margin-top: 4px; font-family: monospace;">
+                ${result.text || 'No text detected'}
+              </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <strong>Description:</strong>
+              <div style="color: rgba(255,255,255,0.8); margin-top: 4px;">
+                ${result.description}
+              </div>
+            </div>
+            ${result.objects ? `
+              <div>
+                <strong>Detected Objects:</strong>
+                <div style="margin-top: 4px;">
+                  ${result.objects.map(obj => `<span style="background: rgba(0,255,255,0.2); padding: 2px 6px; border-radius: 4px; margin-right: 4px;">${obj}</span>`).join('')}
+                </div>
+              </div>
+            ` : ''}
+          `;
+        }
+
+        resultsDiv.style.display = 'block';
+      }
+
+      // Make functions globally available
+      window.sendQuickMessage = sendQuickMessage;
+      window.closeScreenshotModal = closeScreenshotModal;
+      window.closeSearchResultsModal = closeSearchResultsModal;
+
+      // Initialize
+      createParticles();
+      loadApps();
+      updateSystemStats();
+    </script>
+  </body>
+</html>
