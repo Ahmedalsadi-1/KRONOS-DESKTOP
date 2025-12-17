@@ -37,6 +37,21 @@ KRONOS democratizes AI-powered automation through a unified platform where intel
 
 ---
 
+## 🎬 KRONOS Demos
+
+<div align="center">
+
+### Platform Overview
+*Core KRONOS AI automation capabilities*
+
+🎥 **[Watch KRONOS Demo 1](videos/kronos-demo-1.mp4)** • 🎥 **[Watch KRONOS Demo 2](videos/kronos-demo-2.mp4)**
+
+*View all demos: [videos/](videos/)*
+
+</div>
+
+---
+
 ## 🎬 KRONOS in Action
 
 <div align="center">
