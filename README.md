@@ -2,38 +2,38 @@
 
 <img src="assets/kronos_logo.webp" width="200" alt="KRONOS Logo">
 
-# KRONOS 🤖⚡
+# KRONOS
 
-**The Definitive AI Desktop Agent - Give Your AI Its Own Computer**
+**Intelligent Automation, Unified**
 
-*Professional-grade AI automation with real desktop control, multi-agent orchestration, and enterprise security*
+*A unified platform where intelligent agents seamlessly collaborate to accomplish complex tasks across all computing environments.*
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688)](https://fastapi.tiangolo.com/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
-[![KRONOS](https://img.shields.io/badge/KRONOS-v2.0-000000)](https://github.com/yourusername/ai-emulators)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-1a365d.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Next.js](https://img.shields.io/badge/Next.js-15-64748b)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-3b82f6)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-b45309)](https://www.docker.com/)
+[![KRONOS](https://img.shields.io/badge/KRONOS-v2.0-1a365d)](https://github.com/yourusername/ai-emulators)
 
-[🌐 **KRONOS Platform**](https://llmhub.dev) • [📚 **Documentation**](https://docs.bytebot.ai) • [💬 **Discord**](https://discord.gg/gppEfsVt) • [𝕏 **Twitter**](https://x.com/llmhub_dev)
+[🌐 **Platform**](https://llmhub.dev) • [📚 **Documentation**](https://docs.kronos.ai) • [💬 **Community**](https://discord.gg/gppEfsVt) • [𝕏 **Updates**](https://x.com/llmhub_dev)
 
 </div>
 
 ---
 
-## ⚡ What is KRONOS?
+## Overview
 
-**KRONOS** is the most advanced AI desktop agent platform, giving AI models complete control over virtual computers. Unlike traditional AI assistants that only *talk* about tasks, KRONOS enables AI to *actually perform* them by controlling browsers, terminals, applications, and workflows in real-time.
+KRONOS democratizes AI-powered automation through a unified platform where intelligent agents collaborate seamlessly across computing environments. By mastering time and processes, KRONOS transforms complex workflows into orchestrated intelligence.
 
-### The KRONOS Difference
+### Core Capabilities
 
-- 🎯 **Real Desktop Control**: AI agents with full access to browsers, terminals, and applications
-- 🔒 **Enterprise Security**: Isolated execution environments with comprehensive access controls
-- 🚀 **Multi-Agent Orchestration**: Complex tasks broken down and executed by specialized agents
-- 📊 **Live Monitoring**: Real-time task execution with streaming logs and screenshots
-- 🏗️ **Extensible Architecture**: Plugin system supporting 100+ AI providers and custom tools
-- ⚡ **Production Ready**: Docker-based deployment with Kubernetes support
+- **Control**: Real desktop environments with complete AI agent access
+- **Observe**: Comprehensive monitoring and real-time execution tracking
+- **Coordinate**: Multi-agent orchestration for complex task decomposition
+- **Secure**: Enterprise-grade isolation and access management
+- **Extend**: Plugin architecture supporting diverse AI providers and tools
+- **Deploy**: Production-ready infrastructure with containerization
 
-> **"Computer use" capabilities beyond Claude Computer Use - fully open-source and infinitely extensible.**
+> **KRONOS creates harmony between AI agents, delivering outcomes that surpass individual capabilities.**
 
 ---
 
@@ -60,88 +60,92 @@
 
 ---
 
-## 🏗️ KRONOS Architecture
+## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                           KRONOS PLATFORM                            │
-│  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │                    KRONOS AI Desktop Agent                      │  │
-│  │         Vision-language models with real desktop control        │  │
-│  └─────────────────────────────────────────────────────────────────┘  │
-│  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │                KRONOS Multi-Agent System                        │  │
-│  │     Task decomposition and orchestration across agents          │  │
-│  └─────────────────────────────────────────────────────────────────┘  │
-│  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │               KRONOS Environment Provisioning                  │  │
-│  │    Unified sandboxing for Android/desktop automation            │  │
-│  └─────────────────────────────────────────────────────────────────┘  │
-│  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │                 KRONOS Enterprise Platform                      │  │
-│  │         Orchestration layer for production deployments          │  │
-│  └─────────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                   MCP Integration Layer                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
-│  │  Cursor     │  │  Claude     │  │ Any MCP     │  │ Custom      │ │
-│  │ Integration │  │ Code Agent  │  │ Client      │  │ Agent       │ │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │
-└─────────────────────────────────────────────────────────────────────┘
+                          ┌─────────────────┐
+                          │   KRONOS Core   │
+                          │   Platform      │
+                          └─────────┬───────┘
+                                    │
+                    ┌───────────────┼───────────────┐
+                    │               │               │
+          ┌─────────▼─────────┐ ┌───▼───┐ ┌────────▼─────────┐
+          │   AI Desktop     │ │ Multi- │ │ Environment      │
+          │   Agent          │ │ Agent  │ │ Provisioning     │
+          │   Control Layer  │ │ System │ │ Sandboxing       │
+          └─────────────────┘ └────────┘ └──────────────────┘
+                    │               │               │
+                    └───────────────┼───────────────┘
+                                    │
+                          ┌─────────▼─────────┐
+                          │ Enterprise       │
+                          │ Platform         │
+                          │ Orchestration    │
+                          └─────────┬────────┘
+                                    │
+                          ┌─────────▼─────────┐
+                          │   MCP Protocol   │
+                          │   Integration    │
+                          └─────────┬────────┘
+                                    │
+                ┌───────────────────┼───────────────────┐
+                │                   │                   │
+        ┌───────▼───────┐   ┌───────▼───────┐   ┌───────▼───────┐
+        │   Cursor      │   │   Claude      │   │   Custom      │
+        │   Integration │   │   Code Agent  │   │   Agent       │
+        └───────────────┘   └───────────────┘   └───────────────┘
 ```
 
-## 📁 Project Structure
+## Components
 
-### Core Kronos Components
+### Core Systems
 
-- **`UI-TARS-desktop/`** - Kronos vision-language model based desktop automation
-  - Advanced computer vision for GUI interaction
-  - Multi-modal input processing (text, images, coordinates)
-  - Real-time action prediction and execution
+- **`UI-TARS-desktop/`** - Vision-language desktop automation
+  - Computer vision for interface interaction
+  - Multi-modal processing and coordinate mapping
+  - Real-time action execution and prediction
 
-- **`open-computer-use/`** - Kronos cross-platform computer automation framework
-  - API-driven automation across desktop and mobile
-  - Plugin architecture for extensibility
-  - Security-focused execution environment
+- **`open-computer-use/`** - Cross-platform automation framework
+  - API-driven desktop and mobile control
+  - Extensible plugin architecture
+  - Secure execution environments
 
-- **`bytebot/`** - Kronos multi-modal AI agent system
-  - MCP (Model Context Protocol) integration
+- **`bytebot/`** - Multi-modal agent orchestration
+  - MCP protocol integration
   - Real-time agent communication
-  - WebSocket-based orchestration
+  - WebSocket-based coordination
 
-- **`gbox/`** - Kronos unified environment provisioning
-  - Cloud Virtual Devices (Android emulators)
-  - Cloud Physical Devices (real Android hardware)
-  - Local Physical Devices (USB-connected devices)
-  - Desktop/Browser environments
+- **`gbox/`** - Unified environment management
+  - Cloud virtual device provisioning
+  - Physical device orchestration
+  - Local and remote environment control
 
-### Specialized Kronos Automation Tools
+### Specialized Tools
 
-- **`ai-browser/`** - Kronos intelligent web automation
-- **`local-manus/`** - Kronos local AI agent orchestration
-- **`postiz-app/`** - Kronos social media automation platform
-- **`unified-automation-platform/`** - Kronos cross-framework orchestration
+- **`ai-browser/`** - Intelligent web automation
+- **`local-manus/`** - Local agent orchestration
+- **`postiz-app/`** - Social media automation
+- **`unified-automation-platform/`** - Cross-framework integration
 
-### Kronos Integration Components
+### Integration Layer
 
-- **`unified-ai-ecosystem/`** - Kronos shared AI services and utilities
-- **`packages/`** - Kronos shared npm packages and dependencies
-- **`ollama/`** - Kronos local LLM inference and model management
+- **`unified-ai-ecosystem/`** - Shared AI services
+- **`packages/`** - Shared dependencies
+- **`ollama/`** - Local LLM management
 
-### Kronos Social Media & Content Automation
+### Content Automation
 
-- **`instapy/`** - Kronos Instagram automation toolkit
-- **`onlysnarf/`** - Kronos content management and distribution
-- **`tiktokpy/`** - Kronos TikTok automation framework
-- **`youtube_upload/`** - Kronos YouTube content publishing
+- **`instapy/`** - Instagram automation
+- **`onlysnarf/`** - Content distribution
+- **`tiktokpy/`** - TikTok automation
+- **`youtube_upload/`** - YouTube publishing
 
-### Kronos Development & Analysis Tools
+### Development Tools
 
-- **`accessible-view-terminal/`** - Kronos accessibility-focused terminal interface
-- **`reports/`** - Kronos analysis reports and documentation
-- **`data/`** - Kronos shared data stores and configurations
+- **`accessible-view-terminal/`** - Terminal interface
+- **`reports/`** - Analysis and documentation
+- **`data/`** - Shared configurations
 
 ## 🚀 Quick Start
 
@@ -191,35 +195,37 @@ npm run test
 npm run build
 ```
 
-## 🛠️ Development Guidelines
+## Development
 
-### Code Style & Conventions
+### Code Style
 
 - **TypeScript**: Strict mode, TSDoc comments, camelCase
 - **Python**: Type hints, Google docstrings, snake_case
-- **Linting**: ESLint + Prettier for consistency
-- **Testing**: Jest for unit tests, comprehensive coverage
+- **Linting**: ESLint with TypeScript + Prettier
+- **Testing**: Jest with comprehensive coverage
 
-### Build Commands
+### Commands
 
 ```bash
-# Lint and format code
+# Build shared packages first
+npm run build
+
+# Lint and format
 npm run lint
 npm run format
 
-# Build all components
-npm run build
-
-# Run test suite
+# Test suite
 npm run test
+npm run test:watch
+npm run test:cov
 ```
 
-### Architecture Patterns
+### Architecture
 
-- **Modular Design**: Each framework is independently deployable
-- **MCP Integration**: Standardized agent communication protocol
-- **Plugin Architecture**: Extensible automation capabilities
-- **Security First**: Sandboxed execution, input validation
+- **Modular**: Independently deployable components
+- **MCP Protocol**: Standardized agent communication
+- **Plugin System**: Extensible automation capabilities
+- **Security First**: Sandboxed execution and validation
 
 ## 🔧 Configuration
 
@@ -296,18 +302,17 @@ We welcome contributions from the community! Please see our [Contributing Guide]
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- **Kronos**: The unified AI desktop automation platform
 - **MCP Protocol**: Standardized agent communication
-- **Open Source Community**: For the foundational technologies that power Kronos
+- **Open Source Community**: Foundational technologies enabling orchestration
 
-## 📞 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/ai-emulators/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/ai-emulators/discussions)
-- **Documentation**: [docs.ai-emulators.dev](https://docs.ai-emulators.dev)
+- **Documentation**: [docs.kronos.ai](https://docs.kronos.ai)
 
 ---
 
-**Built with ❤️ for the AI automation community**
+*KRONOS: Where AI agents collaborate.*
