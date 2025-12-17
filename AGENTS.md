@@ -2,7 +2,7 @@
 
 ## Build/Lint/Test Commands
 
-### Backend Services (bytebot-agent, bytebot-agent-cc, bytebotd)
+### Backend Services (kronos-agent, kronos-agent-cc, kronosd)
 - **Build**: `npm run build` (builds shared package first)
 - **Lint**: `npm run lint` (ESLint with TypeScript + Prettier)
 - **Format**: `npm run format` (Prettier)
@@ -11,7 +11,7 @@
 - **Test watch**: `npm run test:watch`
 - **Test coverage**: `npm run test:cov`
 
-### UI (bytebot-ui)
+### UI (kronos-ui)
 - **Build**: `npm run build` (builds shared package first)
 - **Lint**: `npm run lint` (Next.js ESLint)
 - **Dev server**: `npm run dev`
@@ -21,7 +21,7 @@
 - **Lint**: `npm run lint`
 - **Format**: `npm run format`
 
-### LLM Proxy (bytebot-llm-proxy)
+### LLM Proxy (kronos-llm-proxy)
 - **Build**: `docker build .` (Docker container)
 - **Run**: `docker run -p 4000:4000 [image]`
 
@@ -49,7 +49,7 @@
 
 ### Naming Conventions
 - **Classes**: PascalCase (e.g., `AnthropicService`, `AppModule`)
-- **Interfaces/Types**: PascalCase (e.g., `BytebotAgentResponse`)
+- **Interfaces/Types**: PascalCase (e.g., `KronosAgentResponse`)
 - **Variables/Functions**: camelCase (e.g., `generateMessage`, `apiKey`)
 - **Constants**: UPPER_SNAKE_CASE (e.g., `DEFAULT_MODEL`)
 - **Files**: kebab-case for modules, camelCase for services (e.g., `anthropic.service.ts`)
@@ -71,7 +71,7 @@
 
 ## Project Rules
 
-### Bytebot Monorepo
+### Kronos Platform
 - **Backend Services**: NestJS with TypeScript, Prisma ORM, PostgreSQL
 - **Frontend**: Next.js 15+ with React 19, Tailwind CSS, shadcn/ui
 - **Shared Types**: TypeScript-only package for type definitions and utilities

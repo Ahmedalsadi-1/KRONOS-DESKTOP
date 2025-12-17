@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  onlysnarf:
+  kronos-snippet:
     build:
       context: ./onlysnarf
       dockerfile: Dockerfile
     ports:
       - "5005:5000"
     volumes:
-      - onlysnarf-config:/root/.onlysnarf:rw
+      - kronos-config:/root/.onlysnarf:rw
       - downloads:/app/downloads:rw
     environment:
       - FLASK_ENV=development
@@ -18,7 +18,7 @@ services:
     depends_on:
       - selenium-hub
 
-  instapy:
+  kronos-instapy:
     build:
       context: ./instapy
       dockerfile: Dockerfile
@@ -29,7 +29,7 @@ services:
     depends_on:
       - selenium-hub
 
-  instagrapi:
+  kronos-instagrapi:
     build:
       context: ./instagrapi
       dockerfile: Dockerfile
@@ -38,7 +38,7 @@ services:
     networks:
       - automation-network
 
-  tiktok_api:
+  kronos-tiktok:
     build:
       context: ./tiktok_api
       dockerfile: Dockerfile
@@ -47,7 +47,7 @@ services:
     networks:
       - automation-network
 
-  pytube:
+  kronos-pytube:
     build:
       context: ./pytube
       dockerfile: Dockerfile
@@ -56,7 +56,7 @@ services:
     networks:
       - automation-network
 
-  youtube_upload:
+  kronos-youtube:
     build:
       context: ./youtube_upload
       dockerfile: Dockerfile
@@ -66,7 +66,7 @@ services:
     networks:
       - automation-network
 
-  agent-orchestrator:
+  kronos-orchestrator:
     build:
       context: .
       dockerfile: agent-orchestrator/Dockerfile
@@ -77,12 +77,12 @@ services:
     networks:
       - automation-network
     depends_on:
-      - onlysnarf
-      - instapy
-      - instagrapi
-      - tiktok_api
-      - pytube
-      - youtube_upload
+      - kronos-snippet
+      - kronos-instapy
+      - kronos-instagrapi
+      - kronos-tiktok
+      - kronos-pytube
+      - kronos-youtube
 
   selenium-hub:
     image: selenium/hub:4.15.0
@@ -124,6 +124,6 @@ networks:
     driver: bridge
 
 volumes:
-  onlysnarf-config:
+  kronos-config:
   downloads:
   data:

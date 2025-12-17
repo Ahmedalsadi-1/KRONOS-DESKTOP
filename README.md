@@ -1,41 +1,85 @@
-# AI Emulators Ecosystem 🧠🤖
+<div align="center">
 
-A comprehensive suite of AI-powered computer automation tools and frameworks designed for intelligent desktop and mobile automation across multiple platforms.
+<img src="https://raw.githubusercontent.com/LLmHub-dev/open-computer-use/main/assets/kronos-logo.png" width="200" alt="KRONOS Logo">
 
-## 🌟 Overview
+# KRONOS 🤖⚡
 
-The AI Emulators Ecosystem is a unified platform that brings together cutting-edge AI automation technologies to create intelligent agents capable of automating complex workflows across desktop and mobile environments. This monorepo contains multiple specialized automation frameworks, each designed for specific use cases while maintaining seamless interoperability.
+**The Definitive AI Desktop Agent - Give Your AI Its Own Computer**
 
-## 🧭 Unified Automation Stack
+*Professional-grade AI automation with real desktop control, multi-agent orchestration, and enterprise security*
 
-This repository now also ships with a lightweight **Agent Orchestrator** microservice that parses `agent.md` and exposes inventory, overlap, and manifest endpoints (see `agent-orchestrator/`). The orchestrator plus the Docker stack form the “meta-agent” layer used by the `ai_emulators` GitHub Actions workflow to continuously smoke-test the entire automation fleet.
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
+[![KRONOS](https://img.shields.io/badge/KRONOS-v2.0-000000)](https://github.com/yourusername/ai-emulators)
 
-Each GitHub push/PR triggers the `ai_emulators` workflow, which builds every Docker service, spins the stack up, calls the orchestrator’s `/status`, `/inventory`, and `/overlaps`, and then tears the stack back down. This ensures every automation project stays runnable before merging.
+[🌐 **KRONOS Platform**](https://llmhub.dev) • [📚 **Documentation**](https://docs.bytebot.ai) • [💬 **Discord**](https://discord.gg/gppEfsVt) • [𝕏 **Twitter**](https://x.com/llmhub_dev)
 
-## 🏗️ Architecture
+</div>
+
+---
+
+## ⚡ What is KRONOS?
+
+**KRONOS** is the most advanced AI desktop agent platform, giving AI models complete control over virtual computers. Unlike traditional AI assistants that only *talk* about tasks, KRONOS enables AI to *actually perform* them by controlling browsers, terminals, applications, and workflows in real-time.
+
+### The KRONOS Difference
+
+- 🎯 **Real Desktop Control**: AI agents with full access to browsers, terminals, and applications
+- 🔒 **Enterprise Security**: Isolated execution environments with comprehensive access controls
+- 🚀 **Multi-Agent Orchestration**: Complex tasks broken down and executed by specialized agents
+- 📊 **Live Monitoring**: Real-time task execution with streaming logs and screenshots
+- 🏗️ **Extensible Architecture**: Plugin system supporting 100+ AI providers and custom tools
+- ⚡ **Production Ready**: Docker-based deployment with Kubernetes support
+
+> **"Computer use" capabilities beyond Claude Computer Use - fully open-source and infinitely extensible.**
+
+---
+
+## 🎬 KRONOS in Action
+
+<div align="center">
+
+### Advanced Browser Automation
+*AI agents navigating complex web applications autonomously*
+
+[![Browser Automation Demo](https://img.shields.io/badge/🎮_Play_Demo-Browser_Automation-blue?style=for-the-badge)](https://llmhub.dev/share/2c27ad52-47e0-4ed4-9998-701cebc1c409)
+
+### Terminal & Development Workflows
+*Complete software development and deployment automation*
+
+[![Terminal Operations Demo](https://img.shields.io/badge/🎮_Play_Demo-Terminal_Operations-green?style=for-the-badge)](https://llmhub.dev/share/6f24c719-868d-4308-9e54-8ab00914761d)
+
+### Multi-Agent Task Decomposition
+*Complex business processes automated across multiple systems*
+
+[![Multi-Agent Demo](https://img.shields.io/badge/🎮_Play_Demo-Multi_Agent_System-purple?style=for-the-badge)](https://llmhub.dev/share/fb94d739-978b-42f8-81f3-5acaaeb3420f)
+
+</div>
+
+---
+
+## 🏗️ KRONOS Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     AI EMULATORS ECOSYSTEM                           │
+│                           KRONOS PLATFORM                            │
 │  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │              UI-TARS Desktop Automation                         │  │
-│  │         Vision-language models for desktop control              │  │
+│  │                    KRONOS AI Desktop Agent                      │  │
+│  │         Vision-language models with real desktop control        │  │
 │  └─────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │              Open Computer Use Framework                        │  │
-│  │       Cross-platform computer automation via APIs               │  │
+│  │                KRONOS Multi-Agent System                        │  │
+│  │     Task decomposition and orchestration across agents          │  │
 │  └─────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │                Bytebot Agent System                             │  │
-│  │     Multi-modal AI agents with MCP protocol integration         │  │
-│  └─────────────────────────────────────────────────────────────────┘  │
-│  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │                 GBox Environment Provisioning                   │  │
+│  │               KRONOS Environment Provisioning                  │  │
 │  │    Unified sandboxing for Android/desktop automation            │  │
 │  └─────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────┐  │
-│  │               Unified Automation Platform                       │  │
-│  │         Orchestration layer for multi-agent workflows           │  │
+│  │                 KRONOS Enterprise Platform                      │  │
+│  │         Orchestration layer for production deployments          │  │
 │  └─────────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────┘
                                ▼
@@ -50,54 +94,54 @@ Each GitHub push/PR triggers the `ai_emulators` workflow, which builds every Doc
 
 ## 📁 Project Structure
 
-### Core Automation Frameworks
+### Core Kronos Components
 
-- **`UI-TARS-desktop/`** - Vision-language model based desktop automation
+- **`UI-TARS-desktop/`** - Kronos vision-language model based desktop automation
   - Advanced computer vision for GUI interaction
   - Multi-modal input processing (text, images, coordinates)
   - Real-time action prediction and execution
 
-- **`open-computer-use/`** - Cross-platform computer automation framework
+- **`open-computer-use/`** - Kronos cross-platform computer automation framework
   - API-driven automation across desktop and mobile
   - Plugin architecture for extensibility
   - Security-focused execution environment
 
-- **`bytebot/`** - Multi-modal AI agent system
+- **`bytebot/`** - Kronos multi-modal AI agent system
   - MCP (Model Context Protocol) integration
   - Real-time agent communication
   - WebSocket-based orchestration
 
-- **`gbox/`** - Unified environment provisioning
+- **`gbox/`** - Kronos unified environment provisioning
   - Cloud Virtual Devices (Android emulators)
   - Cloud Physical Devices (real Android hardware)
   - Local Physical Devices (USB-connected devices)
   - Desktop/Browser environments
 
-### Specialized Automation Tools
+### Specialized Kronos Automation Tools
 
-- **`ai-browser/`** - Intelligent web automation
-- **`local-manus/`** - Local AI agent orchestration
-- **`postiz-app/`** - Social media automation platform
-- **`unified-automation-platform/`** - Cross-framework orchestration
+- **`ai-browser/`** - Kronos intelligent web automation
+- **`local-manus/`** - Kronos local AI agent orchestration
+- **`postiz-app/`** - Kronos social media automation platform
+- **`unified-automation-platform/`** - Kronos cross-framework orchestration
 
-### Integration Components
+### Kronos Integration Components
 
-- **`unified-ai-ecosystem/`** - Shared AI services and utilities
-- **`packages/`** - Shared npm packages and dependencies
-- **`ollama/`** - Local LLM inference and model management
+- **`unified-ai-ecosystem/`** - Kronos shared AI services and utilities
+- **`packages/`** - Kronos shared npm packages and dependencies
+- **`ollama/`** - Kronos local LLM inference and model management
 
-### Social Media & Content Automation
+### Kronos Social Media & Content Automation
 
-- **`instapy/`** - Instagram automation toolkit
-- **`onlysnarf/`** - Content management and distribution
-- **`tiktokpy/`** - TikTok automation framework
-- **`youtube_upload/`** - YouTube content publishing
+- **`instapy/`** - Kronos Instagram automation toolkit
+- **`onlysnarf/`** - Kronos content management and distribution
+- **`tiktokpy/`** - Kronos TikTok automation framework
+- **`youtube_upload/`** - Kronos YouTube content publishing
 
-### Development & Analysis Tools
+### Kronos Development & Analysis Tools
 
-- **`accessible-view-terminal/`** - Accessibility-focused terminal interface
-- **`reports/`** - Analysis reports and documentation
-- **`data/`** - Shared data stores and configurations
+- **`accessible-view-terminal/`** - Kronos accessibility-focused terminal interface
+- **`reports/`** - Kronos analysis reports and documentation
+- **`data/`** - Kronos shared data stores and configurations
 
 ## 🚀 Quick Start
 
@@ -254,11 +298,9 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 🙏 Acknowledgments
 
-- **UI-TARS**: Vision-language desktop automation framework
-- **Open Computer Use**: Cross-platform automation community
-- **Bytebot**: Multi-modal agent architecture
-- **GBox**: Environment provisioning technology
+- **Kronos**: The unified AI desktop automation platform
 - **MCP Protocol**: Standardized agent communication
+- **Open Source Community**: For the foundational technologies that power Kronos
 
 ## 📞 Support
 

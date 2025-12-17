@@ -1,16 +1,16 @@
-## AI Emulators Unification Plan
+## Kronos Platform Unification Plan
 
 ### Executive Summary
-This plan outlines the comprehensive unification of all AI automation projects in the repository into a single, cohesive platform that leverages the strengths of individual tools while providing seamless integration and orchestration.
+This plan outlines the comprehensive unification of all AI automation projects in the repository into the Kronos platform - a single, cohesive system that leverages the strengths of individual tools while providing seamless integration and orchestration.
 
 ### Current State Analysis
 
-**Project Inventory:**
-- **AI Desktop Agents**: bytebot, open-computer-use, UI-TARS-desktop, local-manus
-- **Automation Platforms**: n8n, unified-automation-platform, unified-ai-ecosystem
-- **Social Media Tools**: instagrapi, instapy, onlysnarf, tiktok_api, youtube_upload, pytube
-- **Development Tools**: comfyui, ollama, solana, refly, postiz-app
-- **Infrastructure**: gbox, ai-browser, agent-orchestrator
+**Kronos Component Inventory:**
+- **AI Desktop Agents**: kronos-desktop, kronos-computer-use, kronos-ui-tars, kronos-manus
+- **Automation Platforms**: kronos-n8n, kronos-automation-platform, kronos-ai-ecosystem
+- **Social Media Tools**: kronos-instagrapi, kronos-instapy, kronos-snippet, kronos-tiktok, kronos-youtube, kronos-pytube
+- **Development Tools**: kronos-comfyui, kronos-ollama, kronos-solana, kronos-refly, kronos-postiz
+- **Infrastructure**: kronos-gbox, kronos-browser, kronos-orchestrator
 
 **Common Patterns Identified:**
 - Docker containerization across all projects
@@ -58,9 +58,9 @@ This plan outlines the comprehensive unification of all AI automation projects i
 - Create environment provisioning layer
 
 **Phase 3: Service Integration (8 weeks)**
-- Integrate AI desktop agents (bytebot, open-computer-use, UI-TARS)
-- Connect social media automation (Instagram, TikTok, YouTube)
-- Incorporate workflow and development tools (n8n, ollama, comfyui)
+- Integrate Kronos AI desktop agents (kronos-desktop, kronos-computer-use, kronos-ui-tars)
+- Connect Kronos social media automation (Instagram, TikTok, YouTube)
+- Incorporate Kronos workflow and development tools (kronos-n8n, kronos-ollama, kronos-comfyui)
 
 **Phase 4: Intelligence & Optimization (6 weeks)**
 - Add AI-powered orchestration
