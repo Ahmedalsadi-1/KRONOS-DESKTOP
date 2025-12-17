@@ -1,0 +1,38 @@
+name: ai_emulators
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  compose-stack:
+    name: Build and smoke-test compose stack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure Docker Compose is available
+        run: |
+          docker compose version
+          docker version
+
+      - name: Build all services
+        run: docker compose build --parallel
+
+      - name: Start services in detached mode
+        run: docker compose up -d
+
+      - name: Validate agent orchestrator endpoint
+        run: |
+          for endpoint in status inventory overlaps; do
+            curl -fsS http://localhost:8080/$endpoint
+          done
+
+      - name: Show running containers
+        run: docker compose ps
+
+      - name: Stop and remove services
+        if: always()
+        run: docker compose down --remove-orphans

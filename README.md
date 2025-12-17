@@ -6,6 +6,12 @@ A comprehensive suite of AI-powered computer automation tools and frameworks des
 
 The AI Emulators Ecosystem is a unified platform that brings together cutting-edge AI automation technologies to create intelligent agents capable of automating complex workflows across desktop and mobile environments. This monorepo contains multiple specialized automation frameworks, each designed for specific use cases while maintaining seamless interoperability.
 
+## 🧭 Unified Automation Stack
+
+This repository now also ships with a lightweight **Agent Orchestrator** microservice that parses `agent.md` and exposes inventory, overlap, and manifest endpoints (see `agent-orchestrator/`). The orchestrator plus the Docker stack form the “meta-agent” layer used by the `ai_emulators` GitHub Actions workflow to continuously smoke-test the entire automation fleet.
+
+Each GitHub push/PR triggers the `ai_emulators` workflow, which builds every Docker service, spins the stack up, calls the orchestrator’s `/status`, `/inventory`, and `/overlaps`, and then tears the stack back down. This ensures every automation project stays runnable before merging.
+
 ## 🏗️ Architecture
 
 ```
@@ -207,6 +213,18 @@ docker-compose up -d
 # View logs
 docker-compose logs -f
 ```
+
+### Agent Orchestrator API
+
+The orchestrator service runs on port 8080 and is part of the same Docker Compose network. Once the stack is healthy you can query:
+
+```bash
+curl http://localhost:8080/status
+curl http://localhost:8080/inventory
+curl http://localhost:8080/overlaps
+```
+
+These endpoints are also used by the GitHub `ai_emulators` workflow to validate the manifest before approving new commits.
 
 ## 📚 Documentation
 

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 const AuthManager = ({ authStatus, onAuthAction }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [selectedPlatform, setSelectedPlatform] = use [credentials, setState('');
-  constCredentials] = useState({
+  const [selectedPlatform, setSelectedPlatform] = useState('');
+  const [credentials, setCredentials] = useState({
     username: '',
     password: '',
     apiKey: '',

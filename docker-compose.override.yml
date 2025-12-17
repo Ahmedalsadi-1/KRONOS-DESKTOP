@@ -1,0 +1,92 @@
+# Development override configuration for AI Emulators Automation Suite
+# This file is automatically loaded by docker-compose and overrides base settings
+
+version: '3.8'
+
+services:
+  # Development overrides for services that need special dev configuration
+
+  onlysnarf:
+    environment:
+      - FLASK_DEBUG=true
+      - FLASK_ENV=development
+    volumes:
+      - ./onlysnarf/onlysnarf:/app:ro
+      - ./onlysnarf/config:/root/.onlysnarf
+      - ./onlysnarf/downloads:/app/downloads
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5000", "--reload"]
+
+  instapy:
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./instapy/InstaPy:/app:ro
+      - ./instapy/data:/app/data
+    stdin_open: true
+    tty: true
+
+  instagrapi:
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./instagrapi/instagrapi:/app:ro
+      - ./instagrapi/data:/app/data
+    stdin_open: true
+    tty: true
+
+  tiktok_api:
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./tiktok_api/TikTok-Api:/app:ro
+      - ./tiktok_api/data:/app/data
+    stdin_open: true
+    tty: true
+
+  pytube:
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./pytube/pytube:/app:ro
+      - ./pytube/downloads:/app/downloads
+    stdin_open: true
+    tty: true
+
+  youtube_upload:
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - ./youtube_upload/youtube-upload:/app:ro
+      - ./youtube_upload/data:/app/data
+    stdin_open: true
+    tty: true
+
+  # Selenium Grid configuration for development
+  selenium-hub:
+    ports:
+      - "4444:4444"  # VNC port for debugging
+
+  chrome-node:
+    ports:
+      - "7900:7900"  # VNC port
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    shm_size: 2gb
+
+  firefox-node:
+    ports:
+      - "7901:7900"  # VNC port
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    shm_size: 2gb
+
+# Override networks for development
+networks:
+  automation-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: automation-dev

@@ -43,7 +43,7 @@ class ProjectManager extends EventEmitter {
         description: 'Android automation platform',
         ports: [],
         workingDirectory: path.join(__dirname, '../../../gbox'),
-        startCommand: './gbox setup',
+        startCommand: 'echo "GBox setup disabled - missing required scripts"',
         stopCommand: 'pkill -f "gbox"',
         status: 'stopped'
       },

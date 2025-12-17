@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  onlysnarf:
+    build:
+      context: ./onlysnarf
+      dockerfile: Dockerfile
+    ports:
+      - "5005:5000"
+    volumes:
+      - onlysnarf-config:/root/.onlysnarf:rw
+      - downloads:/app/downloads:rw
+    environment:
+      - FLASK_ENV=development
+      - PYTHONPATH=/app
+    networks:
+      - automation-network
+    depends_on:
+      - selenium-hub
+
+  instapy:
+    build:
+      context: ./instapy
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - automation-network
+    depends_on:
+      - selenium-hub
+
+  instagrapi:
+    build:
+      context: ./instagrapi
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - automation-network
+
+  tiktok_api:
+    build:
+      context: ./tiktok_api
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - automation-network
+
+  pytube:
+    build:
+      context: ./pytube
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - automation-network
+
+  youtube_upload:
+    build:
+      context: ./youtube_upload
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+      - OAUTHLIB_INSECURE_TRANSPORT=1
+    networks:
+      - automation-network
+
+  agent-orchestrator:
+    build:
+      context: .
+      dockerfile: agent-orchestrator/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - automation-network
+    depends_on:
+      - onlysnarf
+      - instapy
+      - instagrapi
+      - tiktok_api
+      - pytube
+      - youtube_upload
+
+  selenium-hub:
+    image: selenium/hub:4.15.0
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+    networks:
+      - automation-network
+
+  chrome-node:
+    image: selenium/node-chrome:4.15.0
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - automation-network
+
+  firefox-node:
+    image: selenium/node-firefox:4.15.0
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - automation-network
+
+networks:
+  automation-network:
+    driver: bridge
+
+volumes:
+  onlysnarf-config:
+  downloads:
+  data:
