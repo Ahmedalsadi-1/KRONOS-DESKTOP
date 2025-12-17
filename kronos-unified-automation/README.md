@@ -1,6 +1,6 @@
-# Unified Automation Platform
+# KRONOS Unified Automation Platform
 
-A comprehensive Electron desktop application for managing AI computer automation projects with a unified interface.
+A comprehensive Electron desktop application for managing KRONOS AI computer automation projects with a unified interface.
 
 ## Overview
 

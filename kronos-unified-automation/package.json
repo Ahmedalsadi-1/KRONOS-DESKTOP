@@ -1,7 +1,7 @@
 {
-  "name": "unified-automation-platform",
+  "name": "kronos-unified-automation-platform",
   "version": "1.0.0",
-  "description": "Unified Electron interface for managing AI computer automation projects",
+  "description": "KRONOS Unified Electron interface for managing AI computer automation projects",
   "main": "src/main/main.js",
   "homepage": "./",
   "scripts": {
@@ -64,8 +64,8 @@
     "typescript": "^5.0.0"
   },
   "build": {
-    "appId": "com.ai-automation.unified-platform",
-    "productName": "Unified Automation Platform",
+    "appId": "com.kronos.ai.unified-platform",
+    "productName": "KRONOS Unified Automation Platform",
     "directories": {
       "output": "dist"
     },

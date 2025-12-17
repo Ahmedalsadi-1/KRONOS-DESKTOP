@@ -1,5 +1,5 @@
 {
-  "name": "agent-orchestrator",
+  "name": "kronos-agent-orchestrator",
   "version": "0.1.0",
   "description": "Lightweight meta-agent API that summarizes every automation project",
   "main": "index.js",

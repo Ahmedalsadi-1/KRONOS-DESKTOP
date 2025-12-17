@@ -1,7 +1,7 @@
 {
-  "name": "unified-ai-ecosystem",
+  "name": "kronos-unified-ai",
   "version": "1.0.0",
-  "description": "Unified AI Ecosystem - Integrated platform for all AI emulator applications",
+  "description": "Kronos Unified AI - Integrated platform for all AI emulator applications",
   "main": "electron/main/index.js",
   "homepage": "./",
   "scripts": {
@@ -84,8 +84,8 @@
     "vite-plugin-electron": "^0.14.0"
   },
   "build": {
-    "appId": "com.unified.ai.ecosystem",
-    "productName": "Unified AI Ecosystem",
+    "appId": "com.kronos.unified.ai",
+    "productName": "Kronos Unified AI",
     "directories": {
       "output": "dist-electron"
     },
