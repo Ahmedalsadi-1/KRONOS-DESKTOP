@@ -1,0 +1,142 @@
+version: '3.8'
+
+services:
+  # KRONOS Unified Platform Infrastructure
+
+  # Service Registry - Enhanced with health monitoring & load balancing
+  kronos-service-registry:
+    build:
+      context: ./kronos-platform/service-registry
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # API Gateway - Intelligent routing with authentication
+  kronos-api-gateway:
+    build:
+      context: ./kronos-platform/api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - REDIS_URL=redis://kronos-redis:6379
+      - LOG_LEVEL=info
+    depends_on:
+      kronos-service-registry:
+        condition: service_healthy
+      kronos-redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Configuration Service - Centralized config management
+  kronos-config-service:
+    build:
+      context: ./kronos-platform/config-service
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://kronos-redis:6379
+      - LOG_LEVEL=info
+    depends_on:
+      kronos-redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Redis - Caching and session storage
+  kronos-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass ""
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Monitoring Service (Prometheus + Grafana)
+  kronos-monitoring:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./kronos-platform/docker/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  kronos-grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=kronos2024!
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./kronos-platform/docker/monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./kronos-platform/docker/monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - kronos-monitoring
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  kronos-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
