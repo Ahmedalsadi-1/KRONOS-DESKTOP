@@ -8,15 +8,20 @@
 
 <br>
 
-## 🎬 **Platform in Action**
+## 🎬 **KRONOS in Action**
 
-<video width="600" controls autoplay muted loop poster="concept-ui-designs/main_kronos_image.jpg">
+<div align="center">
+
+<video width="800" controls poster="concept-ui-designs/main_kronos_image.jpg" style="border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
   <source src="videos/kronos-demo-2.mp4" type="video/mp4">
-  <img src="assets/kronos_logo.webp" width="200" alt="KRONOS Logo" style="border-radius: 10px;">
+  <img src="assets/kronos_logo.webp" width="300" alt="KRONOS Logo" style="border-radius: 12px;">
   Your browser does not support the video tag.
 </video>
 
-<p><em>Watch KRONOS bring AI automation to life - Multi-agent collaboration and intelligent task execution</em></p>
+<p><strong>🎥 Click play to see KRONOS AI automation in action!</strong></p>
+<p><em>Multi-agent collaboration and intelligent task execution</em></p>
+
+</div>
 
 <br>
 
