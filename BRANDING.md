@@ -44,8 +44,16 @@ Making powerful automation tools available to developers, businesses, and indivi
 
 ### Visual Identity
 
-#### Logo Concept
+#### Logo
+![Kronos Logo](assets/kronos_logo.webp)
+
 **KRONOS** - Inspired by the Greek god of time, representing mastery over time and processes through intelligent automation.
+
+**Logo Usage Guidelines:**
+- Primary logo: Full color version for all digital and print materials
+- Minimum size: 100px width for web, 1 inch for print
+- Clear space: Maintain 25% of logo height as clear space around logo
+- Color variations: Use full color primarily, grayscale only when necessary
 
 #### Color Palette
 - **Primary**: Deep Blue (#1a365d) - Trust, Intelligence, Technology

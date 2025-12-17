@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/LLmHub-dev/open-computer-use/main/assets/kronos-logo.png" width="200" alt="KRONOS Logo">
+<img src="assets/kronos_logo.webp" width="200" alt="KRONOS Logo">
 
 # KRONOS 🤖⚡
 
