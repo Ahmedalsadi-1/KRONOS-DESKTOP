@@ -97,6 +97,36 @@ KRONOS democratizes AI-powered automation through a unified platform where intel
         └───────────────┘   └───────────────┘   └───────────────┘
 ```
 
+## 🎨 KRONOS Interface Designs
+
+<div align="center">
+
+### Main Platform Interface
+*Professional control system for AI automation orchestration*
+
+<img src="concept-ui-designs/main_kronos_image.jpg" width="800" alt="KRONOS Main Interface">
+
+### Browser Automation Control
+*Real-time web scraping and interaction capabilities*
+
+<img src="concept-ui-designs/kronos-browser-automation.jpg" width="600" alt="KRONOS Browser Automation">
+
+### Environment Management
+*Containerized AI agent deployment and monitoring*
+
+<img src="concept-ui-designs/kronos-enviroment.jpg" width="600" alt="KRONOS Environment Management">
+
+### Alternative UI Concepts
+*Exploratory interface designs for future iterations*
+
+<img src="concept-ui-designs/kronos-maybe-ui.jpg" width="400" alt="KRONOS UI Concept">
+
+</div>
+
+**View all concept designs**: [concept-ui-designs/](concept-ui-designs/)
+
+---
+
 ## Components
 
 ### Core Systems

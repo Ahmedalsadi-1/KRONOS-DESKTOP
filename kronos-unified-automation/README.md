@@ -17,6 +17,16 @@
 
 A comprehensive Electron desktop application for managing KRONOS AI computer automation projects with a unified interface.
 
+<div align="center">
+
+<img src="../concept-ui-designs/main_kronos_image.jpg" width="800" alt="KRONOS Unified Automation Platform">
+
+*The central control interface for all KRONOS AI automation components*
+
+</div>
+
+---
+
 ## Overview
 
 This platform provides a single Electron desktop interface for managing multiple AI automation projects including:
