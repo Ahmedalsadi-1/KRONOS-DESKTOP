@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: bytebot-postgres
+    environment:
+      POSTGRES_DB: bytebot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bytebot_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bytebot-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: bytebot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - bytebot-network
+
+  # PgAdmin (Database Management - Development only)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: bytebot-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@bytebot.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - bytebot-network
+
+  # MinIO S3-compatible Object Storage (Alternative to AWS S3)
+  minio:
+    image: minio/minio:latest
+    container_name: bytebot-minio
+    environment:
+      MINIO_ACCESS_KEY: bytebot_access_key
+      MINIO_SECRET_KEY: bytebot_secret_key
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - bytebot-network
+
+  # Service Registry (Consul)
+  consul:
+    image: consul:1.15
+    container_name: bytebot-consul
+    ports:
+      - "8500:8500"
+      - "8600:53/tcp"
+      - "8600:53/udp"
+    volumes:
+      - consul_data:/consul/data
+    command: agent -server -bootstrap -ui -client=0.0.0.0 -bind=127.0.0.1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8500/v1/status/leader"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - bytebot-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  pgadmin_data:
+  minio_data:
+  consul_data:
+
+networks:
+  bytebot-network:
+    driver: bridge
