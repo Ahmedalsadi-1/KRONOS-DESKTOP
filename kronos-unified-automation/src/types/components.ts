@@ -1,6 +1,10 @@
 // React component type definitions
 
 import { ReactNode, CSSProperties } from 'react';
+import { Project, ProjectCreateRequest, ProjectUpdateRequest, ProjectActionRequest } from './project';
+import { Task, TaskCreateRequest, TaskUpdateRequest, TaskActionRequest, TaskFilter } from './task';
+import { AuthConfig, AuthCreateRequest, AuthUpdateRequest, AuthActionRequest } from './auth';
+import { SystemMetrics, SystemAlert, ProcessInfo, SystemActionRequest } from './system';
 
 // Base component props
 export interface BaseComponentProps {

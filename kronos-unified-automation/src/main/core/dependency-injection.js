@@ -9,7 +9,7 @@ class DIContainer extends EventEmitter {
     super();
     this.services = new Map();
     this.factories = new Map();
-    this Singletons = new Map();
+    this.singletons = new Map();
     this.modules = new Map();
     this.config = new Map();
     
@@ -101,8 +101,8 @@ class DIContainer extends EventEmitter {
   async resolve(serviceName, context = {}) {
     try {
       // Check if it's already instantiated (for singletons)
-      if (this.Singletons.has(serviceName)) {
-        return this.Singletons.get(serviceName);
+      if (this.singletons.has(serviceName)) {
+        return this.singletons.get(serviceName);
       }
 
       // Get service definition
@@ -129,7 +129,7 @@ class DIContainer extends EventEmitter {
 
       // Store singleton instances
       if (definition.scope === 'singleton') {
-        this.Singletons.set(serviceName, instance);
+        this.singletons.set(serviceName, instance);
       }
 
       this.logger.info(`Resolved service: ${serviceName}`);
@@ -324,8 +324,8 @@ class DIContainer extends EventEmitter {
       this.factories.delete(serviceName);
       
       // Remove singleton instance if exists
-      if (this.Singletons.has(serviceName)) {
-        this.Singletons.delete(serviceName);
+      if (this.singletons.has(serviceName)) {
+        this.singletons.delete(serviceName);
       }
 
       this.logger.info(`Unregistered service: ${serviceName}`);
@@ -373,7 +373,7 @@ class DIContainer extends EventEmitter {
    */
   clear() {
     this.factories.clear();
-    this.Singletons.clear();
+    this.singletons.clear();
     this.modules.clear();
     this.config.clear();
     
@@ -387,7 +387,7 @@ class DIContainer extends EventEmitter {
   getStats() {
     return {
       services: this.factories.size,
-      singletons: this.Singletons.size,
+      singletons: this.singletons.size,
       modules: this.modules.size,
       servicesByScope: {
         singleton: this.getServicesByScope('singleton').length,
@@ -487,7 +487,7 @@ class DIContainer extends EventEmitter {
       this.logger.info('Shutting down DI Container...');
 
       // Dispose all singleton instances that have a dispose method
-      for (const [name, instance] of this.Singletons) {
+      for (const [name, instance] of this.singletons) {
         try {
           if (typeof instance.dispose === 'function') {
             await instance.dispose();
