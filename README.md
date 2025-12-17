@@ -278,11 +278,8 @@ These endpoints are also used by the GitHub `ai_emulators` workflow to validate 
 
 ## 📚 Documentation
 
-- **[Architecture Overview](./docs/architecture.md)** - Detailed system design
-- **[API Reference](./docs/api.md)** - Complete API documentation
-- **[Integration Guide](./docs/integration.md)** - Framework integration patterns
-- **[Security Guide](./docs/security.md)** - Security best practices
-- **[Deployment Guide](./docs/deployment.md)** - Production deployment
+- **[Architecture Overview](./kronos-docs/architecture.md)** - Detailed system design
+- **[API Reference](./kronos-docs/api.md)** - Complete API documentation
 
 ## 🤝 Contributing
 
