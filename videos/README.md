@@ -41,9 +41,10 @@ This folder contains demonstration videos showcasing KRONOS AI automation platfo
 ## 📱 **Integration Points**
 
 ### **Main Repository**
-- Featured in README.md demo section
-- Showcases platform capabilities
-- Used for marketing and presentations
+- **⭐ HERO FEATURE**: Prominently displayed at the top of README.md
+- **Autoplay Video**: Showcases KRONOS in action immediately upon repository visit
+- **Fallback Support**: Logo displays for browsers without video support
+- **Marketing Focus**: Primary demonstration of platform capabilities
 
 ### **Documentation**
 - Referenced in installation guides

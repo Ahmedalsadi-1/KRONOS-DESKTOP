@@ -1,18 +1,30 @@
 <div align="center">
 
-<img src="assets/kronos_logo.webp" width="200" alt="KRONOS Logo">
-
-# KRONOS
+# KRONOS 🤖⚡
 
 **Intelligent Automation, Unified**
 
 *A unified platform where intelligent agents seamlessly collaborate to accomplish complex tasks across all computing environments.*
 
+<br>
+
+## 🎬 **Platform in Action**
+
+<video width="600" controls autoplay muted loop poster="concept-ui-designs/main_kronos_image.jpg">
+  <source src="videos/kronos-demo-2.mp4" type="video/mp4">
+  <img src="assets/kronos_logo.webp" width="200" alt="KRONOS Logo" style="border-radius: 10px;">
+  Your browser does not support the video tag.
+</video>
+
+<p><em>Watch KRONOS bring AI automation to life - Multi-agent collaboration and intelligent task execution</em></p>
+
+<br>
+
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-1a365d.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Next.js](https://img.shields.io/badge/Next.js-15-64748b)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-3b82f6)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-b45309)](https://www.docker.com/)
-[![KRONOS](https://img.shields.io/badge/KRONOS-v2.0-1a365d)](https://github.com/yourusername/ai-emulators)
+[![KRONOS](https://img.shields.io/badge/KRONOS-v2.0-1a365d)](https://github.com/Ahmedalsadi-1/KRONOS-DESKTOP)
 
 [🌐 **Platform**](https://llmhub.dev) • [📚 **Documentation**](https://docs.kronos.ai) • [💬 **Community**](https://discord.gg/gppEfsVt) • [𝕏 **Updates**](https://x.com/llmhub_dev)
 
