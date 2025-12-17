@@ -37,16 +37,43 @@ KRONOS democratizes AI-powered automation through a unified platform where intel
 
 ---
 
-## 🎬 KRONOS Demos
+## 🎬 KRONOS Platform Demos
 
 <div align="center">
 
-### Platform Overview
-*Core KRONOS AI automation capabilities*
+### 🚀 **KRONOS Demo Videos**
 
-🎥 **[Watch KRONOS Demo 1](videos/kronos-demo-1.mp4)** • 🎥 **[Watch KRONOS Demo 2](videos/kronos-demo-2.mp4)**
+<table>
+  <tr>
+    <td align="center">
+      <h3>🎥 Core Platform Demo</h3>
+      <p><em>AI Agent Orchestration & Automation Workflows</em></p>
+      <video width="400" controls>
+        <source src="videos/kronos-demo-1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <br><br>
+      <a href="videos/kronos-demo-1.mp4" target="_blank">
+        <img src="https://img.shields.io/badge/📥_Download-Demo_1-blue?style=for-the-badge" alt="Download Demo 1">
+      </a>
+    </td>
+    <td align="center">
+      <h3>🎥 Advanced Features Demo</h3>
+      <p><em>Multi-Agent Collaboration & Intelligent Execution</em></p>
+      <video width="400" controls>
+        <source src="videos/kronos-demo-2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <br><br>
+      <a href="videos/kronos-demo-2.mp4" target="_blank">
+        <img src="https://img.shields.io/badge/📥_Download-Demo_2-purple?style=for-the-badge" alt="Download Demo 2">
+      </a>
+    </td>
+  </tr>
+</table>
 
-*View all demos: [videos/](videos/)*
+### 📚 **Complete Demo Collection**
+🔗 **[Browse All Videos](videos/)** • 📖 **[Video Documentation](videos/README.md)**
 
 </div>
 

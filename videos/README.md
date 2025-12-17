@@ -2,24 +2,41 @@
 
 This folder contains demonstration videos showcasing KRONOS AI automation platform capabilities.
 
-## 📹 **Available Demos**
+## 📹 **Featured Demo Videos**
 
-### **kronos-demo-1.mp4** (630KB)
+### **🎥 kronos-demo-1.mp4** (630KB)
+<div align="center">
+<video width="400" controls>
+  <source src="kronos-demo-1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+
 - **Duration**: ~15-30 seconds
 - **Focus**: Core KRONOS platform functionality
-- **Content**: AI agent orchestration and automation workflows
+- **Content**: AI agent orchestration, automation workflows, and unified control interface
+- **Key Features Shown**: Desktop automation, web scraping, multi-agent coordination
 
-### **kronos-demo-2.mp4** (662KB)
+### **🎥 kronos-demo-2.mp4** (662KB)
+<div align="center">
+<video width="400" controls>
+  <source src="kronos-demo-2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+
 - **Duration**: ~15-30 seconds
-- **Focus**: Advanced automation features
-- **Content**: Multi-agent collaboration and intelligent task execution
+- **Focus**: Advanced automation features and intelligent capabilities
+- **Content**: Multi-agent collaboration, intelligent task execution, and adaptive workflows
+- **Key Features Shown**: Real-time orchestration, environment management, enterprise-grade automation
 
 ## 🎬 **Video Specifications**
 
-- **Format**: MP4 (H.264)
-- **Resolution**: Optimized for web playback
-- **File Size**: Compressed for fast loading
-- **Audio**: Included where applicable
+- **Format**: MP4 (H.264) - Optimized for web playback
+- **Resolution**: High quality with efficient compression
+- **File Size**: Under 1MB for fast loading across all connections
+- **Audio**: Clear narration and sound effects where applicable
+- **Compatibility**: Works in all modern browsers and GitHub interface
 
 ## 📱 **Integration Points**
 
