@@ -106,7 +106,7 @@ Create a structured Electron application with clear separation of concerns.
 
 ### New Files to Create
 
-- `src/main/main.js` - Electron main process, IPC handlers, service management
+- `src/main/kronos-main.js` - Electron main process, IPC handlers, service management
 - `src/main/services/project-manager.js` - Manages starting/stopping project services
 - `src/main/services/process-monitor.js` - Monitors project health and processes
 - `src/main/services/unified-api.js` - Cross-project API abstraction layer

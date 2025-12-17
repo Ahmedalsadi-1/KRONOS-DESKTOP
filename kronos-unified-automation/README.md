@@ -1,4 +1,19 @@
+<div align="center">
+
+<img src="../assets/kronos_logo.webp" width="200" alt="KRONOS Logo">
+
 # KRONOS Unified Automation Platform
+
+**Unified Desktop Interface**
+
+*Comprehensive Electron application for managing KRONOS AI computer automation projects*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-1a365d.svg)](LICENSE)
+[![KRONOS](https://img.shields.io/badge/KRONOS-Component-64748b)](https://github.com/yourusername/ai-emulators)
+
+</div>
+
+---
 
 A comprehensive Electron desktop application for managing KRONOS AI computer automation projects with a unified interface.
 
@@ -97,7 +112,7 @@ This platform provides a single Electron desktop interface for managing multiple
 unified-automation-platform/
 ├── src/
 │   ├── main/                 # Electron main process
-│   │   ├── main.js          # Main process entry point
+│   │   ├── kronos-main.js    # Main process entry point
 │   │   ├── preload.js       # Secure IPC bridge
 │   │   └── services/        # Main process services
 │   │       ├── project-manager.js

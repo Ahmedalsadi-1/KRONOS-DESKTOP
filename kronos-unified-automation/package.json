@@ -2,7 +2,7 @@
   "name": "kronos-unified-automation-platform",
   "version": "1.0.0",
   "description": "KRONOS Unified Electron interface for managing AI computer automation projects",
-  "main": "src/main/main.js",
+  "main": "src/main/kronos-main.js",
   "homepage": "./",
   "scripts": {
     "start": "concurrently \"npm run start:electron\" \"npm run start:renderer\"",

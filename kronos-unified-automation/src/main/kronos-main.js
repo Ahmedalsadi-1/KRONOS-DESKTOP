@@ -363,4 +363,4 @@ app.on('activate', () => {
     createWindow();
   }
 });
-// End of main.js - application initialization handled by app.whenReady() above
+// End of kronos-main.js - application initialization handled by app.whenReady() above
