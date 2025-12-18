@@ -9,6 +9,7 @@ const ProcessMonitor = require('./services/process-monitor');
 const WebSocketManager = require('./services/websocket-manager');
 const AuthManager = require('./services/auth-manager');
 const ControlRouter = require('./control-router');
+const OpenComputerUseAdapter = require('./api/opencomputer-adapter');
 
 console.log('App object:', typeof app, app ? 'available' : 'undefined');
 if (!app) {
@@ -26,7 +27,14 @@ let controlRouter = null;
 
 // Initialize services
 function initializeServices() {
-  projectManager = new ProjectManager();
+  const adapters = {
+    openComputer: new OpenComputerUseAdapter({
+      baseUrl: process.env.OPENCOMPUTER_BASE_URL || 'http://localhost:8001',
+      timeout: 120000
+    })
+  };
+
+  projectManager = new ProjectManager(adapters);
   processMonitor = new ProcessMonitor();
   webSocketManager = new WebSocketManager();
   authManager = new AuthManager();

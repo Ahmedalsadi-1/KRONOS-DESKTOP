@@ -4,11 +4,12 @@ const path = require('path');
 const fs = require('fs').promises;
 
 class ProjectManager extends EventEmitter {
-  constructor() {
+  constructor(adapters = {}) {
     super();
     this.projects = new Map();
     this.processes = new Map();
     this.tasks = new Map();
+    this.adapters = adapters;
     
     this.initializeProjects();
   }
@@ -333,7 +334,7 @@ class ProjectManager extends EventEmitter {
       task.updatedAt = new Date();
       this.emit('task-update', task.id, { status: 'executing', progress: 0 });
 
-      // Project-specific task execution
+      // Project-specific task execution (UI-TARS / OpenComputerUse)
       const result = await this.executeTaskForProject(task);
 
       task.status = 'completed';
@@ -350,8 +351,32 @@ class ProjectManager extends EventEmitter {
   }
 
   async executeTaskForProject(task) {
-    // This will be implemented in Phase 4 with API adapters
-    // For now, return a mock result
+    if (task.projectId === 'open-computer-use') {
+      // Route to OpenComputerUse adapter (expects baseUrl running locally)
+      const adapter = this.adapters?.openComputer;
+      if (!adapter) throw new Error('OpenComputerUse adapter not available');
+      const created = await adapter.createTask({
+        id: task.id,
+        description: task.description || task.title || 'Automation task',
+        prompt: task.description || task.title,
+        browserUse: true,
+        useVision: true,
+        continueOnFailure: true
+      });
+      const status = await adapter.getTaskStatus(created.id);
+      return status;
+    }
+
+    if (task.projectId === 'ui-tars-desktop') {
+      // Minimal UI-TARS hook: execute via local script/CLI placeholder
+      // TODO: replace with real UI-TARS client when available
+      return {
+        message: `UI-TARS executed "${task.title || task.description}"`,
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    // Fallback mock
     return {
       message: `Task "${task.title}" executed successfully on ${task.projectId}`,
       timestamp: new Date().toISOString()

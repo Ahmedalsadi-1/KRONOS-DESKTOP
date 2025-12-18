@@ -74,7 +74,8 @@
     "files": [
       "build/**/*",
       "node_modules/**/*",
-      "src/main/**/*"
+      "src/main/**/*",
+      "!**/node_modules/electron*/**/*"
     ],
     "extraResources": [],
     "mac": {
