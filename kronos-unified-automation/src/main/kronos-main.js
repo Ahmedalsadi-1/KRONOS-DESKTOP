@@ -8,6 +8,7 @@ const ProjectManager = require('./services/project-manager');
 const ProcessMonitor = require('./services/process-monitor');
 const WebSocketManager = require('./services/websocket-manager');
 const AuthManager = require('./services/auth-manager');
+const ControlRouter = require('./control-router');
 
 console.log('App object:', typeof app, app ? 'available' : 'undefined');
 if (!app) {
@@ -21,6 +22,7 @@ let projectManager = null;
 let processMonitor = null;
 let webSocketManager = null;
 let authManager = null;
+let controlRouter = null;
 
 // Initialize services
 function initializeServices() {
@@ -28,6 +30,7 @@ function initializeServices() {
   processMonitor = new ProcessMonitor();
   webSocketManager = new WebSocketManager();
   authManager = new AuthManager();
+  controlRouter = new ControlRouter({ projectManager, webSocketManager });
 }
 
 // Create main window
@@ -205,6 +208,59 @@ function setupIPC() {
     }
   });
 
+
+  // Control widget IPC: backends, tasks, streaming
+  ipcMain.handle('control:list-backends', async () => {
+    try {
+      const backends = await controlRouter.listBackends();
+      return { success: true, backends };
+    } catch (error) {
+      console.error('Failed to list backends:', error);
+      return { success: false, error: error.message };
+    }
+  });
+
+  ipcMain.handle('control:start-backend', async (event, projectId) => {
+    try {
+      const status = await controlRouter.startBackend(projectId);
+      return { success: true, status };
+    } catch (error) {
+      console.error('Failed to start backend:', error);
+      return { success: false, error: error.message };
+    }
+  });
+
+  ipcMain.handle('control:stop-backend', async (event, projectId) => {
+    try {
+      const status = await controlRouter.stopBackend(projectId);
+      return { success: true, status };
+    } catch (error) {
+      console.error('Failed to stop backend:', error);
+      return { success: false, error: error.message };
+    }
+  });
+
+  ipcMain.handle('control:create-task', async (event, payload) => {
+    try {
+      const result = await controlRouter.createTask(payload || {});
+      return { success: true, ...result };
+    } catch (error) {
+      console.error('Failed to create control task:', error);
+      return { success: false, error: error.message };
+    }
+  });
+
+  ipcMain.handle('control:cancel-task', async (event, taskId) => {
+    try {
+      const success = await controlRouter.cancelTask(taskId);
+      return { success };
+    } catch (error) {
+      console.error('Failed to cancel control task:', error);
+      return { success: false, error: error.message };
+    }
+  });
+
+
   // Authentication IPC handlers
   ipcMain.handle('auth:login', async (event, projectId, credentials) => {
     try {
@@ -348,6 +404,9 @@ app.whenReady().then(() => {
   createWindow();
   setupMenu();
   setupIPC();
+  if (controlRouter && mainWindow) {
+    controlRouter.attachTaskStreaming(mainWindow);
+  }
   setupEventHandlers();
 });
 

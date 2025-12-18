@@ -35,6 +35,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Streaming
   connectStream: (projectId, taskId) => ipcRenderer.invoke('stream:connect', projectId, taskId),
   disconnectStream: (taskId) => ipcRenderer.invoke('stream:disconnect', taskId),
+
+  // Control widget
+  controlListBackends: () => ipcRenderer.invoke('control:list-backends'),
+  controlStartBackend: (projectId) => ipcRenderer.invoke('control:start-backend', projectId),
+  controlStopBackend: (projectId) => ipcRenderer.invoke('control:stop-backend', projectId),
+  controlCreateTask: (payload) => ipcRenderer.invoke('control:create-task', payload),
+  controlCancelTask: (taskId) => ipcRenderer.invoke('control:cancel-task', taskId),
   
   // Event listeners
   onProjectStatusChanged: (callback) => ipcRenderer.on('project-status-changed', callback),
@@ -45,6 +52,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   onProjectUpdate: (callback) => ipcRenderer.on('project-updated', callback),
   onTaskUpdate: (callback) => ipcRenderer.on('task-updated', callback),
   onSystemStatusUpdate: (callback) => ipcRenderer.on('system-status-updated', callback),
+  onControlTaskUpdate: (callback) => ipcRenderer.on('control:task-update', callback),
   
   // Remove listeners
   removeAllListeners: (channel) => ipcRenderer.removeAllListeners(channel),
