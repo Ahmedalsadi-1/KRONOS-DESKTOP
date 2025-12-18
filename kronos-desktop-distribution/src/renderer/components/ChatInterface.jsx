@@ -198,6 +198,7 @@ function ChatInterface({ config }) {
                 <span className="text-sm">KRONOS is thinking...</span>
               </div>
             </div>
+          </div>
         )}
         
         <div ref={messagesEndRef} />

@@ -1,7 +1,7 @@
-const { useEffect, useState, useCallback } = require('react');
+import { useEffect, useState, useCallback } from 'react';
 
 // Custom hook for KRONOS API communication
-function useKronosAPI() {
+export function useKronosAPI() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -52,5 +52,3 @@ function useKronosAPI() {
     restartServices
   };
 }
-
-module.exports = { useKronosAPI };

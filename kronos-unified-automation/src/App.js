@@ -115,6 +115,8 @@ function App() {
         case 'stop':
           await window.electronAPI.stopProject(projectData.id);
           break;
+        default:
+          break;
       }
     } catch (error) {
       console.error('Project action failed:', error);
@@ -135,6 +137,8 @@ function App() {
         case 'delete':
           await window.electronAPI.deleteTask(taskData.id);
           setTasks(prev => prev.filter(t => t.id !== taskData.id));
+          break;
+        default:
           break;
       }
     } catch (error) {
@@ -159,6 +163,8 @@ function App() {
               p.name === authData.platform ? status : p
             )
           }));
+          break;
+        default:
           break;
       }
     } catch (error) {
