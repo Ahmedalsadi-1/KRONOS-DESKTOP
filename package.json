@@ -1,0 +1,33 @@
+{
+  "name": "kronos-desktop-distribution",
+  "version": "1.0.0",
+  "private": true,
+  "productName": "KRONOS Desktop Agent",
+  "description": "AI-powered desktop automation platform with comprehensive distribution system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kronos-ai/kronos-desktop-agent"
+  },
+  "workspaces": [
+    "kronos-desktop-distribution",
+    "kronos-unified-platform",
+    "kronos-unified-ai",
+    "kronos-unified-automation",
+    "unified-ai-ecosystem"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "clean": "rimraf release dist"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^27.1.0",
+    "electron-builder": "^24.6.4",
+    "electron-notarize": "^1.2.2",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@kronos/service-registry",
+  "version": "1.0.0",
+  "description": "KRONOS Service Registry - Centralized service discovery and health monitoring",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "redis": "^4.6.0",
+    "axios": "^1.6.0",
+    "winston": "^3.11.0",
+    "node-cron": "^3.0.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^9.0.0",
+    "@types/winston": "^2.4.4",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

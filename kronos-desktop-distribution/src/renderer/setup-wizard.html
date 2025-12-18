@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRONOS Desktop Agent - Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .setup-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .step-indicator {
+            background: linear-gradient(90deg, #4f46e5 0%, #667eea 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .step-indicator.active {
+            width: 100%;
+        }
+        .step-indicator.inactive {
+            width: 0%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="setup-container flex items-center justify-center p-8">
+        <div class="glass-effect rounded-xl p-8 max-w-4xl w-full">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="mb-6">
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                        KRONOS Desktop Agent
+                    </h1>
+                    <p class="text-gray-300 mt-2">
+                        AI-Powered Desktop Automation Platform
+                    </p>
+                </div>
+            </div>
+
+            <!-- Setup Progress -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold">Setup Wizard</h2>
+                    <span id="currentStep" class="text-sm text-gray-400">Step 1 of 5</span>
+                </div>
+                
+                <div class="step-indicator inactive mb-6"></div>
+                
+                <div id="progressBar" class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                </div>
+            </div>
+
+            <!-- Setup Content -->
+            <div id="setupContent" class="space-y-6">
+                <!-- Welcome Step -->
+                <div id="step1" class="setup-step">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Welcome to KRONOS</h3>
+                    <div class="space-y-4">
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-2">What is KRONOS?</h4>
+                            <p class="text-gray-300 leading-relaxed">
+                                KRONOS is a comprehensive AI-powered desktop automation platform that combines multiple AI services 
+                                into a unified interface. It can handle web automation, computer vision, 
+                                text analysis, and system control through intelligent AI agents.
+                            </p>
+                        </div>
+                        
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-2">Key Features</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Embedded AI services for computer vision and automation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Web automation using Puppeteer</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Text analysis and OCR capabilities</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Cross-platform compatibility (Windows, macOS, Linux)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Real-time WebSocket communication</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-2">System Requirements</h4>
+                            <ul class="space-y-2 text-gray-300 text-sm">
+                                <li>• 4GB RAM minimum (8GB recommended)</li>
+                                <li>• 2GB disk space available</li>
+                                <li>• Active internet connection for AI services</li>
+                                <li>• Windows 10+, macOS 10.15+, or Linux</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button id="nextBtn1" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            Get Started
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Configuration Step -->
+                <div id="step2" class="setup-step hidden">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Configuration</h3>
+                    <div class="space-y-6">
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-4">Basic Settings</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Theme</label>
+                                    <select id="theme" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2">
+                                        <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
+                                        <option value="auto">Auto</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Auto-start</label>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" id="autoStart" class="mr-2">
+                                        <span class="text-sm">Start with system</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Start minimized</label>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" id="startMinimized" class="mr-2">
+                                        <span class="text-sm">Launch to system tray</span>
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Check updates</label>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" id="checkUpdates" checked class="mr-2">
+                                        <span class="text-sm">Automatic updates</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-4">AI Services</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="aiService" checked class="mr-2">
+                                    <span class="text-sm">Enable embedded AI services</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="webAutomation" checked class="mr-2">
+                                    <span class="text-sm">Web automation</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="computerVision" checked class="mr-2">
+                                    <span class="text-sm">Computer vision</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="androidControl" checked class="mr-2">
+                                    <span class="text-sm">Android device control</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button id="backBtn2" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all duration-200">
+                            Back
+                        </button>
+                        <button id="nextBtn2" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            Next
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Services Status Step -->
+                <div id="step3" class="setup-step hidden">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">AI Services Status</h3>
+                    <div class="space-y-4">
+                        <div id="servicesStatus" class="glass-effect rounded-lg p-4">
+                            <div class="text-center py-8">
+                                <div class="animate-spin inline-block w-8 h-8 border-4 border-t-blue-500 border-gray-300 rounded-full mb-4"></div>
+                                <p class="text-gray-300">Checking AI services...</p>
+                            </div>
+                        </div>
+                        
+                        <div id="serviceDetails" class="glass-effect rounded-lg p-4 hidden">
+                            <h4 class="font-medium mb-3">Services Ready</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                <div class="flex items-center">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>AI Core Services</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Web Automation</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Computer Vision</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span>Android Control</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="serviceError" class="glass-effect rounded-lg p-4 hidden">
+                            <h4 class="font-medium mb-3 text-red-400">Service Error</h4>
+                            <p id="errorMessage" class="text-gray-300"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button id="backBtn3" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all duration-200">
+                            Back
+                        </button>
+                        <button id="nextBtn3" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200">
+                            Finish Setup
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Complete Step -->
+                <div id="step4" class="setup-step hidden">
+                    <h3 class="text-xl font-semibold mb-4 text-green-400">Setup Complete!</h3>
+                    <div class="space-y-6">
+                        <div class="glass-effect rounded-lg p-4 text-center">
+                            <div class="text-6xl mb-4">🎉</div>
+                            <h4 class="text-2xl font-bold mb-2">KRONOS Ready</h4>
+                            <p class="text-gray-300 mb-4">
+                                Your KRONOS Desktop Agent has been successfully configured and is ready to use!
+                            </p>
+                            <div class="space-y-2 text-sm text-gray-400">
+                                <p>• All AI services are initialized and ready</p>
+                                <p>• Configuration has been saved</p>
+                                <p>• You can now start using KRONOS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-lg p-4">
+                            <h4 class="font-medium mb-3">Next Steps</h4>
+                            <div class="space-y-2 text-sm text-gray-300">
+                                <p>• Explore the main interface to discover AI capabilities</p>
+                                <p>• Check the configuration menu for advanced settings</p>
+                                <p>• Visit the documentation for detailed guides</p>
+                                <p>• Join our community for support and updates</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="startBtn" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-12 py-3 rounded-lg font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 text-lg">
+                            Start KRONOS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Step navigation
+        const buttons = {
+            next1: document.getElementById('nextBtn1'),
+            back2: document.getElementById('backBtn2'),
+            next2: document.getElementById('nextBtn2'),
+            back3: document.getElementById('backBtn3'),
+            next3: document.getElementById('nextBtn3'),
+            start: document.getElementById('startBtn')
+        };
+
+        // Progress update
+        function updateProgress(step) {
+            const percentage = (step / totalSteps) * 100;
+            document.querySelector('#progressBar > div').style.width = `${percentage}%`;
+            document.getElementById('currentStep').textContent = `Step ${step} of ${totalSteps}`;
+        }
+
+        // Show/hide steps
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.setup-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+            
+            // Show current step
+            const currentStepElement = document.getElementById(`step${stepNumber}`);
+            if (currentStepElement) {
+                currentStepElement.classList.remove('hidden');
+            }
+            
+            currentStep = stepNumber;
+            updateProgress(stepNumber);
+            updateButtons();
+        }
+
+        // Update button visibility
+        function updateButtons() {
+            // Hide all buttons
+            Object.values(buttons).forEach(btn => {
+                if (btn) btn.style.display = 'none';
+            });
+            
+            // Show relevant buttons
+            switch(currentStep) {
+                case 1:
+                    buttons.next1.style.display = 'block';
+                    break;
+                case 2:
+                    buttons.back2.style.display = 'block';
+                    buttons.next2.style.display = 'block';
+                    break;
+                case 3:
+                    buttons.back3.style.display = 'block';
+                    buttons.next3.style.display = 'block';
+                    break;
+                case 4:
+                    buttons.start.style.display = 'block';
+                    break;
+            }
+        }
+
+        // Configuration handling
+        function collectConfiguration() {
+            return {
+                theme: document.getElementById('theme').value,
+                autoStart: document.getElementById('autoStart').checked,
+                startMinimized: document.getElementById('startMinimized').checked,
+                checkUpdates: document.getElementById('checkUpdates').checked,
+                services: {
+                    ai: document.getElementById('aiService').checked,
+                    webAutomation: document.getElementById('webAutomation').checked,
+                    computerVision: document.getElementById('computerVision').checked,
+                    androidControl: document.getElementById('androidControl').checked
+                }
+            };
+        }
+
+        // Event listeners
+        buttons.next1?.addEventListener('click', () => showStep(2));
+        buttons.back2?.addEventListener('click', () => showStep(1));
+        buttons.next2?.addEventListener('click', async () => {
+            try {
+                const config = collectConfiguration();
+                await window.kronosConfig.setConfig(config);
+                showStep(3);
+            } catch (error) {
+                console.error('Configuration error:', error);
+                alert('Failed to save configuration');
+            }
+        });
+        buttons.back3?.addEventListener('click', () => showStep(2));
+        buttons.next3?.addEventListener('click', async () => {
+            try {
+                // Check services status
+                const status = await window.kronosServices.getStatus();
+                
+                if (status.error) {
+                    document.getElementById('servicesStatus').classList.add('hidden');
+                    document.getElementById('serviceError').classList.remove('hidden');
+                    document.getElementById('errorMessage').textContent = status.error;
+                } else {
+                    document.getElementById('servicesStatus').classList.add('hidden');
+                    document.getElementById('serviceError').classList.add('hidden');
+                    document.getElementById('serviceDetails').classList.remove('hidden');
+                }
+                
+                showStep(4);
+            } catch (error) {
+                console.error('Service check error:', error);
+                alert('Failed to check services status');
+            }
+        });
+        buttons.start?.addEventListener('click', async () => {
+            try {
+                window.kronosApp.relaunch();
+            } catch (error) {
+                console.error('Launch error:', error);
+                alert('Failed to launch application');
+            }
+        });
+
+        // Initialize
+        updateProgress(currentStep);
+        updateButtons();
+    </script>
+</body>
+</html>

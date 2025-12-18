@@ -1,0 +1,249 @@
+{
+  "name": "kronos-desktop-distribution",
+  "version": "1.0.0",
+  "description": "KRONOS Desktop Distribution System - Professional DMG/EXE/AppImage builder with auto-update and setup wizard",
+  "homepage": "https://kronos.ai",
+  "main": "src/main/index.js",
+  "author": {
+    "name": "KRONOS Team",
+    "email": "team@kronos.ai"
+  },
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:electron\"",
+    "dev:web": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "build": "npm run build:web && npm run build:electron",
+    "build:web": "vite build",
+    "build:electron": "electron-builder",
+    "build:mac": "npm run build && electron-builder --mac",
+    "build:win": "npm run build && electron-builder --win",
+    "build:linux": "npm run build && electron-builder --linux",
+    "build:signed": "npm run build && electron-builder --mac --win --linux --publish=never",
+    "dist": "npm run build && electron-builder --publish=never",
+    "dist:all": "npm run build && electron-builder --mac --win --linux --publish=never",
+    "dist:mac": "npm run build && electron-builder --mac --publish=never",
+    "dist:win": "npm run build && electron-builder --win --publish=never",
+    "dist:linux": "npm run build && electron-builder --linux --publish=never",
+    "dist:portable": "npm run build && electron-builder --mac portable --win portable --linux portable --publish=never",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps",
+    "test:build": "node scripts/test-build.js",
+    "test:install": "node scripts/test-installers.js",
+    "test:update": "node scripts/test-updater.js",
+    "lint": "eslint src --ext .js,.ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
+    "clean": "rimraf dist build output",
+    "notarize": "node scripts/notarize-macos.js"
+  },
+  "build": {
+    "appId": "com.kronos.desktop",
+    "productName": "KRONOS Desktop Agent",
+    "copyright": "Copyright © 2024 KRONOS Team",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "src/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{.npm,.node_repl_history,.sass-cache,.babelrc,.bower_components}",
+      "!**/{.tool-versions,.vuepress,.vscode,.idea}",
+      "!**/kronos-desktop-distribution/node_modules/.bin",
+      "!**/kronos-desktop-distribution/node_modules/.cache"
+    ],
+    "extraMetadata": {
+      "main": "src/main/index.js",
+      "name": "KRONOS Desktop Agent"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "darkModeSupport": true
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "publisherName": "KRONOS",
+      "verifyUpdateCodeSignature": false,
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "desktop": {
+        "Name": "KRONOS Desktop Agent",
+        "Comment": "Professional automation and desktop management platform",
+        "Keywords": "automation;desktop;productivity;kronos;"
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "installerIcon": "assets/installer/installer-icon.ico",
+      "installerHeaderIcon": "assets/installer/installer-header-icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "KRONOS Agent",
+      "include": "build/installer.nsh",
+      "script": "installer/windows/installer.nsi",
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220,
+          "type": "file"
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "title": "KRONOS Desktop Agent Installer",
+      "iconTextSize": 16,
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libdrm2",
+        "libxcomposite1",
+        "libxdamage1",
+        "libxrandr2",
+        "libgbm1",
+        "libxkbcommon0",
+        "libasound2"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "kronos-ai",
+      "repo": "kronos-desktop-agent"
+    }
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "ajv": "^8.12.0",
+    "antd": "^5.13.0",
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.3.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^5.0.1",
+    "electron-notarize": "^1.2.2",
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.7",
+    "framer-motion": "^10.16.4",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "semver": "^7.5.4",
+    "socket.io-client": "^4.7.4",
+    "styled-components": "^6.1.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "@types/lodash": "^4.14.202",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@types/semver": "^7.5.6",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.0",
+    "vite": "^5.1.0",
+    "wait-on": "^7.2.0"
+  }
+}

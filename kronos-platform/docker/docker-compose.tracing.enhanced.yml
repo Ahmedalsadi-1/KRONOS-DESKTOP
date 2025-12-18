@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  # Jaeger - Distributed Trace Storage and Visualization
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: kronos-jaeger
+    ports:
+      - "16686:16686"
+      - "16687:16687"
+      - "14250:14250"
+      - "4317:4317"
+      - "14268:14268"
+    environment:
+      - COLLECTOR_OTLP_ENABLED: "true"
+      - COLLECTOR_ZIPKIN_HOST_PORT: "9411"
+      - SPAN_STORAGE_TYPE: "badger"
+      - QUERY_TRACER_MAX_DURATION: "2h"
+    volumes:
+      - jaeger-data:/badger-db
+      - ./config:/etc/jaeger
+    networks:
+      - kronos-network
+    depends_on:
+      - redis
+      - otel-collector
+
+  # OpenTelemetry Collector - High-Performance Trace Collection
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: kronos-otel-collector
+    command: ["/etc/otel-collector-config.yml"]
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "8888:8888"
+      - "8889:8889"
+      - "13133:13133"
+    environment:
+      - OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14250"
+      - OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
+      - OTEL_TRACES_SAMPLER: "parentbased_root"
+      - OTEL_RESOURCE_ATTRIBUTES: "service.name=kronos,service.namespace=platform,service.version=1.0.0"
+      - OTEL_BSP_SCHEDULE: "always_on"
+      - OTEL_METRICS_EXPORTER: "prometheus"
+    volumes:
+      - ./config:/etc/otel
+      - ./data:/var/log/otel
+    networks:
+      - kronos-network
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://otel-collector:4318/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus - Metrics Collection and Storage
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: kronos-prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    volumes:
+      - prometheus-data:/prometheus
+      - ./config:/etc/prometheus
+    networks:
+      - kronos-network
+    depends_on:
+      - otel-collector
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://otel-collector:8889/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana - Visualization and Monitoring Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: kronos-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD: "admin"
+      - GF_USERS_ALLOW_SIGN_UP: "false"
+      - GF_INSTALL_PLUGINS: "grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,grafana-simple-json-datasource"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config:/etc/grafana/provisioning
+    networks:
+      - kronos-network
+    depends_on:
+      - prometheus
+      - otel-collector
+    healthcheck:
+      test: ["CMD-SHELL", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://admin:admin@localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis - Distributed Cache and Queue Backend
+  redis:
+    image: redis:7-alpine
+    container_name: kronos-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+      - ./config:/usr/local/etc/redis
+    networks:
+      - kronos-network
+    command:
+      - redis-server --appendonly yes --protected-mode no
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Persistent Data Volumes
+  volumes:
+    jaeger-data:
+      driver: local
+    redis-data:
+      driver: local
+    prometheus-data:
+      driver: local
+    grafana-data:
+      driver: local
+    config:
+      driver: local
+
+  # Network Configuration
+  networks:
+    kronos-network:
+      driver: bridge
+
+# Health Checks for All Services
+  healthchecks:
+    api-gateway:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      
+    orchestration-engine:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://localhost:5001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      
+    service-registry:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--tries=2", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+# Service Dependencies with Health Order
+  depends_on:
+  order:
+    - redis
+    - api-gateway
+    - orchestration-engine
+    - service-registry
+    - otel-collector
+    - tracing-mcp-server
+
+# Restart Policy
+  restart:
+  unless-stopped
+
+# Logging Configuration
+  logging:
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"

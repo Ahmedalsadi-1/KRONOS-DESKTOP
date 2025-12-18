@@ -1,0 +1,166 @@
+{
+  "name": "kronos-unified-platform",
+  "version": "2.0.0",
+  "description": "KRONOS Unified Automation Platform - Enterprise-grade desktop and mobile automation solution",
+  "main": "electron/main.js",
+  "homepage": "./",
+  "scripts": {
+    "build": "npm run build:web && npm run build:electron",
+    "build:web": "vite build",
+    "build:electron": "electron-builder",
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:electron\"",
+    "dev:web": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "start": "npm run dev",
+    "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "dist": "npm run build && electron-builder --publish=never",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps",
+    "typecheck": "tsc --noEmit"
+  },
+  "build": {
+    "appId": "com.kronos.platform",
+    "productName": "KRONOS Automation Platform",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "sign": false
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220,
+          "type": "file"
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 420
+      }
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "KRONOS Platform"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable.${ext}"
+    },
+    "publish": null
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "ajv": "^8.12.0",
+    "antd": "^5.13.0",
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.3.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.7",
+    "framer-motion": "^10.16.4",
+    "lodash": "^4.17.21",
+    "ping": "^0.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "socket.io-client": "^4.7.4",
+    "ssh2": "^1.15.0",
+    "styled-components": "^6.1.1",
+    "ws": "^8.14.2",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "@types/lodash": "^4.14.202",
+    "@types/ping": "^0.4.3",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.3.0",
+    "vite": "^5.1.0",
+    "wait-on": "^7.2.0"
+  }
+}

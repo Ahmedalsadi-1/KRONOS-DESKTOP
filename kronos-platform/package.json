@@ -1,0 +1,48 @@
+{
+  "name": "kronos-platform",
+  "version": "1.0.0",
+  "description": "Unified KRONOS AI Automation Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "docker-compose -f docker/docker-compose.dev.yml up --build",
+    "prod": "docker-compose -f docker/docker-compose.prod.yml up -d",
+    "build": "docker-compose build",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "clean": "docker-compose down -v && docker system prune -f"
+  },
+  "workspaces": [
+    "api-gateway",
+    "service-registry",
+    "config-service",
+    "monitoring",
+    "orchestration-engine",
+    "security-service",
+    "plugin-manager",
+    "unified-ui",
+    "cli-tool"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahmedalsadi-1/KRONOS-DESKTOP.git"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "platform",
+    "orchestration",
+    "microservices"
+  ],
+  "author": "KRONOS Team",
+  "license": "Apache-2.0"
+}

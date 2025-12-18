@@ -1,0 +1,189 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "KRONOS Distributed Tracing Overview",
+    "tags": ["kronos", "tracing", "jaeger", "opentelemetry"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": "tracing-overview-stats",
+        "title": "Tracing Overview Statistics",
+        "type": "stat",
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(traces_total[5m]))",
+            "legendFormat": "Traces/sec",
+            "refId": "tracing-overview-stats"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short",
+            "mappings": []
+          }
+        }
+      },
+      {
+        "id": "service-latency-heatmap",
+        "title": "Service Latency Heatmap",
+        "type": "heatmap",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "targets": [
+          {
+            "expr": "rate(traces_duration_milliseconds_bucket[5m])",
+            "legendFormat": "{{service}}",
+            "refId": "service-latency-heatmap"
+          }
+        ],
+        "options": {
+          "tooltip": {
+            "mode": "single",
+            "sort": "desc"
+          },
+          "cell": {
+            "type": "gradient"
+          },
+          "color": {
+            "mode": "opacity"
+          }
+        }
+      },
+      {
+        "id": "error-rate-chart",
+        "title": "Error Rate by Service",
+        "type": "timeseries",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(traces_dropped_total[5m])) by (service_name)",
+            "legendFormat": "{{service_name}}",
+            "refId": "error-rate-chart"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short",
+              "custom": {
+                "axisSide": "right",
+                "axisBorderShow": false
+              }
+          }
+        }
+      },
+      {
+        "id": "trace-throughput",
+        "title": "Trace Throughput",
+        "type": "timeseries",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(span_total[5m])) by (service_name)",
+            "legendFormat": "{{service_name}}",
+            "refId": "trace-throughput"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": "top-services-table",
+        "title": "Top Services by Load",
+        "type": "table",
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "targets": [
+          {
+            "expr": "topk(10, sum(rate(span_total[5m])) by (service_name))",
+            "legendFormat": "{{service_name}}",
+            "refId": "top-services-table",
+            "format": "table"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "include": [
+                {
+                  "name": "Service",
+                  "type": "string"
+                },
+                {
+                  "name": "Request Rate",
+                  "type": "number"
+                },
+                {
+                  "name": "P95 Latency",
+                  "type": "number"
+                },
+                {
+                  "name": "Error Rate",
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "10s"
+  },
+  "overwrite": true,
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "prometheus"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "KRONOS Tracing Panel",
+        "type": "dashboard"
+      }
+    ]
+  }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRONOS Desktop Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .splash-container {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .loading {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .version {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <div class="logo">
+            <div class="logo-text">KRONOS</div>
+        </div>
+        <div class="subtitle">Desktop Agent</div>
+        <div class="loading"></div>
+        <div class="status">Initializing...</div>
+        <div class="version">v1.0.0</div>
+    </div>
+
+    <script>
+        // Communicate with main process for status updates
+        const { ipcRenderer } = require('electron');
+
+        // Loading states
+        const states = [
+            'Initializing components...',
+            'Loading AI services...',
+            'Starting distributed services...',
+            'Ready to launch'
+        ];
+
+        let currentState = 0;
+
+        function updateStatus() {
+            const statusElement = document.querySelector('.status');
+            const loadingElement = document.querySelector('.loading');
+            
+            statusElement.textContent = states[currentState];
+            
+            currentState = (currentState + 1) % states.length;
+            
+            // Add some delay to show progression
+            setTimeout(updateStatus, 1500);
+        }
+
+        // Start status updates
+        setTimeout(updateStatus, 1000);
+
+        // Listen for main process messages
+        ipcRenderer.on('splash-status', (event, message) => {
+            const statusElement = document.querySelector('.status');
+            const loadingElement = document.querySelector('.loading');
+            
+            if (message.status === 'complete') {
+                statusElement.textContent = 'Launching...';
+                loadingElement.style.display = 'none';
+            } else if (message.error) {
+                statusElement.textContent = 'Error: ' + message.error;
+                loadingElement.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

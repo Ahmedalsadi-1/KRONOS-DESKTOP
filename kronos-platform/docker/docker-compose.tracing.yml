@@ -1,0 +1,575 @@
+version: '3.8'
+
+services:
+  # KRONOS Unified Platform Infrastructure with Distributed Tracing
+  # Enhanced with Jaeger for end-to-end request tracing
+
+  # Jaeger All-in-One - Complete distributed tracing solution
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # Jaeger collector gRPC
+      - "14250:14250"  # Jaeger HTTP collector
+      - "6831:6831"   # Jaeger HTTP collector
+      - "5775:5775"   # Jaeger UDP collector
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - SPAN_STORAGE_TYPE=memory
+      - MEMORY_MAX_TRACES=50000
+      - LOG_LEVEL=info
+      - QUERY_BASE_PATH=/
+    volumes:
+      - jaeger_data:/tmp
+    networks:
+      - kronos-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:16686/", "--timeout=10", "-O-", "http://localhost:16686/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # OpenTelemetry Collector - Centralized trace collection and processing
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    ports:
+      - "4317:4317"   # OTLP HTTP receiver
+      - "4318:4318"   # OTLP gRPC receiver
+      - "8888:8888"   # Prometheus metrics
+      - "8889:8889"   # Prometheus metrics exposition
+      - "55679:55679" # ZPages
+    volumes:
+      - ./tracing/otel-collector-config.yml:/etc/otel-contrib-config.yml
+      - otel_collector_data:/tmp
+    command:
+      - --config=/etc/otel-contrib-config.yml
+    environment:
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+    networks:
+      - kronos-network
+    restart: unless-stopped
+    depends_on:
+      - jaeger:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4318/", "--timeout=10"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Enhanced Service Registry with OpenTelemetry instrumentation
+  kronos-service-registry:
+    build:
+      context: ../service-registry
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-service-registry
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=service-registry,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-service-registry
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1
+      - SAMPLING_PROBABILITY=1.0  # Sample 100% for development
+    depends_on:
+      - otel-collector:
+        condition: service_healthy
+      - kronos-redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # API Gateway with distributed tracing
+  kronos-api-gateway:
+    build:
+      context: ../api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - REDIS_URL=redis://kronos-redis:6379
+      - LOG_LEVEL=info
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-api-gateway
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=api-gateway,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-api-gateway
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.1  # Sample 10% for production
+      - CORRELATION_ID_HEADER=X-Correlation-ID
+      - TRACE_ID_HEADER=X-Trace-ID
+      - SPAN_ID_HEADER=X-Span-ID
+    depends_on:
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Configuration Service with tracing
+  kronos-config-service:
+    build:
+      context: ../config-service
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://kronos-redis:6379
+      - LOG_LEVEL=info
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-config-service
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=config-service,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-config-service
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1
+    depends_on:
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Redis with tracing capabilities
+  kronos-redis:
+    image: redis:7-alpine
+    ports:
+      - "6381:6379"
+    command: redis-server --appendonly yes --requirepass ""
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - kronos-network
+    restart: unless-stopped
+    # Redis doesn't need OpenTelemetry directly, but benefits from tracing headers
+
+  # Orchestration Engine with distributed tracing
+  kronos-orchestration-engine:
+    build:
+      context: ../orchestration-engine
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-orchestration-engine
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=orchestration-engine,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-orchestration-engine
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.05  # Sample 5% for orchestration
+      - WORKFLOW_TIMEOUT=300000
+      - MAX_CONCURRENT_WORKFLOWS=10
+      - REDIS_URL=redis://kronos-redis:6379
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+    depends_on:
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Security Service with tracing
+  kronos-security-service:
+    build:
+      context: ../security-service
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-security-service
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=security-service,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-security-service
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1  # Security events always traced
+      - REDIS_URL=redis://kronos-redis:6379
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+    depends_on:
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Enhanced Monitoring with Jaeger integration
+  # Prometheus with Jaeger support
+  kronos-monitoring:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus-jaeger.yml:/etc/prometheus/prometheus-jaeger.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--config.file=/etc/prometheus/prometheus-jaeger.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - kronos-network
+    restart: unless-stopped
+    depends_on:
+      - jaeger:
+        condition: service_healthy
+
+  # Grafana with Jaeger and OpenTelemetry dashboards
+  kronos-grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=kronos2024!
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel
+      - GF_UNSECURE_SKIP_MENU_VALIDATION=true
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./monitoring/grafana/jaeger-dashboards:/etc/grafana/provisioning/dashboards/jaeger
+    depends_on:
+      - kronos-monitoring:
+        condition: service_healthy
+      - jaeger:
+        condition: service_healthy
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Browser Automation with distributed tracing
+  kronos-browser-automation:
+    build:
+      context: ../../kronos-web-automation
+      dockerfile: Dockerfile
+      target: nextjs-app
+      args:
+        - ENCRYPTION_KEY=${ENCRYPTION_KEY:-default-encryption-key}
+        - CSRF_SECRET=${CSRF_SECRET:-default-csrf-secret}
+        - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL:-}
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}
+        - SUPABASE_SERVICE_ROLE=${SUPABASE_SERVICE_ROLE:-}
+        - STRIPE_API_KEY=${STRIPE_API_KEY:-}
+        - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET:-}
+        - STRIPE_PRICE_STARTER=${STRIPE_PRICE_STARTER:-}
+        - STRIPE_PRICE_PROFESSIONAL=${STRIPE_PRICE_PROFESSIONAL:-}
+        - STRIPE_PRICE_ENTERPRISE=${STRIPE_PRICE_ENTERPRISE:-}
+    ports:
+      - "3002:3000"  # Frontend
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1  # Disable Next.js telemetry in favor of OTEL
+      - PYTHON_BACKEND_URL=http://kronos-browser-automation-backend:8001
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - API_GATEWAY_URL=http://kronos-api-gateway:3000
+      - REDIS_URL=redis://kronos-redis:6379
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - CORS_ORIGINS=http://localhost:3002,http://kronos-api-gateway:3000
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-browser-automation
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=browser-automation,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-browser-automation
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.15  # Sample 15% for browser automation
+    depends_on:
+      - kronos-service-registry:
+        condition: service_healthy
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+      - kronos-browser-automation-backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - browser_data:/app/data
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Browser Automation Backend with tracing
+  kronos-browser-automation-backend:
+    build:
+      context: ../../kronos-web-automation/backend
+      dockerfile: Dockerfile
+      target: backend
+    ports:
+      - "8002:8001"  # Backend API
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8001
+      - CORS_ORIGINS=http://kronos-browser-automation:3000,http://kronos-api-gateway:3000
+      - CACHE_ENABLED=true
+      - REDIS_URL=redis://kronos-redis:6379
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-browser-automation-backend
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=browser-automation-backend,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-browser-automation-backend
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.2  # Sample 20% for backend operations
+    depends_on:
+      - kronos-redis:
+        condition: service_started
+      - kronos-service-registry:
+        condition: service_healthy
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # UI Automation with tracing
+  kronos-ui-automation:
+    build:
+      context: ../../kronos-ui-automation
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8000"  # UI automation API
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=production
+      - MODEL_NAME=ByteDance-Seed/UI-TARS-1.5-7B
+      - DEVICE=cpu  # Can be changed to cuda for GPU support
+      - MAX_NEW_TOKENS=2048
+      - TEMPERATURE=0.1
+      - DO_SAMPLE=true
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - API_GATEWAY_URL=http://kronos-api-gateway:3000
+      - REDIS_URL=redis://kronos-redis:6379
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-ui-automation
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=ui-automation,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-ui-automation
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.25  # Sample 25% for ML operations
+    depends_on:
+      - kronos-service-registry:
+        condition: service_healthy
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - ui_automation_models:/app/models
+      - ui_automation_data:/app/data
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+  # Desktop Agent with tracing
+  kronos-desktop-agent:
+    build:
+      context: ../../kronos-desktop-agent/docker
+      dockerfile: bytebot-desktop.Dockerfile
+    ports:
+      - "9990:9990"  # Desktop agent API
+      - "5999:5999"  # VNC access for desktop viewing
+    environment:
+      - NODE_ENV=production
+      - DISPLAY=:99
+      - VNC_PASSWORD=kronos2024!
+      - WEBSOCKET_PORT=9991
+      - API_PORT=9990
+      - SERVICE_REGISTRY_URL=http://kronos-service-registry:8080
+      - API_GATEWAY_URL=http://kronos-api-gateway:3000
+      - REDIS_URL=redis://kronos-redis:6379
+      - ENVIRONMENT=production
+      - DEBUG=false
+      # OpenTelemetry Configuration
+      - OTEL_SERVICE_NAME=kronos-desktop-agent
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=desktop-agent,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_HEADERS=content-type=application/json
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_PROPAGATORS=tracecontext,baggage,b3
+      - JAEGER_ENDPOINT=http://jaeger:14250/api/traces
+      - JAEGER_SERVICE_NAME=kronos-desktop-agent
+      - JAEGER_SAMPLER_TYPE=probabilistic
+      - JAEGER_SAMPLER_PARAM=0.1  # Sample 10% for desktop operations
+    depends_on:
+      - kronos-service-registry:
+        condition: service_healthy
+      - kronos-redis:
+        condition: service_started
+      - otel-collector:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9990/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - desktop_agent_data:/app/data
+      - desktop_agent_logs:/app/logs
+    networks:
+      - kronos-network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    prometheus_data:
+    grafana_data:
+    browser_data:
+    desktop_agent_data:
+    desktop_agent_logs:
+    ui_automation_models:
+    ui_automation_data:
+    jaeger_data:
+    otel_collector_data:
+
+networks:
+  kronos-network:
+    external: true
+    name: ai-emulators_automation-network

@@ -1,0 +1,396 @@
+/**
+ * Layered Modal Component for KRONOS Platform
+ * 
+ * Modern modal/dialog component with layered design, animations, and accessibility
+ */
+
+import React, { ReactNode, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import LayeredComponent, { LayerDepth, colorSchemes, glassMorphismPresets } from './LayeredComponent';
+import { LayeredButton } from './LayeredButton';
+
+export interface LayeredModalProps {
+  open: boolean;
+  onClose: () => void;
+  title?: string;
+  children: ReactNode;
+  footer?: ReactNode;
+  size?: 'small' | 'medium' | 'large' | 'fullscreen';
+  variant?: 'default' | 'glass' | 'gradient';
+  closable?: boolean;
+  maskClosable?: boolean;
+  centered?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+// Modal size configurations
+const modalSizes = {
+  small: {
+    width: '400px',
+    maxWidth: '90vw',
+    padding: '24px'
+  },
+  medium: {
+    width: '600px',
+    maxWidth: '90vw',
+    padding: '32px'
+  },
+  large: {
+    width: '800px',
+    maxWidth: '95vw',
+    padding: '40px'
+  },
+  fullscreen: {
+    width: '95vw',
+    height: '90vh',
+    maxWidth: '95vw',
+    maxHeight: '90vh',
+    padding: '40px'
+  }
+};
+
+// Animation variants
+const modalVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    y: 50
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      mass: 0.8
+    }
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+    y: 50,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  }
+};
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut"
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn"
+    }
+  }
+};
+
+export const LayeredModal: React.FC<LayeredModalProps> = ({
+  open,
+  onClose,
+  title,
+  children,
+  footer,
+  size = 'medium',
+  variant = 'default',
+  closable = true,
+  maskClosable = true,
+  centered = true,
+  className = '',
+  style = {},
+  ...props
+}) => {
+  const sizeConfig = modalSizes[size];
+  const variantConfig = {
+    default: {
+      colorScheme: colorSchemes.light,
+      depth: LayerDepth.MODAL,
+      glassmorphism: undefined
+    },
+    glass: {
+      colorScheme: colorSchemes.glass,
+      depth: LayerDepth.MODAL,
+      glassmorphism: glassMorphismPresets.strong
+    },
+    gradient: {
+      colorScheme: colorSchemes.accent,
+      depth: LayerDepth.MODAL,
+      glassmorphism: undefined
+    }
+  }[variant];
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && open && closable) {
+        onClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [open, closable, onClose]);
+
+  const modalStyle: React.CSSProperties = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: centered ? 'center' : 'flex-start',
+    justifyContent: 'center',
+    zIndex: 1000,
+    padding: centered ? '20px' : '40px 20px',
+    overflow: 'auto'
+  };
+
+  const overlayStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.5)',
+    backdropFilter: 'blur(4px)',
+    WebkitBackdropFilter: 'blur(4px)'
+  };
+
+  const modalContentStyle: React.CSSProperties = {
+    width: sizeConfig.width,
+    maxWidth: sizeConfig.maxWidth,
+    maxHeight: size === 'fullscreen' ? sizeConfig.maxHeight : '90vh',
+    position: 'relative',
+    zIndex: 1001,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: size === 'fullscreen' ? 'hidden' : 'visible'
+  };
+
+  const headerStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '24px',
+    paddingBottom: '16px',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: '20px',
+    fontWeight: 600,
+    color: '#1a1a1a',
+    margin: 0,
+    flex: 1
+  };
+
+  const contentStyle: React.CSSProperties = {
+    flex: 1,
+    overflow: size === 'fullscreen' ? 'auto' : 'visible',
+    padding: size === 'fullscreen' ? '0' : `0 0 ${footer ? '24px' : '0'} 0`,
+    marginBottom: footer ? '24px' : '0'
+  };
+
+  const footerStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: '12px',
+    marginTop: '24px',
+    paddingTop: '16px',
+    borderTop: '1px solid rgba(0, 0, 0, 0.1)'
+  };
+
+  const closeButtonStyle: React.CSSProperties = {
+    width: '32px',
+    height: '32px',
+    borderRadius: '50%',
+    background: 'rgba(0, 0, 0, 0.05)',
+    border: 'none',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '18px',
+    color: '#666',
+    flexShrink: 0,
+    transition: 'all 0.2s ease'
+  };
+
+  const handleOverlayClick = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget && maskClosable) {
+      onClose();
+    }
+  };
+
+  const modalContent = (
+    <div style={modalContentStyle}>
+      {/* Header */}
+      {(title || closable) && (
+        <div style={headerStyle}>
+          {title && <h2 style={titleStyle}>{title}</h2>}
+          {closable && (
+            <button
+              style={closeButtonStyle}
+              onClick={onClose}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(0, 0, 0, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(0, 0, 0, 0.05)';
+              }}
+            >
+              ×
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Content */}
+      <div style={contentStyle}>
+        {children}
+      </div>
+
+      {/* Footer */}
+      {footer && (
+        <div style={footerStyle}>
+          {footer}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <div style={modalStyle} onClick={handleOverlayClick}>
+          {/* Overlay */}
+          <motion.div
+            style={overlayStyle}
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          />
+
+          {/* Modal */}
+          <motion.div
+            className={`layered-modal ${className}`}
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            style={style}
+            {...props}
+          >
+            <LayeredComponent
+              depth={variantConfig.depth}
+              colorScheme={variantConfig.colorScheme}
+              glassmorphism={variantConfig.glassmorphism}
+              rounded={true}
+              border={true}
+              style={{
+                background: '#ffffff',
+                borderRadius: '16px',
+                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
+                ...sizeConfig
+              }}
+            >
+              {modalContent}
+            </LayeredComponent>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+// Confirmation Modal
+export const ConfirmModal: React.FC<{
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  title: string;
+  message: string;
+  confirmText?: string;
+  cancelText?: string;
+  variant?: 'danger' | 'warning' | 'info';
+}> = ({
+  open,
+  onClose,
+  onConfirm,
+  title,
+  message,
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
+  variant = 'info'
+}) => {
+  const variantStyles = {
+    danger: { confirmVariant: 'danger' as const },
+    warning: { confirmVariant: 'secondary' as const },
+    info: { confirmVariant: 'primary' as const }
+  }[variant];
+
+  return (
+    <LayeredModal
+      open={open}
+      onClose={onClose}
+      title={title}
+      size="small"
+    >
+      <p style={{ 
+        margin: '0 0 24px 0', 
+        color: '#666',
+        lineHeight: 1.5,
+        fontSize: '16px'
+      }}>
+        {message}
+      </p>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'flex-end', 
+        gap: '12px' 
+      }}>
+        <LayeredButton
+          variant="ghost"
+          onClick={onClose}
+        >
+          {cancelText}
+        </LayeredButton>
+        <LayeredButton
+          variant={variantStyles.confirmVariant}
+          onClick={() => {
+            onConfirm();
+            onClose();
+          }}
+        >
+          {confirmText}
+        </LayeredButton>
+      </div>
+    </LayeredModal>
+  );
+};
+
+export default LayeredModal;
