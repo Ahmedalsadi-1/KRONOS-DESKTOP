@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import kronosLogo from '../../assets/branding/kronos_logo.webp';
 
@@ -17,9 +17,20 @@ export interface ControlWidgetProps {
   onOpenSettings?: () => void;
   onHide?: () => void;
   onToggleMic?: () => void;
+  onBackendsChanged?: (backends: BackendInfo[]) => void;
   className?: string;
   style?: React.CSSProperties;
 }
+
+type BackendInfo = {
+  id: string;
+  name: string;
+  status: string;
+  available?: boolean;
+};
+
+// Electron API typing (runtime guarded)
+const electronAPI = (typeof window !== 'undefined' && (window as any).electronAPI) || null;
 
 const statusColors: Record<Status, { bg: string; text: string }> = {
   active: { bg: 'rgba(94, 234, 212, 0.14)', text: '#22d3ee' },
@@ -55,16 +66,69 @@ const ControlWidget: React.FC<ControlWidgetProps> = ({
   onOpenSettings,
   onHide,
   onToggleMic,
+  onBackendsChanged,
   className = '',
   style
 }) => {
   const [prompt, setPrompt] = useState('');
+  const [backends, setBackends] = useState<BackendInfo[]>([]);
+  const [activeBackend, setActiveBackend] = useState<string>('open-computer-use');
+  const [stepLog, setStepLog] = useState<string[]>(steps);
+  const [liveStatus, setLiveStatus] = useState<Status>(status);
 
   const statusTheme = useMemo(() => statusColors[status] ?? statusColors.stopped, [status]);
 
+  useEffect(() => {
+    setStepLog(steps);
+  }, [steps]);
+
+  useEffect(() => {
+    setLiveStatus(status);
+  }, [status]);
+
+  // Load backends on mount
+  useEffect(() => {
+    const loadBackends = async () => {
+      if (!electronAPI?.controlListBackends) return;
+      const res = await electronAPI.controlListBackends();
+      if (res?.success && Array.isArray(res.backends)) {
+        setBackends(res.backends);
+        onBackendsChanged?.(res.backends);
+        const first = res.backends.find((b) => b.available !== false);
+        if (first) setActiveBackend(first.id);
+      }
+    };
+    loadBackends();
+  }, [onBackendsChanged]);
+
+  // Subscribe to task updates
+  useEffect(() => {
+    if (!electronAPI?.onControlTaskUpdate) return;
+    const handler = (_event: any, payload: any) => {
+      if (!payload) return;
+      const { status: taskStatus, result, error } = payload;
+      if (taskStatus === 'executing') setLiveStatus('active');
+      if (taskStatus === 'completed' || taskStatus === 'failed' || taskStatus === 'cancelled') {
+        setLiveStatus('stopped');
+      }
+      const message = result?.message || error || JSON.stringify(payload);
+      setStepLog((prev) => [...prev, `${taskStatus || 'update'}: ${message}`]);
+    };
+    electronAPI.onControlTaskUpdate(handler);
+    return () => electronAPI.removeAllListeners?.('control:task-update');
+  }, []);
+
   const handleSend = () => {
     if (!prompt.trim()) return;
-    onSendPrompt?.(prompt.trim());
+    const text = prompt.trim();
+    onSendPrompt?.(text);
+    if (electronAPI?.controlCreateTask) {
+      electronAPI.controlCreateTask({
+        projectId: activeBackend || 'open-computer-use',
+        prompt: text,
+        options: { browserUse: true }
+      });
+    }
     setPrompt('');
   };
 
@@ -117,7 +181,7 @@ const ControlWidget: React.FC<ControlWidgetProps> = ({
     padding: '10px 12px',
     color: '#cbd5e1',
     fontSize: 13.5,
-    display: steps.length ? 'grid' : 'none',
+    display: stepLog.length ? 'grid' : 'none',
     gap: 6
   };
 
@@ -176,6 +240,27 @@ const ControlWidget: React.FC<ControlWidgetProps> = ({
           />
         </div>
         <div style={{ flex: 1, opacity: 0.8, color: '#e2e8f0', fontSize: 14 }}>{sizeHint}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#cbd5e1', fontSize: 12.5 }}>
+          <span>Backend:</span>
+          <select
+            value={activeBackend}
+            onChange={(e) => setActiveBackend(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: '#e5e7eb',
+              borderRadius: 8,
+              padding: '6px 8px',
+              outline: 'none'
+            }}
+          >
+            {backends.map((b) => (
+              <option key={b.id} value={b.id} disabled={b.available === false}>
+                {b.name || b.id} {b.status ? `(${b.status})` : ''}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           onClick={onToggleMic}
           style={micButtonStyle}
@@ -255,7 +340,7 @@ const ControlWidget: React.FC<ControlWidgetProps> = ({
       </div>
 
       <div style={stepPanelStyle}>
-        {steps.map((step, idx) => (
+        {stepLog.map((step, idx) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span
               style={{
