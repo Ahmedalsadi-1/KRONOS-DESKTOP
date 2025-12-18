@@ -2,110 +2,54 @@
 
 ## Build/Lint/Test Commands
 
-<<<<<<< HEAD
-### Backend Services (kronos-agent, kronos-agent-cc, kronosd)
-=======
-### Backend Services (bytebot-agent, bytebot-agent-cc, bytebotd)
->>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
-- **Build**: `npm run build` (builds shared package first)
-- **Lint**: `npm run lint` (ESLint with TypeScript + Prettier)
-- **Format**: `npm run format` (Prettier)
-- **Test all**: `npm run test` (Jest)
-- **Test single**: `npm run test -- --testNamePattern="test name"` or `npm run test -- --testPathPattern=filename.spec.ts`
-- **Test watch**: `npm run test:watch`
-- **Test coverage**: `npm run test:cov`
+### Workflow Studio (Primary)
+- **Build**: `pnpm build` (Turbo monorepo build)
+- **Lint**: `pnpm lint` (Biome linter)
+- **Format**: `pnpm format` (Biome formatter)
+- **Check**: `pnpm check` (Biome lint + format)
+- **Test**: `pnpm test` (Run all tests via pnpm recursive)
+- **Test unit**: `pnpm test:unit`
+- **Test integration**: `pnpm test:integration`
+- **Dev**: `pnpm dev` (Start all development services)
 
-<<<<<<< HEAD
-### UI (kronos-ui)
-=======
-### UI (bytebot-ui)
->>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
-- **Build**: `npm run build` (builds shared package first)
-- **Lint**: `npm run lint` (Next.js ESLint)
-- **Dev server**: `npm run dev`
-
-### Shared Package
-- **Build**: `npm run build` (TypeScript compilation)
-- **Lint**: `npm run lint`
-- **Format**: `npm run format`
-
-<<<<<<< HEAD
-### LLM Proxy (kronos-llm-proxy)
-=======
-### LLM Proxy (bytebot-llm-proxy)
->>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
-- **Build**: `docker build .` (Docker container)
-- **Run**: `docker run -p 4000:4000 [image]`
+### Individual Apps
+- **Web app**: `pnpm --filter @refly/web dev`
+- **API app**: `pnpm --filter @refly/api dev`
 
 ## Code Style Guidelines
 
-### TypeScript Configuration
-- Target: ES2021 (modern JavaScript features)
-- Strict null checks enabled
-- No implicit any (disabled, allowing explicit `any` usage)
-- Decorators enabled (NestJS)
-- Source maps enabled for debugging
+### TypeScript/JavaScript
+- Single quotes for string literals
+- Optional chaining (`?.`) required for object property access
+- Nullish coalescing (`??`) for undefined/null values
+- Array existence checks before array methods
+- Object property validation before destructuring
+- ES6+ features: arrow functions, destructuring, spread operators
 
-### Formatting (Prettier)
-- Single quotes
-- Trailing commas: all
-- Consistent casing in filenames
+### React Performance
+- React.memo for pure components
+- useMemo for expensive computations
+- useCallback for function props
+- Proper dependency arrays in useEffect
+- No inline objects/arrays in render
+- Proper key props for lists (avoid index)
+- Split nested closure components
 
-### Linting (ESLint)
-- TypeScript recommended rules with type checking
-- Prettier integration
-- Custom rules:
-  - `@typescript-eslint/no-explicit-any`: off
-  - `@typescript-eslint/no-floating-promises`: warn
-  - `@typescript-eslint/no-unsafe-argument`: warn
-
-### Naming Conventions
-- **Classes**: PascalCase (e.g., `AnthropicService`, `AppModule`)
-<<<<<<< HEAD
-- **Interfaces/Types**: PascalCase (e.g., `KronosAgentResponse`)
-=======
-- **Interfaces/Types**: PascalCase (e.g., `BytebotAgentResponse`)
->>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
-- **Variables/Functions**: camelCase (e.g., `generateMessage`, `apiKey`)
-- **Constants**: UPPER_SNAKE_CASE (e.g., `DEFAULT_MODEL`)
-- **Files**: kebab-case for modules, camelCase for services (e.g., `anthropic.service.ts`)
-
-### Architecture Patterns
-- **Backend**: NestJS with modules, controllers, services
-- **Frontend**: Next.js with React 19
-- **Validation**: Zod schemas + class-validator DTOs
-- **Database**: Prisma ORM
-- **WebSockets**: Socket.io
-- **Logging**: NestJS Logger
-- **Error Handling**: Try-catch with Logger.warn/error
+### Error Handling
+- Handle async errors with try/catch
+- Meaningful error messages
+- Fallback UI for failed components
+- Error boundaries for runtime errors
+- No silent failures - log errors
 
 ### Import Organization
+- Type-only imports: `import type`
 - External libraries first
-- Internal imports (relative paths)
-- Type-only imports when possible
+- Internal imports second
 - Group by functionality
 
-## Project Rules
-
-<<<<<<< HEAD
-### Kronos Platform
-=======
-### Bytebot Monorepo
->>>>>>> dc77199 (feat: initialize AI Emulators Ecosystem repository)
-- **Backend Services**: NestJS with TypeScript, Prisma ORM, PostgreSQL
-- **Frontend**: Next.js 15+ with React 19, Tailwind CSS, shadcn/ui
-- **Shared Types**: TypeScript-only package for type definitions and utilities
-- **LLM Proxy**: LiteLLM-based proxy for multi-provider AI model access
-- **Desktop Automation**: Computer control via MCP protocol and automation libraries
-- **Communication**: WebSocket-based real-time updates, REST APIs
-- **Security**: Environment variables for secrets, input validation, CORS configuration
-- **Testing**: Jest framework with unit and integration tests
-- **Deployment**: Docker containers with Kubernetes/Helm support
-
-### General Guidelines
-- Descriptive names, modular code structure
-- Follow existing patterns and conventions
-- Security-first approach (no eval, proper input validation)
-- Comprehensive error handling and logging
-- Type safety throughout the codebase</content>
-<parameter name="filePath">AGENTS.md
+### Naming Conventions
+- Classes/Interfaces/Types: PascalCase
+- Variables/Functions: camelCase
+- Constants: UPPER_SNAKE_CASE
+- Files: kebab-case for modules, PascalCase for components

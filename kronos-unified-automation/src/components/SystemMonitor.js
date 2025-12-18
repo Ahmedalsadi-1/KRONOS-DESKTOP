@@ -9,7 +9,7 @@ const SystemMonitor = ({ systemStatus }) => {
     if (isAutoRefresh) {
       interval = setInterval(() => {
         // Trigger a system status refresh
-        window.electronAPI.getSystemStatus().then(status => {
+        window.electronAPI.getSystemStatus().then(() => {
           // This will be handled by the event listener in the parent component
         });
       }, refreshInterval);
@@ -19,24 +19,19 @@ const SystemMonitor = ({ systemStatus }) => {
     };
   }, [isAutoRefresh, refreshInterval]);
 
-  const formatBytes = (bytes) => {
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
   const getStatusColor = (value, thresholds = { warning: 70, critical: 90 }) => {
     if (value >= thresholds.critical) return '#dc3545';
     if (value >= thresholds.warning) return '#ffc107';
     return '#28a745';
   };
 
-  const getStatusText = (value, thresholds = { warning: 70, critical: 90 }) => {
-    if (value >= thresholds.critical) return 'Critical';
-    if (value >= thresholds.warning) return 'Warning';
-    return 'Good';
+  const formatBytes = (bytes) => {
+    if (!bytes && bytes !== 0) return 'N/A';
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.min(sizes.length - 1, Math.floor(Math.log(bytes) / Math.log(k)));
+    return `${(bytes / Math.pow(k, i)).toFixed(2)} ${sizes[i]}`;
   };
 
   const systemStats = [

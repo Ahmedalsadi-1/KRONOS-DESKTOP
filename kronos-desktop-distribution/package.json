@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "KRONOS Desktop Distribution System - Professional DMG/EXE/AppImage builder with auto-update and setup wizard",
   "homepage": "https://kronos.ai",
-  "main": "src/main.js",
+  "main": "src/main/index.js",
   "author": {
     "name": "KRONOS Team",
     "email": "team@kronos.ai"
@@ -65,13 +65,11 @@
       "!**/kronos-desktop-distribution/node_modules/.cache"
     ],
     "extraMetadata": {
-      "main": "src/main.js",
+      "main": "src/main/index.js",
       "name": "KRONOS Desktop Agent"
     },
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "assets/icons/icon.icns",
-      "iconSize": 80,
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
@@ -79,54 +77,64 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
-      "gatekeeperAssess": false,
       "darkModeSupport": true
     },
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         },
         {
           "target": "portable",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ],
-      "icon": "assets/icons/icon.ico",
       "publisherName": "KRONOS",
       "verifyUpdateCodeSignature": false,
       "artifactName": "${productName}-${version}-${arch}.${ext}",
-      "requestedExecutionLevel": "asInvoker",
-      "signtoolOptions": {
-        "certificateFile": "",
-        "certificatePassword": "",
-        "timestampingServer": "http://timestamp.digicert.com"
-      }
+      "requestedExecutionLevel": "asInvoker"
     },
     "linux": {
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "deb",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "rpm",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
-      "icon": "assets/icons/icon.png",
       "category": "Utility",
       "desktop": {
         "Name": "KRONOS Desktop Agent",
@@ -147,13 +155,9 @@
       "script": "installer/windows/installer.nsi",
       "perMachine": false,
       "deleteAppDataOnUninstall": false,
-      "runAfterFinish": true,
-      "menuComments": "KRONOS Desktop Agent",
-      "menuDescription": "Professional automation platform"
+      "runAfterFinish": true
     },
     "dmg": {
-      "icon": "assets/icons/icon.icns",
-      "iconSize": 80,
       "contents": [
         {
           "x": 130,
@@ -167,7 +171,6 @@
           "path": "/Applications"
         }
       ],
-      "background": "assets/installer/dmg-background.png",
       "title": "KRONOS Desktop Agent Installer",
       "iconTextSize": 16,
       "window": {
@@ -200,34 +203,33 @@
     }
   },
   "dependencies": {
-    "electron": "^28.1.0",
-    "electron-updater": "^6.1.7",
-    "electron-store": "^8.1.0",
+    "@ant-design/icons": "^5.2.6",
+    "ajv": "^8.12.0",
+    "antd": "^5.13.0",
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.3.1",
     "electron-is-dev": "^2.0.0",
     "electron-log": "^5.0.1",
-    "electron-notarize": "^2.2.1",
+    "electron-notarize": "^1.2.2",
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.7",
+    "framer-motion": "^10.16.4",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
-    "antd": "^5.13.0",
-    "@ant-design/icons": "^5.2.6",
-    "zustand": "^4.4.7",
-    "axios": "^1.6.2",
-    "socket.io-client": "^4.7.4",
-    "crypto-js": "^4.2.0",
-    "dotenv": "^16.3.1",
-    "ajv": "^8.12.0",
-    "lodash": "^4.17.21",
-    "framer-motion": "^10.16.4",
-    "styled-components": "^6.1.1",
     "semver": "^7.5.4",
-    "node-fetch": "^3.3.2"
+    "socket.io-client": "^4.7.4",
+    "styled-components": "^6.1.1",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
     "@types/crypto-js": "^4.2.1",
     "@types/lodash": "^4.14.202",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
     "@types/semver": "^7.5.6",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",

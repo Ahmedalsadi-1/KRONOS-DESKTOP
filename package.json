@@ -1,51 +1,26 @@
 {
   "name": "kronos-desktop-distribution",
+  "version": "1.0.0",
+  "private": true,
   "productName": "KRONOS Desktop Agent",
   "description": "AI-powered desktop automation platform with comprehensive distribution system",
   "repository": {
     "type": "git",
     "url": "https://github.com/kronos-ai/kronos-desktop-agent"
   },
-  "scripts": {
-    "install": "npm install",
-    "start": "npm start",
-    "build": "npm run build",
-    "build:all": "npm run build:all",
-    "build:dmg": "npm run build:dmg",
-    "build:exe": "npm run build:exe",
-    "package": "npm run build:dir",
-    "configure": "npm run configure",
-    "setup": "npm run setup",
-    "sign": "npm run sign",
-    "dist": "npm run build:all && npm run package",
-    "clean": "npm run clean && rimraf release dist",
-    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
-    "lint": "npm run lint",
-    "lint:fix": "npm run lint:fix",
-    "test": "npm run test"
-  },
   "workspaces": [
     "kronos-desktop-distribution",
-    "kronos-unified-automation-platform", 
-    "kronos-unified-ai-ecosystem"
+    "kronos-unified-platform",
+    "kronos-unified-ai",
+    "kronos-unified-automation",
+    "unified-ai-ecosystem"
   ],
   "scripts": {
-    "install": "npm install",
-    "start": "npm start",
-    "build": "npm run build",
-    "build:all": "npm run build:all",
-    "build:dmg": "npm run build:dmg",
-    "build:exe": "npm run build:exe",
-    "package": "npm run build:dir",
-    "configure": "npm run configure",
-    "setup": "npm run setup",
-    "sign": "npm run sign",
-    "dist": "npm run build:all && npm run package",
-    "clean": "npm run clean && rimraf release dist",
-    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
-    "lint": "npm run lint",
-    "lint:fix": "npm run lint:fix",
-    "test": "npm run test"
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "clean": "rimraf release dist"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",

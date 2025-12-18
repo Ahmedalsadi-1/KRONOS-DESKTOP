@@ -59,18 +59,9 @@ function createWindow() {
 
 // Setup auto-updater
 function setupAutoUpdater() {
-  if (isDev) {
-    autoUpdater.updateConfigAndGetPublishSignature活(() => {
-      // Set to your update server
-      autoUpdater.setFeedURL({
-        provider: 'github',
-        owner: 'your-username',
-        repo: 'kronos-platform'
-      });
-    });
+  if (!isDev) {
+    autoUpdater.checkForUpdatesAndNotify();
   }
-
-  autoUpdater.checkForUpdatesAndNotify();
 
   autoUpdater.on('checking-for-update', () => {
     console.log('Checking for update...');
