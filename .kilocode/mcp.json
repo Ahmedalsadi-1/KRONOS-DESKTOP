@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "github.com/21st-dev/magic-mcp": {
+    "21st-dev-magic": {
       "autoApprove": [
         "comprehensive_summary",
         "21st_magic_component_builder",
@@ -17,10 +17,10 @@
         "@21st-dev/magic@latest"
       ],
       "env": {
-        "TWENTY_FIRST_API_KEY": "d9cd3be783d6a6e0cba50b442be0b015afb0e328ae2fa286613b31c50b28b808"
+        "TWENTY_FIRST_API_KEY": "${TWENTY_FIRST_API_KEY}"
       }
     },
-    "github.com/Dhravya/apple-mcp": {
+    "apple-ecosystem": {
       "autoApprove": [
         "create_note",
         "notes",
@@ -39,7 +39,7 @@
         "apple-mcp"
       ]
     },
-    "github.com/ahujasid/blender-mcp": {
+    "blender-3d": {
       "autoApprove": [
         "get_scene_info",
         "get_object_info",
@@ -71,7 +71,7 @@
         "blender-mcp"
       ]
     },
-    "github.com/mobile-next/mobile-mcp": {
+    "mobile-device-control": {
       "autoApprove": [
         "mobile_get_screen_size",
         "mobile_take_screenshot",
@@ -99,10 +99,10 @@
       "command": "npx",
       "args": [
         "-y",
-        "@mobilenext/mobile-mcp@latest"
+        "@mobilenext/mobile-mcp@1.2.0"
       ]
     },
-    "github.com/modelcontextprotocol/servers/tree/main/src/filesystem": {
+    "filesystem-core": {
       "autoApprove": [
         "read_file",
         "read_media_file",
@@ -125,11 +125,11 @@
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/albsheralsadi/Desktop"
+        "@modelcontextprotocol/server-filesystem@0.6.2",
+        "/Users/albsheralsadi/KRONOS-DESKTOP"
       ]
     },
-    "github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking": {
+    "sequential-thinking": {
       "autoApprove": [
         "sequentialthinking"
       ],
@@ -139,10 +139,10 @@
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
+        "@modelcontextprotocol/server-sequential-thinking@0.6.2"
       ]
     },
-    "bytebot": {
+    "computer-automation": {
       "autoApprove": [
         "computer_trace_mouse",
         "computer_click_mouse",
@@ -166,7 +166,7 @@
       "type": "streamableHttp",
       "url": "http://localhost:9990/mcp"
     },
-    "github.com/AgentDeskAI/browser-tools-mcp": {
+    "browser-tools": {
       "autoApprove": [
         "getConsoleLogs",
         "getConsoleErrors",
@@ -189,34 +189,10 @@
       "command": "npx",
       "args": [
         "-y",
-        "@agentdeskai/browser-tools-mcp@latest"
+        "@agentdeskai/browser-tools-mcp@1.0.0"
       ]
     },
-    "gbox-android": {
-      "autoApprove": [
-        "start_android_box",
-        "tap",
-        "swipe",
-        "type",
-        "screenshot",
-        "open_app",
-        "close_app",
-        "press_button",
-        "wait",
-        "drag",
-        "long_press",
-        "install_apk"
-      ],
-      "disabled": false,
-      "timeout": 60,
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@gbox.ai/mcp-server@latest"
-      ]
-    },
-    "github.com/pashpashpash/iterm-mcp": {
+    "terminal-control": {
       "autoApprove": [
         "write_to_terminal",
         "send_control_character",
@@ -230,7 +206,7 @@
         "/Users/albsheralsadi/Documents/Cline/MCP/iterm-mcp/build/index.js"
       ]
     },
-    "github.com/supabase-community/supabase-mcp": {
+    "supabase-management": {
       "autoApprove": [
         "search_docs",
         "list_organizations",
@@ -268,10 +244,10 @@
         "/Users/albsheralsadi/Documents/Cline/MCP/supabase-mcp/packages/mcp-server-supabase/dist/transports/stdio.js"
       ],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_f0419401e2f863497ec2f6751547d95c856a6adf"
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
       }
     },
-    "github.com/github/github-mcp-server": {
+    "github-api": {
       "autoApprove": [
         "get_me"
       ],
@@ -285,11 +261,11 @@
         "--rm",
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
+        "ghcr.io/github/github-mcp-server:latest"
       ],
-       "env": {}
+      "env": {}
     },
-    "github.com/NightTrek/Ollama-mcp": {
+    "ollama-ai": {
       "autoApprove": [],
       "disabled": false,
       "timeout": 60,
@@ -302,7 +278,7 @@
         "OLLAMA_HOST": "http://127.0.0.1:11434"
       }
     },
-    "zapier-ai-content": {
+    "zapier-integrated": {
       "autoApprove": [
         "add_tools",
         "edit_tools",
@@ -394,25 +370,11 @@
         "google_sheets_update_spreadsheet_row_s",
         "google_sheets_api_request_beta",
         "mcp_client_by_zapier_run_read-only_tool",
-        "mcp_client_by_zapier_run_tool"
-      ],
-      "disabled": false,
-      "timeout": 60,
-      "type": "streamableHttp",
-      "url": "https://mcp.zapier.com/api/mcp/s/YzQ3NDM0YzctZGQ2NS00OTVkLTllMjctNWRjNTU2N2I2MWM5OmFjYzgzN2UxLWE4NGUtNDM0Yi1iMDExLWRhYjM0NWI1N2JkNQ==/mcp"
-    },
-    "zapier-google": {
-      "autoApprove": [
-        "add_tools",
-        "edit_tools",
+        "mcp_client_by_zapier_run_tool",
         "google_ads_find_campaign_by_id",
         "google_ads_find_campaign_by_name",
         "google_slides_find_presentation",
         "notion_retrieve_block_children",
-        "formatter_by_zapier_date_time",
-        "formatter_by_zapier_numbers",
-        "formatter_by_zapier_text",
-        "formatter_by_zapier_utilities",
         "discord_find_channel",
         "discord_find_user",
         "discord_add_role",
@@ -446,37 +408,9 @@
         "google_calendar_quick_add_event",
         "google_calendar_move_event_to_another_calendar",
         "google_calendar_update_event",
-        "google_sheets_lookup_spreadsheet_rows_advanced",
-        "google_sheets_find_worksheet",
-        "google_sheets_get_data_range",
-        "google_sheets_get_many_spreadsheet_rows_advanced",
-        "google_sheets_get_row_by_id",
-        "google_sheets_get_spreadsheet_by_id",
-        "google_sheets_lookup_spreadsheet_row",
-        "google_sheets_create_spreadsheet_column",
-        "google_sheets_create_spreadsheet_row",
-        "google_sheets_create_multiple_spreadsheet_rows",
-        "google_sheets_create_spreadsheet_row_at_top",
-        "google_sheets_change_sheet_properties",
-        "google_sheets_create_conditional_formatting_rule",
-        "google_sheets_copy_range",
-        "google_sheets_rename_sheet",
-        "google_sheets_copy_worksheet",
-        "google_sheets_create_spreadsheet",
-        "google_sheets_create_worksheet",
-        "google_sheets_clear_spreadsheet_row_s",
-        "google_sheets_set_data_validation",
-        "google_sheets_delete_sheet",
-        "google_sheets_delete_spreadsheet_row_s",
-        "google_sheets_format_cell_range",
-        "google_sheets_format_spreadsheet_row",
-        "google_sheets_sort_range",
-        "google_sheets_update_spreadsheet_row",
-        "google_sheets_update_spreadsheet_row_s",
         "google_docs_insert_image",
         "google_docs_find_a_document",
         "google_docs_get_document_content",
-        "google_ai_studio_gemini_send_prompt",
         "google_docs_append_text_to_document",
         "google_docs_create_document_from_template",
         "google_docs_upload_document",
@@ -494,12 +428,9 @@
         "google_ads_remove_contact_from_customer_list",
         "google_ads_send_offline_conversion",
         "google_ads_set_campaign_status",
-        "google_ai_studio_gemini_conversation",
-        "google_ai_studio_gemini_generate_image",
         "google_slides_create_presentation_from_template",
         "google_slides_refresh_charts",
         "agents_run_agent",
-        "webhooks_by_zapier_post",
         "shopify_find_product_variants_by_title",
         "apify_run_.task",
         "notion_get_page_comments",
@@ -520,11 +451,9 @@
         "notion_restore_data_source_item",
         "notion_update_database",
         "notion_update_data_source_item",
-        "code_by_zapier_run_javascript",
         "notion_update_data_source_schema",
         "notion_retrieve_database",
         "notion_retrieve_a_page",
-        "code_by_zapier_run_python",
         "shopify_find_customers",
         "shopify_find_product_variant_by_sku",
         "shopify_find_order",
@@ -582,7 +511,6 @@
         "github_find_organization",
         "github_find_repository",
         "github_find_issue",
-        "apify_find_last_task_run",
         "github_find_pull_request",
         "github_find_user",
         "github_add_labels_to_issue",
@@ -594,15 +522,9 @@
         "github_create_issue",
         "github_create_pull_request",
         "github_set_profile_status",
-        "apify_run_actor",
         "github_submit_review",
         "github_update_issue",
         "github_update_pull_request",
-        "apify_fetch_dataset_items",
-        "apify_get_key-value_store_record",
-        "apify_find_last_actor_run",
-        "apify_set_key-value_store_record",
-        "apify_scrape_single_url",
         "telegram_send_message",
         "telegram_send_photo",
         "telegram_send_poll",
@@ -626,63 +548,14 @@
         "stripe_create_subscription",
         "stripe_deactivate_payment_link",
         "stripe_update_customer",
-        "stripe_api_request_beta",
-        "mcp_client_by_zapier_run_read-only_tool",
-        "mcp_client_by_zapier_run_tool"
+        "stripe_api_request_beta"
       ],
       "disabled": false,
       "timeout": 60,
       "type": "streamableHttp",
-      "url": "https://mcp.zapier.com/api/mcp/s/MDM5NGFmOWMtNzhmYS00ZmE3LWFhMjYtODgxZDFiNjc0OGFkOjgwM2QxZTc0LTg5NDYtNGVmZC1hNWRhLWExODlkNTgxNTBmZQ==/mcp"
+      "url": "https://mcp.zapier.com/api/mcp/s/${ZAPIER_INTEGRATED_KEY}/mcp"
     },
-    "DEXTO": {
-      "autoApprove": [
-        "add_tools",
-        "edit_tools",
-        "snapchat_conversions_send_your_events",
-        "hugging_face_document_question_answering",
-        "hugging_face_text_classification",
-        "hugging_face_language_translation",
-        "snapchat_conversions_send_leads",
-        "hubspot_find_crm_object",
-        "slack_get_conversation",
-        "slack_get_conversation_members",
-        "zapier_tables_find_records",
-        "zapier_tables_find_table",
-        "zapier_tables_create_record",
-        "google_calendar_get_calendar_information",
-        "notion_retrieve_block_children",
-        "notion_get_page_comments",
-        "notion_find_data_source_items",
-        "notion_get_block",
-        "hubspot_find_company",
-        "hubspot_find_contact",
-        "slack_get_message",
-        "slack_find_message",
-        "gmail_get_attachment_by_filename",
-        "gmail_add_label_to_email",
-        "gmail_create_draft",
-        "google_sheets_lookup_spreadsheet_rows_advanced",
-        "google_sheets_find_worksheet",
-        "google_sheets_get_data_range",
-        "google_sheets_get_spreadsheet_by_id",
-        "google_calendar_retrieve_event_by_id",
-        "google_calendar_find_events",
-        "google_calendar_find_calendars",
-        "google_docs_find_a_document",
-        "google_docs_get_document_content",
-        "google_docs_append_text_to_document",
-        "google_docs_upload_document",
-        "google_drive_retrieve_file_or_folder_by_id",
-        "google_drive_get_file_permissions",
-        "airtable_find_record",
-        "airtable_find_record_by_id",
-        "airtable_find_table",
-        "airtable_find_base",
-        "google_forms_api_request_beta"
-      ]
-    },
-    "github.com/pashpashpash/mcp-taskmanager": {
+    "task-manager": {
       "autoApprove": [],
       "disabled": false,
       "timeout": 60,
