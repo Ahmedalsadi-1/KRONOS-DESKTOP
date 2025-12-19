@@ -1,0 +1,19 @@
+{
+  "name": "saas-demo-backend",
+  "version": "1.0.0",
+  "description": "Multi-tenant SaaS backend with Lambda functions",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --ext .js",
+    "deploy": "sam deploy"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1500.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0"
+  }
+}

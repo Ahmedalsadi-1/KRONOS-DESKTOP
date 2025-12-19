@@ -636,9 +636,6 @@
       "url": "https://mcp.zapier.com/api/mcp/s/MDM5NGFmOWMtNzhmYS00ZmE3LWFhMjYtODgxZDFiNjc0OGFkOjgwM2QxZTc0LTg5NDYtNGVmZC1hNWRhLWExODlkNTgxNTBmZQ==/mcp"
     },
     "DEXTO": {
-      "url": "https://mcp.zapier.com/api/mcp/s/ZGJkYjg3MzUtZmYxMy00YWNiLTgzNjYtY2RiZDllZTdlMmQ4OjY1MzZhNmUwLWY5ZjMtNDg2OS1hMTQ0LWUzMzExYjc1YzZiYw==/mcp",
-      "type": "streamableHttp",
-      "disabled": false,
       "autoApprove": [
         "add_tools",
         "edit_tools",
