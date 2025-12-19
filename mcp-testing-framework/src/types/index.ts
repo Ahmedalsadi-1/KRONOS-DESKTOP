@@ -67,7 +67,7 @@ export interface BenchmarkConfig {
 export interface AgentInteraction {
   fromAgent: string;
   toAgent: string;
-  message: MCPMessage;
+  message: Omit<MCPMessage, 'id' | 'jsonrpc'>;
   expectedResponse?: any;
   timeout?: number;
 }
